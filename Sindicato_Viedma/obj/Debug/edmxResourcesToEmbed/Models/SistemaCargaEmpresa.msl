@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="geosoftw_seoca_aportesModelStoreContainer" CdmEntityContainer="geosoftw_seoca_aportesEntities">
+    <EntitySetMapping Name="Boletas_Actas">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Boletas_Actas">
+        <MappingFragment StoreEntitySet="Boletas_Actas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Numero_Acta" ColumnName="Numero_Acta" />
+          <ScalarProperty Name="IDEmpresa" ColumnName="IDEmpresa" />
+          <ScalarProperty Name="Cuota" ColumnName="Cuota" />
+          <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="Interes_Mora" ColumnName="Interes_Mora" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+          <ScalarProperty Name="EntidadRecaudadora" ColumnName="EntidadRecaudadora" />
+          <ScalarProperty Name="ImportePagar" ColumnName="ImportePagar" />
+          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Filename" ColumnName="Filename" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Boletas_Pagos">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Boletas_Pagos">
+        <MappingFragment StoreEntitySet="Boletas_Pagos">
+          <ScalarProperty Name="IDPago" ColumnName="IDPago" />
+          <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+          <ScalarProperty Name="TipoBoleta" ColumnName="TipoBoleta" />
+          <ScalarProperty Name="IDConexion" ColumnName="IDConexion" />
+          <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categorias">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Categorias">
+        <MappingFragment StoreEntitySet="Categorias">
+          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+          <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleados">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Empleados">
+        <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="TipoDoc" ColumnName="TipoDoc" />
+          <ScalarProperty Name="CUIL" ColumnName="CUIL" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+          <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
+          <ScalarProperty Name="Remuneracion" ColumnName="Remuneracion" />
+          <ScalarProperty Name="Afiliado" ColumnName="Afiliado" />
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Fecha_Baja" ColumnName="Fecha_Baja" />
+          <ScalarProperty Name="CantHoras" ColumnName="CantHoras" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresas">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Empresas">
+        <MappingFragment StoreEntitySet="Empresas">
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="CUIT" ColumnName="CUIT" />
+          <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="NombreFantasia" ColumnName="NombreFantasia" />
+          <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+          <ScalarProperty Name="CP" ColumnName="CP" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="HorarioAtencion" ColumnName="HorarioAtencion" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="OKRegistrarse" ColumnName="OKRegistrarse" />
+          <ScalarProperty Name="OKLogin" ColumnName="OKLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estados">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Estados">
+        <MappingFragment StoreEntitySet="Estados">
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+          <ScalarProperty Name="NombreEstado" ColumnName="NombreEstado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Historial">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Historial">
+        <MappingFragment StoreEntitySet="Historial">
+          <ScalarProperty Name="IdHistorial" ColumnName="IdHistorial" />
+          <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+          <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+          <ScalarProperty Name="CUIL" ColumnName="CUIL" />
+          <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
+          <ScalarProperty Name="Remuneracion" ColumnName="Remuneracion" />
+          <ScalarProperty Name="Suma_No_Remuneracion" ColumnName="Suma_No_Remuneracion" />
+          <ScalarProperty Name="Afiliado" ColumnName="Afiliado" />
+          <ScalarProperty Name="IDEstado" ColumnName="IDEstado" />
+          <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+          <ScalarProperty Name="CantHoras" ColumnName="CantHoras" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Liquidacion">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Liquidacion">
+        <MappingFragment StoreEntitySet="Liquidacion">
+          <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="CantEmpleados" ColumnName="CantEmpleados" />
+          <ScalarProperty Name="Total_Afiliado" ColumnName="Total_Afiliado" />
+          <ScalarProperty Name="CantAfiliado" ColumnName="CantAfiliado" />
+          <ScalarProperty Name="Convenio" ColumnName="Convenio" />
+          <ScalarProperty Name="Cuota_Sindical" ColumnName="Cuota_Sindical" />
+          <ScalarProperty Name="Seguro_Sepelio" ColumnName="Seguro_Sepelio" />
+          <ScalarProperty Name="Remuneracion" ColumnName="Remuneracion" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Vencimiento" ColumnName="Vencimiento" />
+          <ScalarProperty Name="Vencimiento_Pago" ColumnName="Vencimiento_Pago" />
+          <ScalarProperty Name="Diferencia_Pago" ColumnName="Diferencia_Pago" />
+          <ScalarProperty Name="Debito_Credito" ColumnName="Debito_Credito" />
+          <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+          <ScalarProperty Name="InteresXPago" ColumnName="InteresXPago" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="InteresMensual" ColumnName="InteresMensual" />
+          <ScalarProperty Name="Total_Depositar" ColumnName="Total_Depositar" />
+          <ScalarProperty Name="Fecha_Pagado" ColumnName="Fecha_Pagado" />
+          <ScalarProperty Name="Lugar_Pago" ColumnName="Lugar_Pago" />
+          <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+          <ScalarProperty Name="Tipo_Pago" ColumnName="Tipo_Pago" />
+          <ScalarProperty Name="FechaImpresion" ColumnName="FechaImpresion" />
+          <ScalarProperty Name="EntidadRecaudadora" ColumnName="EntidadRecaudadora" />
+          <ScalarProperty Name="ImportePagar" ColumnName="ImportePagar" />
+          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Filename" ColumnName="Filename" />
+          <ScalarProperty Name="CodBarra" ColumnName="CodBarra" />
+          <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LiquidacionPorcentaje">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.LiquidacionPorcentaje">
+        <MappingFragment StoreEntitySet="LiquidacionPorcentaje">
+          <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOG">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.LOG">
+        <MappingFragment StoreEntitySet="LOG">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Meses">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Meses">
+        <MappingFragment StoreEntitySet="Meses">
+          <ScalarProperty Name="IDMes" ColumnName="IDMes" />
+          <ScalarProperty Name="Mes" ColumnName="Mes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Motivos">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Motivos">
+        <MappingFragment StoreEntitySet="Motivos">
+          <ScalarProperty Name="IdMotivo" ColumnName="IdMotivo" />
+          <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pago_Interes">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Pago_Interes">
+        <MappingFragment StoreEntitySet="Pago_Interes">
+          <ScalarProperty Name="Id_Interes" ColumnName="Id_Interes" />
+          <ScalarProperty Name="Id_Empresa" ColumnName="Id_Empresa" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha_Pago" />
+          <ScalarProperty Name="Vencimiento" ColumnName="Vencimiento" />
+          <ScalarProperty Name="IdMotivo" ColumnName="IdMotivo" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="ImporteOriginal" ColumnName="ImporteOriginal" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="EntidadRecaudadora" ColumnName="EntidadRecaudadora" />
+          <ScalarProperty Name="ImportePagar" ColumnName="ImportePagar" />
+          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Filename" ColumnName="Filename" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parametros">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Parametros">
+        <MappingFragment StoreEntitySet="Parametros">
+          <ScalarProperty Name="IdParametro" ColumnName="IdParametro" />
+          <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+          <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+          <ScalarProperty Name="CBU" ColumnName="CBU" />
+          <ScalarProperty Name="CantidadCuotas" ColumnName="CantidadCuotas" />
+          <ScalarProperty Name="PorcentajeMensual" ColumnName="PorcentajeMensual" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDocumentos">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.TipoDocumentos">
+        <MappingFragment StoreEntitySet="TipoDocumentos">
+          <ScalarProperty Name="IdDocumento" ColumnName="IdDocumento" />
+          <ScalarProperty Name="NombreDocumento" ColumnName="NombreDocumento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vencimiento_Liquidacion">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Vencimiento_Liquidacion">
+        <MappingFragment StoreEntitySet="Vencimiento_Liquidacion">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Ter_CUIT" ColumnName="Ter_CUIT" />
+          <ScalarProperty Name="Dia_Vencimiento" ColumnName="Dia_Vencimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="geosoftw_seoca_aportesModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

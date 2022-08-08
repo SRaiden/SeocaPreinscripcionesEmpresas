@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="geosoftw_seoca_aportesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Boletas_Actas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Numero_Acta" Type="Int32" />
+    <Property Name="IDEmpresa" Type="Int32" />
+    <Property Name="Cuota" Type="Int32" />
+    <Property Name="Cuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Interes_Mora" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Periodo" Type="DateTime" Precision="0" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
+    <Property Name="FechaPago" Type="DateTime" Precision="0" />
+    <Property Name="EntidadRecaudadora" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ImportePagar" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Archivo" Type="Boolean" />
+    <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Filename" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Empresas" Relationship="Self.FK_Boletas_Actas_Empresas" FromRole="Boletas_Actas" ToRole="Empresas" />
+  </EntityType>
+  <EntityType Name="Boletas_Pagos">
+    <Key>
+      <PropertyRef Name="IDPago" />
+    </Key>
+    <Property Name="IDPago" Type="Int32" Nullable="false" />
+    <Property Name="Cuit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TipoBoleta" Type="Int32" />
+    <Property Name="IDConexion" Type="Int32" />
+    <Property Name="Pagado" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Categorias">
+    <Key>
+      <PropertyRef Name="IdCategoria" />
+    </Key>
+    <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreCategoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Categorias" FromRole="Categorias" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="Empleados">
+    <Key>
+      <PropertyRef Name="IdEmpleado" />
+    </Key>
+    <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TipoDoc" Type="Int32" Nullable="false" />
+    <Property Name="CUIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Sexo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
+    <Property Name="IdCategoria" Type="Int32" />
+    <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
+    <Property Name="Remuneracion" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Afiliado" Type="Boolean" />
+    <Property Name="IdEstado" Type="Int32" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="Fecha_Baja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CantHoras" Type="Int32" />
+    <NavigationProperty Name="Categorias" Relationship="Self.FK_Empleados_Categorias" FromRole="Empleados" ToRole="Categorias" />
+    <NavigationProperty Name="Empresas" Relationship="Self.FK_Empleados_Empresas" FromRole="Empleados" ToRole="Empresas" />
+    <NavigationProperty Name="Estados" Relationship="Self.FK_Empleados_Estados" FromRole="Empleados" ToRole="Estados" />
+    <NavigationProperty Name="TipoDocumentos" Relationship="Self.FK_Empleados_TipoDocumentos" FromRole="Empleados" ToRole="TipoDocumentos" />
+  </EntityType>
+  <EntityType Name="Empresas">
+    <Key>
+      <PropertyRef Name="IdEmpresa" />
+    </Key>
+    <Property Name="IdEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CUIT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Sucursal" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RazonSocial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="NombreFantasia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Domicilio" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Localidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CP" Type="Int32" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HorarioAtencion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="OKRegistrarse" Type="Boolean" />
+    <Property Name="OKLogin" Type="Boolean" />
+    <NavigationProperty Name="Boletas_Actas" Relationship="Self.FK_Boletas_Actas_Empresas" FromRole="Empresas" ToRole="Boletas_Actas" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Empresas" FromRole="Empresas" ToRole="Empleados" />
+    <NavigationProperty Name="Liquidacion" Relationship="Self.FK_Liquidacion_Empresas" FromRole="Empresas" ToRole="Liquidacion" />
+  </EntityType>
+  <EntityType Name="Estados">
+    <Key>
+      <PropertyRef Name="IdEstado" />
+    </Key>
+    <Property Name="IdEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreEstado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Estados" FromRole="Estados" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="Historial">
+    <Key>
+      <PropertyRef Name="IdHistorial" />
+    </Key>
+    <Property Name="IdHistorial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdLiquidacion" Type="Int32" />
+    <Property Name="IdEmpleado" Type="Int32" />
+    <Property Name="CUIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
+    <Property Name="Remuneracion" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Suma_No_Remuneracion" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Afiliado" Type="Boolean" />
+    <Property Name="IDEstado" Type="Int32" />
+    <Property Name="IDCategoria" Type="Int32" />
+    <Property Name="CantHoras" Type="Int32" />
+    <NavigationProperty Name="Liquidacion" Relationship="Self.FK_LiquidacionXEmpleados_Liquidacion" FromRole="Historial" ToRole="Liquidacion" />
+  </EntityType>
+  <EntityType Name="Liquidacion">
+    <Key>
+      <PropertyRef Name="IdLiquidacion" />
+    </Key>
+    <Property Name="IdLiquidacion" Type="Int32" Nullable="false" />
+    <Property Name="IdEmpresa" Type="Int32" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CantEmpleados" Type="Int32" />
+    <Property Name="Total_Afiliado" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CantAfiliado" Type="Int32" />
+    <Property Name="Convenio" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Cuota_Sindical" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Seguro_Sepelio" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Remuneracion" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Periodo" Type="DateTime" Precision="0" />
+    <Property Name="Vencimiento" Type="DateTime" Precision="0" />
+    <Property Name="Vencimiento_Pago" Type="DateTime" Precision="0" />
+    <Property Name="Diferencia_Pago" Type="Int32" />
+    <Property Name="Debito_Credito" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Motivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="InteresXPago" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Subtotal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="InteresMensual" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total_Depositar" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Fecha_Pagado" Type="DateTime" Precision="0" />
+    <Property Name="Lugar_Pago" Type="Int32" />
+    <Property Name="Pagado" Type="Boolean" />
+    <Property Name="Tipo_Pago" Type="Int32" />
+    <Property Name="FechaImpresion" Type="DateTime" Precision="0" />
+    <Property Name="EntidadRecaudadora" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ImportePagar" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Archivo" Type="Boolean" />
+    <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Filename" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CodBarra" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha_Creacion" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Empresas" Relationship="Self.FK_Liquidacion_Empresas" FromRole="Liquidacion" ToRole="Empresas" />
+    <NavigationProperty Name="Historial" Relationship="Self.FK_LiquidacionXEmpleados_Liquidacion" FromRole="Liquidacion" ToRole="Historial" />
+  </EntityType>
+  <EntityType Name="LiquidacionPorcentaje">
+    <Key>
+      <PropertyRef Name="IdLiquidacion" />
+    </Key>
+    <Property Name="IdLiquidacion" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Porcentaje" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="LOG">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Meses">
+    <Key>
+      <PropertyRef Name="IDMes" />
+    </Key>
+    <Property Name="IDMes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Mes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Motivos">
+    <Key>
+      <PropertyRef Name="IdMotivo" />
+    </Key>
+    <Property Name="IdMotivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Motivo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pago_Interes" Relationship="Self.FK_Pago_Interes_Motivos" FromRole="Motivos" ToRole="Pago_Interes" />
+  </EntityType>
+  <EntityType Name="Pago_Interes">
+    <Key>
+      <PropertyRef Name="Id_Interes" />
+    </Key>
+    <Property Name="Id_Interes" Type="Int32" Nullable="false" />
+    <Property Name="Id_Empresa" Type="Int32" />
+    <Property Name="Periodo" Type="DateTime" Precision="0" />
+    <Property Name="Fecha_Pago" Type="DateTime" Precision="0" />
+    <Property Name="Vencimiento" Type="DateTime" Precision="0" />
+    <Property Name="IdMotivo" Type="Int32" />
+    <Property Name="Comentario" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ImporteOriginal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EntidadRecaudadora" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ImportePagar" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Archivo" Type="Boolean" />
+    <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Filename" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Motivos" Relationship="Self.FK_Pago_Interes_Motivos" FromRole="Pago_Interes" ToRole="Motivos" />
+  </EntityType>
+  <EntityType Name="Parametros">
+    <Key>
+      <PropertyRef Name="IdParametro" />
+    </Key>
+    <Property Name="IdParametro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreEmpresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Cuit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CBU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CantidadCuotas" Type="Int32" />
+    <Property Name="PorcentajeMensual" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="TipoDocumentos">
+    <Key>
+      <PropertyRef Name="IdDocumento" />
+    </Key>
+    <Property Name="IdDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_TipoDocumentos" FromRole="TipoDocumentos" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="Vencimiento_Liquidacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ter_CUIT" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dia_Vencimiento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Boletas_Actas_Empresas">
+    <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+    <End Role="Boletas_Actas" Type="Self.Boletas_Actas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empresas">
+        <PropertyRef Name="IdEmpresa" />
+      </Principal>
+      <Dependent Role="Boletas_Actas">
+        <PropertyRef Name="IDEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleados_Categorias">
+    <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorias">
+        <PropertyRef Name="IdCategoria" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleados_Empresas">
+    <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empresas">
+        <PropertyRef Name="IdEmpresa" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleados_Estados">
+    <End Role="Estados" Type="Self.Estados" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estados">
+        <PropertyRef Name="IdEstado" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleados_TipoDocumentos">
+    <End Role="TipoDocumentos" Type="Self.TipoDocumentos" Multiplicity="1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumentos">
+        <PropertyRef Name="IdDocumento" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="TipoDoc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Liquidacion_Empresas">
+    <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+    <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empresas">
+        <PropertyRef Name="IdEmpresa" />
+      </Principal>
+      <Dependent Role="Liquidacion">
+        <PropertyRef Name="IdEmpresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LiquidacionXEmpleados_Liquidacion">
+    <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="0..1" />
+    <End Role="Historial" Type="Self.Historial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Liquidacion">
+        <PropertyRef Name="IdLiquidacion" />
+      </Principal>
+      <Dependent Role="Historial">
+        <PropertyRef Name="IdLiquidacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pago_Interes_Motivos">
+    <End Role="Motivos" Type="Self.Motivos" Multiplicity="0..1" />
+    <End Role="Pago_Interes" Type="Self.Pago_Interes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Motivos">
+        <PropertyRef Name="IdMotivo" />
+      </Principal>
+      <Dependent Role="Pago_Interes">
+        <PropertyRef Name="IdMotivo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="geosoftw_seoca_aportesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Boletas_Actas" EntityType="Self.Boletas_Actas" />
+    <EntitySet Name="Boletas_Pagos" EntityType="Self.Boletas_Pagos" />
+    <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+    <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+    <EntitySet Name="Empresas" EntityType="Self.Empresas" />
+    <EntitySet Name="Estados" EntityType="Self.Estados" />
+    <EntitySet Name="Historial" EntityType="Self.Historial" />
+    <EntitySet Name="Liquidacion" EntityType="Self.Liquidacion" />
+    <EntitySet Name="LiquidacionPorcentaje" EntityType="Self.LiquidacionPorcentaje" />
+    <EntitySet Name="LOG" EntityType="Self.LOG" />
+    <EntitySet Name="Meses" EntityType="Self.Meses" />
+    <EntitySet Name="Motivos" EntityType="Self.Motivos" />
+    <EntitySet Name="Pago_Interes" EntityType="Self.Pago_Interes" />
+    <EntitySet Name="Parametros" EntityType="Self.Parametros" />
+    <EntitySet Name="TipoDocumentos" EntityType="Self.TipoDocumentos" />
+    <EntitySet Name="Vencimiento_Liquidacion" EntityType="Self.Vencimiento_Liquidacion" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <AssociationSet Name="FK_Boletas_Actas_Empresas" Association="Self.FK_Boletas_Actas_Empresas">
+      <End Role="Empresas" EntitySet="Empresas" />
+      <End Role="Boletas_Actas" EntitySet="Boletas_Actas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleados_Categorias" Association="Self.FK_Empleados_Categorias">
+      <End Role="Categorias" EntitySet="Categorias" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleados_Empresas" Association="Self.FK_Empleados_Empresas">
+      <End Role="Empresas" EntitySet="Empresas" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleados_Estados" Association="Self.FK_Empleados_Estados">
+      <End Role="Estados" EntitySet="Estados" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleados_TipoDocumentos" Association="Self.FK_Empleados_TipoDocumentos">
+      <End Role="TipoDocumentos" EntitySet="TipoDocumentos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Liquidacion_Empresas" Association="Self.FK_Liquidacion_Empresas">
+      <End Role="Empresas" EntitySet="Empresas" />
+      <End Role="Liquidacion" EntitySet="Liquidacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LiquidacionXEmpleados_Liquidacion" Association="Self.FK_LiquidacionXEmpleados_Liquidacion">
+      <End Role="Liquidacion" EntitySet="Liquidacion" />
+      <End Role="Historial" EntitySet="Historial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pago_Interes_Motivos" Association="Self.FK_Pago_Interes_Motivos">
+      <End Role="Motivos" EntitySet="Motivos" />
+      <End Role="Pago_Interes" EntitySet="Pago_Interes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

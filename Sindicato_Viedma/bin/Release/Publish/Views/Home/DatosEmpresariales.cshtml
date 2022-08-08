@@ -1,0 +1,260 @@
+﻿@model Sindicato_Viedma.Models.ViewModels.EditarEmpresa
+
+@{
+    ViewBag.Title = "Datos";
+}
+
+<!-- Banner -->
+@Html.Partial("~/Views/Shared/MisViews/Banner.cshtml")
+
+@{
+    if (ViewBag.Session != false) // Si esta logueado que se muestre la barra menu
+    {
+        @Html.Partial("~/Views/Shared/BarraNavegacion.cshtml")
+    }
+
+}
+
+<div class="w3-content" style="max-width:1564px">
+
+    <div id="id01" class="w3-modal" style="">
+        <div class="w3-modal-content">
+            <div id="modal-content">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="w3-row">
+
+        <!-- --------------------------- Blog --------------------------- -->
+        <div class="w3-col l8 s12">
+            <div class="w3-card-2 w3-margin w3-white">
+                <div class="w3-half">
+                    <div class="w3-padding bg-zul w3-text-white w3-center">
+                        PASSWORD <i class="fas fa-arrow-circle-right"></i>
+                    </div>
+                </div>
+                <div class="w3-half">
+                    <button onclick="document.getElementById('id02').style.display='block'"
+                            class="w3-button w3-card bg-zul w3-margin-left w3-text-white w3-hover-blue">
+                        Cambiar Password
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("DatosEmpresariales", "Home", FormMethod.Post, new { @class = "w3-col l8 s12", autocomplete = "off" }))
+        {
+            <input hidden asp-for="IdEmpresa" value="@Model.IdEmpresa"/>
+            <input hidden asp-for="Password" value="@Model.Password"/>
+
+            <!-- Formulario Nº 001 -->
+            <div class="w3-card-2 w3-margin w3-white w3-padding-16">
+
+                <h2 class="w3-center w3-opacity-min">
+                    <i class="fab fa-black-tie"></i>  EMPRESA @ViewBag.empresa
+                </h2>
+
+                <div class="w3-container">
+
+                    <!-- ---------- LINEA 001 ---------- -->
+                    <div class="w3-row-padding" hidden>
+                        <div class="w3-half w3-container w3-text-white" >
+                            <div class="w3-padding bg-zul">CUIT</div>
+                            @*<input class="w3-input w3-border" placeholder="Cuit" value="@ViewBag.CuitEmpresa" name="CUIT" id="CUIT" readonly />*@
+                            @Html.TextBoxFor(model => model.CUIT, new { @class = "w3-input w3-border", placeholder = "Cuit", @readonly = "readonly" })
+                        </div>
+                        <div class="w3-half">
+                            <div class="w3-padding bg-zul">Sucursal</div>
+                            @*<input class="w3-input w3-border" placeholder="Sucursal" value="@Model.Sucursal" readonly />*@
+                            @Html.TextBoxFor(model => model.Sucursal, new { @class = "w3-input w3-border", placeholder = "Sucursal", @readonly = "readonly" })
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- ---------- LINEA 002 ---------- -->
+
+                    <div class="w3-row-padding">
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Nombre de Fantasia</div>
+                            @*<input class="w3-input w3-border" placeholder="Nombre Fantasia" id="NombreFantasia" value="@Model.NombreFantasia" />*@
+                            @Html.TextBoxFor(model => model.NombreFantasia, new { @class = "w3-input w3-border", placeholder = "Nombre Fantasia", id = "NombreFantasia" })
+                        </div>
+
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Razon Social</div>
+                            @*<input class="w3-input w3-border" placeholder="Razon Social" id="RazonSocial" value="@Model.RazonSocial" />*@
+                            @Html.TextBoxFor(model => model.RazonSocial, new { @class = "w3-input w3-border", placeholder = "Razon Social", id = "RazonSocial" })
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- ---------- LINEA 003 ---------- -->
+
+                    <div class="w3-row-padding">
+                        <div class="w3-col w3-container w3-text-white l12">
+                            <div class="w3-padding bg-zul">Domicilio</div>
+                            @*<input class="w3-input w3-border" placeholder="Domicilio" id="Domicilio" value="@Model.Domicilio" />*@
+                            @Html.TextBoxFor(model => model.Domicilio, new { @class = "w3-input w3-border", placeholder = "Domicilio", id = "Domicilio" })
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- ---------- LINEA 004 ---------- -->
+
+                    <div class="w3-row-padding">
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Provincia</div>
+                            @*<input class="w3-input w3-border" placeholder="Provincia" id="Provincia" value="@Model.Provincia" />*@
+                            @Html.TextBoxFor(model => model.Provincia, new { @class = "w3-input w3-border", placeholder = "Provincia", id = "Provincia" })
+                        </div>
+
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Localidad</div>
+                            @*<input class="w3-input w3-border" placeholder="Localidad" id="Localidad" value="@Model.Localidad" />*@
+                            @Html.TextBoxFor(model => model.Localidad, new { @class = "w3-input w3-border", placeholder = "Localidad", id = "Localidad" })
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- ---------- LINEA 005 ---------- -->
+
+                    <div class="w3-row-padding">
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Codigo Postal</div>
+                            @*<input class="w3-input w3-border" placeholder="Codigo Postal" id="CP" value="@Model.CP" />*@
+                            @Html.TextBoxFor(model => model.CP, new { @class = "w3-input w3-border", placeholder = "Codigo Postal", id = "CP", type = "text", onchange = "validarCamposMomento()" })
+                        </div>
+
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Telefono</div>
+                            @*<input class="w3-input w3-border" placeholder="Telefono" id="Telefono" value="@Model.Telefono" />*@
+                            @Html.TextBoxFor(model => model.Telefono, new { @class = "w3-input w3-border", placeholder = "Telefono", id = "Telefono", type = "text", onchange = "validarCamposMomento()" })
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- ---------- LINEA 006 ---------- -->
+
+                    <div class="w3-row-padding">
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Contacto</div>
+                            @*<input class="w3-input w3-border" placeholder="Contacto" id="Contacto" value="@Model.Contacto" />*@
+                            @Html.TextBoxFor(model => model.Contacto, new { @class = "w3-input w3-border", placeholder = "Contacto", id = "Contacto" })
+                        </div>
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Email</div>
+                            @*<input class="w3-input w3-border" placeholder="Email" id="Email" type="email" value="@Model.Email" />*@
+                            @Html.TextBoxFor(model => model.Email, new { @class = "w3-input w3-border", placeholder = "Email", id = "Email", type = "Email" })
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- ---------- LINEA 007 ---------- -->
+
+                    <div class="w3-row-padding">
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Horario de Atencion</div>
+                            @*<input class="w3-input w3-border" placeholder="Horario de Atencion" id="Horario" value="@Model.HorarioAtencion" />*@
+                            @Html.TextBoxFor(model => model.HorarioAtencion, new { @class = "w3-input w3-border", placeholder = "Horario de Atencion", id = "Horario" })
+                        </div>
+
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Comentario</div>
+                            @*<input class="w3-input w3-border" placeholder="Comentario" id="Comentario" value="@Model.Comentario" />*@
+                            @Html.TextBoxFor(model => model.Comentario, new { @class = "w3-input w3-border", placeholder = "Comentario", id = "Comentario" });
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- ---------- LINEA Bottom ---------- -->
+                    <div class="w3-row-padding w3-center">
+                        <button class="w3-button w3-card bg-zul w3-text-white w3-hover-blue w3-hover-border-cyan" style="float: right" type="submit" onclick="return validarDatosEmpresa()">Modificar</button>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+        <!-- ---------------------------- Modal 02 Start ---------------------------- -->
+            <div class="w3-modal-content">
+
+                @using (Html.BeginForm("EditPassword", "Home", FormMethod.Post, new { @class = "w3-modal", id= "id02", autocomplete = "off" }))
+                {
+                    <input hidden asp-for="IdEmpresa" />
+                    <input hidden value="@ViewBag.password" id="pass" />
+
+                    <div class="w3-content w3-row-padding" style="line-height : 5px;" s>
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Password Actual</div>
+                            <input class="w3-input w3-ligth-grey" type="password" placeholder="Password old" id="passOld">
+                        </div>
+
+                        <div class="w3-half w3-container w3-text-white">
+                            <div class="w3-padding bg-zul">Nueva Password</div>
+                            <label asp-for="Password" hidden></label>
+                            <input asp-for="Password" type="password" class="w3-input w3-ligth-grey" placeholder="Password New" id="passNew" name="passNew" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="w3-half w3-container w3-text-white w3-right">
+                            <div class="w3-padding bg-zul">Repetir Contraseña</div>
+                            <input class="w3-input w3-ligth-grey" type="password" placeholder="Password repeat" id="passRepeat">
+                        </div>
+                    </div>
+                    <div class="w3-content w3-row-padding">
+                        <div class="w3-half w3-center w3-container w3-text-white">
+                            <button onclick="return modifyPass()" class="w3-button w3-card bg-zul w3-margin-left w3-text-white w3-hover-blue" type="submit">
+                                Modificar
+                            </button>
+                        </div>
+                        <div class="w3-half w3-center w3-container w3-text-white">
+                            <button onclick="cerrar()" type="button" class="w3-button w3-card bg-zul w3-margin-left w3-text-white w3-hover-blue">
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        <!----------------------------- Side --------------------------- -->
+        <div class="w3-col l4">
+            @*<div class="w3-card w3-animate-top w3-center w3-margin w3-margin-top bg-zul w3-padding w3-margin-left w3-margin-right">
+                <P class="w3-text-white">El importe máximo para pagar a través de PagoFácil es de pesos 20000.00</P>
+                <P class="w3-text-white">Los pagos en Banco Nación debe realizarse en CASA CENTRAL o en SUCURSALES ubicadas GRAN BUENOS AIRES</P>
+            </div>*@
+            @Html.Partial("~/Views/Shared/MisViews/MesaAyuda.cshtml")
+        </div>
+
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.edicion))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.edicion");
+    </script>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.editarPassword))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.editarPassword");
+    </script>
+}
+
+@section scripts{
+    <script src="~/js/ModifyPassword.js"></script>
+    <script src="~/js/modalRegistrarse.js"></script>
+    <script src="~/js/Empresas.js"></script>
+}

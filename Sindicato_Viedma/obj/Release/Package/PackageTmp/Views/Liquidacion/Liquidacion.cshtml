@@ -1,0 +1,457 @@
+﻿@model Sindicato_Viedma.Models.ViewModels.CrearLiquidacion
+
+@{
+    ViewData["Title"] = "Liquidacion DDJJ";
+}
+
+<!-- Banner -->
+@Html.Partial("~/Views/Shared/MisViews/Banner.cshtml")
+
+
+@{
+    if (ViewBag.Session != false) // Si esta logueado que se muestre la barra menu
+    {
+        @Html.Partial("~/Views/Shared/BarraNavegacion.cshtml")
+    }
+}
+
+<div class="w3-content" style="max-width:1564px">
+
+    @using (Html.BeginForm("Liquidacion", "Liquidacion", FormMethod.Post, new { @class = "w3-content", autocomplete = "off", style = "max-width:1564px" }))
+    {
+        <!-- -------------------- Cuit Sucursal Cuenta / Razon Social -------------------- -->
+
+        <div class="w3-row" hidden>
+            <div class="w3-half w3-container w3-text-white">
+                <div class="w3-padding bg-zul ">Cuit</div>
+                <input class="w3-input w3-ligth-grey" type="text" placeholder="Cuit" value="@ViewBag.cuit" id="terCUIT" readonly>
+            </div>
+            <div class="w3-half w3-container w3-text-white">
+                <div class="w3-padding bg-zul w3-text-white">Razón Social</div>
+                <input class="w3-input w3-ligth-grey" type="text" placeholder="Razón Social" value="@ViewBag.razonSocial" readonly>
+            </div>
+        </div>
+        <br />
+
+        // -- //
+<div class="w3-row">
+    <div class="w3-quarter w3-container w3-text-white">
+        <div class="w3-padding bg-zul">Periodo</div>
+        <div class="w3-half">
+            <select class="w3-select" onchange="InteresPago()" name="PeriodoMes" id="PeriodoMes">
+                <option value="" disabled selected>Mes</option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+        </div>
+        <div class="w3-half">
+            <select class="w3-select" onchange="InteresPago()" name="PeriodoAnio" id="PeriodoAnio">
+                <option value="" disabled selected>Año</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+            </select>
+        </div>
+    </div>
+    <div class="w3-quarter w3-container w3-text-white">
+        <div class="w3-padding bg-zul">Fecha Pago</div>
+        @Html.TextBoxFor(model => model.Vencimiento_Pago, new { @class = "w3-input w3-ligth-grey", placeholder = "Fecha Pago", id = "vencimientoPago", type = "date", onblur = "InteresPago()", min = "01-04-2022" })
+    </div>
+    <div class="w3-quarter w3-container w3-text-white">
+        <div class="w3-padding bg-zul ">Vencimiento</div>
+        @Html.TextBoxFor(model => model.Vencimiento, new { @class = "w3-input w3-ligth-grey", placeholder = "Vencimiento", id = "vencimiento", @readonly = "readonly", type = "date" })
+
+    </div>
+    <div class="w3-quarter w3-container w3-text-white" hidden>
+        <input type="text" value="@ViewBag.fechaActual" id="fechaActual"/>
+    </div>
+
+    <div class="w3-quarter w3-container w3-text-white">
+        <div class="w3-padding bg-zul ">Dias de Diferencia</div>
+        <input type="text" id="DiasDiferencia" value="0" class="w3-input w3-ligth-grey" readonly />
+    </div>
+</div>
+        <br>
+
+        <div class="w3-responsive w3-container">
+            <table class="w3-table-all" id="EmpleadosCargados">
+
+                <tr>
+                    <th class="w3-right-align ">(Agrupado) Cant. Horas Mensuales</th>
+                    <th class="w3-right-align">Cant. Empleados</th>
+                    <th class="w3-right-align">Total $ Empleados</th>
+                    <th class="w3-right-align">Cant. Afiliados</th>
+                    <th class="w3-right-align">Total $ Afiliados</th>
+                </tr>
+                @if (ViewBag.listaHoras != null)
+                {
+                    foreach (var items in ViewBag.listaHoras)
+                    {
+                        <tr>
+                            <td><input class="w3-input txtGrillaEmpLiq" type="text" value="@items.CantHoras" readonly Style = "background:#CACFD2;"></td>
+                            <td><input class="w3-input w3-right-align" type="text" value="@items.CantEmpleados" readonly Style = "background:#CACFD2;"></td>
+                            <td><input class="w3-input w3-right-align" type="text" value="@items.totRemuneracion" readonly Style = "background:#CACFD2;"></td>
+                            <td><input class="w3-input w3-right-align" type="text" value="@items.CantAfiliados" readonly Style = "background:#CACFD2;"></td>
+                            <td><input class="w3-input w3-right-align" type="text" value="@items.totRemuneracionAfiliados" readonly Style = "background:#CACFD2;"></td>
+                        </tr>
+                    }
+                }
+                <tr>
+                    
+                </tr>
+                <tr>
+                    <td class="w3-right-align"><b>Totales</b></td>
+                    <td class="w3-right-align"><input class="w3-input w3-right-align" type="text" value="@ViewBag.cantEmpl" id="cantEmpl" name="cantEmpl" readonly Style = "background:#CACFD2;"></td>
+                    <td class="w3-right-align"><input class="w3-input w3-right-align" type="text" value="@ViewBag.totRem" id="totRem" name="totRem" readonly Style = "background:#CACFD2;"></td>
+                    <td class="w3-right-align"><input class="w3-input w3-right-align" type="text" value="@ViewBag.CantEmplAfi" id="CantEmplAfi" name="CantEmplAfi" readonly Style = "background:#CACFD2;"></td>
+                    <td class="w3-right-align"><input class="w3-input w3-right-align" type="text" value="@ViewBag.totRemAfi" id="totRemAfi" name="totRemAfi" readonly Style = "background:#CACFD2;"></td>
+                </tr>
+            </table>
+        </div>
+
+        <br />
+
+
+        <!-- -------------------- Remuneraciones -------------------- -->
+
+        <div class="w3-row" style="display: none;">
+            <div class="w3-half w3-container w3-text-white w3-right">
+                <div class="w3-half"> </div>
+                <div class="w3-half w3-right">
+                    <div class="w3-padding bg-zul">Remuneraciones</div>
+                    @Html.TextBoxFor(model => model.Remuneracion, new { @class = "w3-input w3-ligth-grey w3-right-align", type = "text", placeholder = "Valor", id = "Remuneracion", @readonly = "readonly" })
+                    <script>
+                        document.getElementById("Remuneracion").value = @ViewBag.totRem
+                    </script>
+                </div>
+            </div>
+            <div class="w3-quarter w3-container w3-text-white" hidden> </div>
+            <div class="w3-quarter w3-container w3-text-white" hidden> </div>
+        </div>
+        <br>
+
+
+        <!-- -------------------- Convenio Colectivo / Cuota Sindical / Sepelio -------------------- -->
+
+        <div class="w3-row">
+            <div class="w3-third w3-container w3-text-white">
+                <div class="w3-padding bg-zul">@ViewBag.Nombreconvenio @ViewBag.PorcentajeConvenio%</div>
+                @Html.TextBoxFor(model => model.Convenio, new { @class = "w3-input w3-ligth-grey w3-right-align", onchange = "calcularMontoTotal()", @readonly = "readonly" })
+            </div>
+            <div class="w3-third w3-container w3-text-white">
+                <div class="w3-padding bg-zul">@ViewBag.NombreCuota @ViewBag.PorcentajeCuota%</div>
+                @Html.TextBoxFor(model => model.Cuota_Sindical, new { @class = "w3-input w3-ligth-grey w3-right-align", onchange = "calcularMontoTotal()", @readonly = "readonly" })
+            </div>
+            @if (!String.IsNullOrEmpty(ViewBag.NombreSepelio))
+            {
+                <div class="w3-third w3-container w3-text-white">
+                    <div class="w3-padding bg-zul">@ViewBag.NombreSepelio @ViewBag.PorcentaSepelio%</div>
+                    @Html.TextBoxFor(model => model.Seguro_Sepelio, new { @class = "w3-input w3-ligth-grey w3-right-align", onchange = "calcularMontoTotal()", @readonly = "readonly" })
+                </div>
+            }
+            else
+            {
+                <div class="w3-third w3-container w3-text-white"></div>
+            }
+        </div>
+
+        <br>
+
+        <!-- -------------------- DebitoCredito / Motivo -------------------- -->
+
+        <div class="w3-row">
+            <div class="w3-quarter w3-container w3-text-white">
+                <div class="w3-padding bg-zul">Ajustes Varios</div>
+                @Html.TextBoxFor(model => model.Debito_Credito, new { @class = "w3-input w3-ligth-grey w3-right-align", placeholder = "Valor", value = "0", onchange = "calcularMontoTotal()" })
+            </div>
+            <div class="w3-threequarter w3-container w3-text-white">
+                <div class="w3-padding bg-zul">Motivos</div>
+                @Html.TextBoxFor(model => model.Motivo, new { @class = "w3-input w3-ligth-grey", placeholder = "Texto" })
+            </div>
+        </div>
+        <br>
+
+        <!-- -------------------- Interes / Recargo / SubTotal -------------------- -->
+
+        <div class="w3-row">
+            <div class="w3-third w3-container w3-text-white">
+                <div class="w3-padding bg-zul">Intereses Por Pago Fuera de Termino</div>
+                @Html.TextBoxFor(model => model.InteresXPago, new { @class = "w3-input w3-ligth-grey w3-right-align", value = "0", onchange = "calcularMontoTotal()" })
+            </div>
+            <div class="w3-third w3-container w3-text-white"></div>
+            <div class="w3-third w3-container w3-text-white">
+                <div class="w3-padding bg-zul">Subtotal</div>
+                @Html.TextBoxFor(model => model.SubTotal, (string)ViewBag.totalDepositar, new { @class = "w3-input w3-ligth-grey w3-right-align", @readonly = "readonly", onchange = "totalDepositar()", Style = "background:#CACFD2;" })
+            </div>
+        </div>
+
+        <br />
+
+        <div class="w3-row">
+            <div class="w3-third w3-container w3-text-white"></div>
+            <div class="w3-third w3-container w3-text-white"></div>
+            <div class="w3-third w3-container w3-text-white">
+                <div class="w3-padding bg-zul">Interes Mensual @ViewBag.porcentajeMensual %</div>
+                @Html.TextBoxFor(model => model.InteresMensual, new { @class = "w3-input w3-ligth-grey w3-right-align", value = "0", @readonly = "readonly", onchange = "totalDepositar()", Style = "background:#CACFD2;" })
+            </div>
+        </div>
+
+        <br />
+
+        <div class="w3-row">
+            <div class="w3-third w3-container w3-text-white"> </div>
+            <div class="w3-third w3-container w3-text-white"></div>
+            <div class="w3-third w3-container w3-text-white">
+                <div class="w3-padding bg-zul">Total a Depositar</div>
+                @Html.TextBoxFor(model => model.Total_Depositar, new { @class = "w3-input w3-ligth-grey w3-right-align", @readonly = "readonly", Style = "background:#CACFD2;" })
+            </div>
+        </div>
+
+        <!-- --------------------Confirmar -------------------- -->
+        <div class="w3-row">
+            <div class="w3-third w3-container w3-text-white">
+            </div>
+            <div class="w3-third w3-container w3-text-white">
+            </div>
+            <div class="w3-third w3-container w3-text-white">
+                <button class="w3-right w3-margin-top w3-button w3-card bg-zul w3-text-white w3-hover-blue w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="return validarLiquidacion();"> Generar Boleta de Pago PDF</button>
+            </div>
+        </div>
+
+        <br>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.pdf))
+    {
+        <script type="text/javascript">
+            window.open('@ViewBag.pdf', '_blank');
+        </script>
+    }
+
+</div>
+
+
+
+@if (!string.IsNullOrEmpty(ViewBag.message))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.message");
+    </script>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.repetido))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.repetido");
+    </script>
+}
+
+@section scripts{
+    <script src="~/js/Liquidaciones.js"></script>
+}
+
+<script>
+
+    var convenio = parseFloat(document.getElementById("Convenio").value);
+    var cuota = parseFloat(document.getElementById("Cuota_Sindical").value);
+    var seguro = parseFloat(document.getElementById("Seguro_Sepelio").value);
+
+    document.getElementById("InteresXPago").value = 0.00;
+    document.getElementById("Debito_Credito").value = 0.00;
+
+    var total = parseFloat(convenio + cuota + seguro);
+        total = total.toFixed(2)
+
+    document.getElementById("SubTotal").value = total;
+    document.getElementById("Total_Depositar").value = total;
+
+    $("#PeriodoMes").val("@ViewBag.mesPeriodo");
+    $("#PeriodoAnio").val("@ViewBag.anioPeriodo");
+
+    periodo();
+
+    var x = document.getElementById("vencimiento");
+
+    function periodo() {
+
+        var CUIT = document.getElementById("terCUIT").value;
+        var termCUIT = CUIT.charAt(CUIT.length - 1);
+
+        var e = document.getElementById("PeriodoMes");
+        var mes = e.options[e.selectedIndex].value;
+        var a = document.getElementById("PeriodoAnio");
+        var anio = a.options[a.selectedIndex].value;
+
+        var accion = 0;
+
+
+        if (mes != "" && anio != "") {
+            @*var list = JSON.parse('@Html.Raw(Json.Serialize(ViewBag.periodoFechaVen))');*@
+            var list = @Html.Raw(Json.Encode(ViewBag.periodoFechaVen));
+            for (var i = 0; i < list.length; i++) {
+                if (termCUIT == list[i].Ter_CUIT) {
+                    var diaVen = list[i].Dia_Vencimiento;
+                    if (mes == "12") {
+                        mes = "01";
+                        anio = parseInt(anio);
+                        anio = (anio + 1).toString();
+                        var fecha = anio + "-" + mes + "-" + diaVen;
+                    } else {
+                        mes = parseInt(mes);
+                        if (mes <= 8) {
+                            mes = (mes + 1).toString();
+                            mes = "0" + mes;
+                        } else {
+                            mes = (mes + 1).toString();
+                        }
+
+                        var fecha = anio + "-" + mes + "-" + diaVen;
+                    }
+                    document.getElementById("vencimiento").value = fecha;
+                    document.getElementById("vencimiento").min = fecha
+
+
+                    document.getElementById("vencimientoPago").value = fecha;
+                    accion = 1;
+                }
+            }
+
+            if (accion == 0) {
+                document.getElementById("vencimiento").value = 'dd/mm/aaaa';
+                document.getElementById("vencimientoPago").value = 'dd/mm/aaaa';
+            }
+        }
+    }
+
+
+
+
+function InteresPago() {
+
+    var MesPeriodo = document.getElementById("PeriodoMes").value;
+    var AnioPeriodo = document.getElementById("PeriodoAnio").value;
+    var periodo = AnioPeriodo + "-" + MesPeriodo + "-01";
+    var vencimientoss = document.getElementById("vencimiento").value;
+
+    var cambioAnio = periodo.substr(0, 4);
+    var cambioMes = periodo.substr(5, 2);
+    cambioMes -= 1;
+    var cambioDia = vencimientoss.substr(8, 2);
+    var cambiofecha = new Date(cambioAnio, cambioMes, cambioDia);
+    cambiofecha.setMonth(cambiofecha.getMonth() + 1);
+
+    var aa = cambiofecha.getDate();
+    var bb = cambiofecha.getMonth();
+    bb += 1;
+    if (bb < 9) {
+        bb = "0" + bb;
+    }
+    var cc = cambiofecha.getFullYear();
+    var dd = cc + "-" + bb + "-" + aa;
+
+    document.getElementById("vencimiento").value = dd;
+
+
+    var pagoActual = document.getElementById("SubTotal").value;
+    var vencimientoPago = document.getElementById("vencimientoPago").value;
+    var vencimiento = document.getElementById("vencimiento").value;
+    var fechaActual = document.getElementById("fechaActual").value;
+
+
+    var per1 = periodo.substr(0, 4);
+    var per2 = periodo.substr(5, 2);
+    per2 -= 1;
+    var per3 = periodo.substr(8, 2);
+
+    var ven1 = vencimientoPago.substr(0, 4);
+    var ven2 = vencimientoPago.substr(5, 2);
+    ven2 -= 1;
+    var ven3 = vencimientoPago.substr(8, 2);
+
+    var venp1 = vencimiento.substr(0, 4);
+    var venp2 = vencimiento.substr(5, 2);
+    venp2 -= 1;
+    var venp3 = vencimiento.substr(8, 2);
+
+    var today = fechaActual;
+    //var today = '2022-05-02';
+
+    var today1 = today.substr(0, 4);
+    var today2 = today.substr(5, 2);
+    today2 -= 1;
+    var today3 = today.substr(8, 2);
+
+
+    var date1 = new Date(per1, per2, per3); //Remember, months are 0 based in JS
+    var date2 = new Date(ven1, ven2, ven3);
+    var date3 = new Date(venp1, venp2, venp3);
+    var hoy = new Date(today1, today2, today3);
+
+
+    if (date2 < hoy) {
+        alert("Debe de ingresar una fecha mayor a " + today + " en la Fecha de Pago.");
+        document.getElementById("vencimientoPago").value = today;
+        document.getElementById("DiasDiferencia").value = 0;
+        document.getElementById('InteresMensual').value = 0;
+        return;
+    }
+
+    // Diferencia de Dias
+    if (date2 > date3) {
+        var diff = date2.getTime() - date3.getTime();
+        diff = Math.round(diff / (1000 * 60 * 60 * 24));
+        if (diff < 0) diff = diff * -1;
+        document.getElementById("DiasDiferencia").value = diff;
+    } else {
+        document.getElementById("DiasDiferencia").value = 0;
+        document.getElementById('InteresMensual').value = 0;
+        totalDepositar();
+        return;
+    }
+
+
+    //if (date2 > fechaMinima) {
+    var meses;
+
+    //var porcentajeMensual = @ViewBag.porcentajeMensual;
+    //var porcentajeMensual = 2;
+    var porcentaje = diff * 0.1;
+
+    var interes = (pagoActual * porcentaje) / 100;
+    interes = interes.toFixed(2);
+
+    document.getElementById('InteresMensual').value = interes;
+    totalDepositar();
+    //} else {
+    //    alert("Debe de ingresar una fecha mayor a" + fechaMinima);
+    //}
+
+
+}
+
+
+
+</script>

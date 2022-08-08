@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ae7b04aebcd341f08b81f1b64c0de2f8" Name="Diagram1">
+        <EntityTypeShape EntityType="SindicatoModel.Actas" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.Boletas_Actas" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.Boletas_DDJJ" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.Categorias" Width="1.5" PointX="3.75" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.Empleados" Width="1.5" PointX="6" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.Empresas" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.Estados" Width="1.5" PointX="3.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.Liquidacion" Width="1.5" PointX="3" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.LiquidacionPorcentaje" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.SubCategoria" Width="1.5" PointX="6" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.TipoDocumentos" Width="1.5" PointX="3.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SindicatoModel.Vencimiento_Liquidacion" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="SindicatoModel.FK_Actas_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="SindicatoModel.FK_Boletas_Actas_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="SindicatoModel.FK_Boletas_DDJJ_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="SindicatoModel.FK_Empleados_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="SindicatoModel.FK_SubCategoria_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="SindicatoModel.FK_Empleados_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="SindicatoModel.FK_Empleados_Estados" ManuallyRouted="false" />
+        <AssociationConnector Association="SindicatoModel.FK_Empleados_TipoDocumentos" ManuallyRouted="false" />
+        <AssociationConnector Association="SindicatoModel.FK_Liquidacion_Empresas" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
