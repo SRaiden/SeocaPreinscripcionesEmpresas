@@ -1,0 +1,907 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SindicatoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actas">
+          <Key>
+            <PropertyRef Name="IdActas" />
+          </Key>
+          <Property Name="IdActas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="Desde" Type="date" />
+          <Property Name="Hasta" Type="date" />
+          <Property Name="Importe_Adeudado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Importe_Actualizado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Cuotas" Type="int" />
+          <Property Name="Valor_Cuota" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Prox_Vencimiento" Type="date" />
+          <Property Name="Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Boletas_Actas">
+          <Key>
+            <PropertyRef Name="Id_BoletasActas" />
+          </Key>
+          <Property Name="Id_BoletasActas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" />
+          <Property Name="Acta_Cuota" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Importe" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="A_Cuenta" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Interes_Mora" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Boletas_DDJJ">
+          <Key>
+            <PropertyRef Name="IdBoletaDDJJ" />
+          </Key>
+          <Property Name="IdBoletaDDJJ" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" />
+          <Property Name="Periodo_DDJJ" Type="date" />
+          <Property Name="Remunerativo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="No_Remunerativo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Importe" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="A_Cuenta" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Interes_Mora" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCategoria" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoDoc" Type="int" Nullable="false" />
+          <Property Name="CUIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sexo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="date" />
+          <Property Name="IdCategoria" Type="int" />
+          <Property Name="IdSubcategoria" Type="int" />
+          <Property Name="Fecha_Ingreso" Type="date" />
+          <Property Name="Remuneracion" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Suma_No_Remuneracion" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Afiliado" Type="bit" />
+          <Property Name="IdEstado" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="Fecha_Baja" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CUIT" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sucursal" Type="int" Nullable="false" />
+          <Property Name="Cuenta" Type="int" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="RazonSocial" Type="varchar" MaxLength="100" />
+          <Property Name="NombreFantasia" Type="varchar" MaxLength="100" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="150" />
+          <Property Name="Provincia" Type="varchar" MaxLength="50" />
+          <Property Name="Localidad" Type="varchar" MaxLength="50" />
+          <Property Name="CP" Type="int" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Contacto" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="HorarioAtencion" Type="varchar" MaxLength="150" />
+          <Property Name="Comentario" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="IdEstado" />
+          </Key>
+          <Property Name="IdEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreEstado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Liquidacion">
+          <Key>
+            <PropertyRef Name="IdLiquidacion" />
+          </Key>
+          <Property Name="IdLiquidacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remunerativo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="No_Remunerativo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CantEmpleados" Type="int" />
+          <Property Name="Convenio" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Afiliado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remunerativo_Afiliado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="No_Remunerativo_Afiliado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Afiliados" Type="int" />
+          <Property Name="Cuota_Sindical" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remuneracion" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Periodo" Type="date" />
+          <Property Name="Vencimiento" Type="date" />
+          <Property Name="Vencimiento_Pago" Type="date" />
+          <Property Name="Interes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Diferencia_Pago" Type="int" />
+          <Property Name="Debito_Credito" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Motivo" Type="varchar" MaxLength="150" />
+          <Property Name="InteresMora" Type="int" />
+          <Property Name="RecargoMora" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Depositar" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha_Pagado" Type="date" />
+          <Property Name="Lugar_Pago" Type="int" />
+          <Property Name="Pagado" Type="bit" />
+          <Property Name="Tipo_Pago" Type="int" />
+        </EntityType>
+        <EntityType Name="LiquidacionPorcentaje">
+          <Key>
+            <PropertyRef Name="IdLiquidacion" />
+          </Key>
+          <Property Name="IdLiquidacion" Type="int" Nullable="false" />
+          <Property Name="Convenio_Colectivo" Type="int" />
+          <Property Name="Cuota_Sindical" Type="int" />
+        </EntityType>
+        <EntityType Name="SubCategoria">
+          <Key>
+            <PropertyRef Name="IdSubcategoria" />
+          </Key>
+          <Property Name="IdSubcategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCategoria" Type="int" />
+          <Property Name="NombreSubcategoria" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoDocumentos">
+          <Key>
+            <PropertyRef Name="IdDocumento" />
+          </Key>
+          <Property Name="IdDocumento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreDocumento" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Vencimiento_Liquidacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ter_CUIT" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Dia_Vencimiento" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Actas_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Actas" Type="Self.Actas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Actas">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boletas_Actas_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Boletas_Actas" Type="Self.Boletas_Actas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Boletas_Actas">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boletas_DDJJ_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Boletas_DDJJ" Type="Self.Boletas_DDJJ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Boletas_DDJJ">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Estados">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="IdEstado" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_TipoDocumentos">
+          <End Role="TipoDocumentos" Type="Self.TipoDocumentos" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumentos">
+              <PropertyRef Name="IdDocumento" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="TipoDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Liquidacion_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Liquidacion">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategoria_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="SubCategoria" Type="Self.SubCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="SubCategoria">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SindicatoModelStoreContainer">
+          <EntitySet Name="Actas" EntityType="Self.Actas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boletas_Actas" EntityType="Self.Boletas_Actas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boletas_DDJJ" EntityType="Self.Boletas_DDJJ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Liquidacion" EntityType="Self.Liquidacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LiquidacionPorcentaje" EntityType="Self.LiquidacionPorcentaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDocumentos" EntityType="Self.TipoDocumentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vencimiento_Liquidacion" EntityType="Self.Vencimiento_Liquidacion" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Actas_Empresas" Association="Self.FK_Actas_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Actas" EntitySet="Actas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boletas_Actas_Empresas" Association="Self.FK_Boletas_Actas_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Boletas_Actas" EntitySet="Boletas_Actas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boletas_DDJJ_Empresas" Association="Self.FK_Boletas_DDJJ_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Boletas_DDJJ" EntitySet="Boletas_DDJJ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Categorias" Association="Self.FK_Empleados_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Empresas" Association="Self.FK_Empleados_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Estados" Association="Self.FK_Empleados_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_TipoDocumentos" Association="Self.FK_Empleados_TipoDocumentos">
+            <End Role="TipoDocumentos" EntitySet="TipoDocumentos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Liquidacion_Empresas" Association="Self.FK_Liquidacion_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Liquidacion" EntitySet="Liquidacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategoria_Categorias" Association="Self.FK_SubCategoria_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="SubCategoria" EntitySet="SubCategoria" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SindicatoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actas">
+          <Key>
+            <PropertyRef Name="IdActas" />
+          </Key>
+          <Property Name="IdActas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Desde" Type="DateTime" Precision="0" />
+          <Property Name="Hasta" Type="DateTime" Precision="0" />
+          <Property Name="Importe_Adeudado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Importe_Actualizado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cuotas" Type="Int32" />
+          <Property Name="Valor_Cuota" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Prox_Vencimiento" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Actas_Empresas" FromRole="Actas" ToRole="Empresas" />
+        </EntityType>
+        <EntityType Name="Boletas_Actas">
+          <Key>
+            <PropertyRef Name="Id_BoletasActas" />
+          </Key>
+          <Property Name="Id_BoletasActas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <Property Name="Acta_Cuota" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="A_Cuenta" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Interes_Mora" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Boletas_Actas_Empresas" FromRole="Boletas_Actas" ToRole="Empresas" />
+        </EntityType>
+        <EntityType Name="Boletas_DDJJ">
+          <Key>
+            <PropertyRef Name="IdBoletaDDJJ" />
+          </Key>
+          <Property Name="IdBoletaDDJJ" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <Property Name="Periodo_DDJJ" Type="DateTime" Precision="0" />
+          <Property Name="Remunerativo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="No_Remunerativo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="A_Cuenta" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Interes_Mora" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Boletas_DDJJ_Empresas" FromRole="Boletas_DDJJ" ToRole="Empresas" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCategoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Categorias" FromRole="Categorias" ToRole="Empleados" />
+          <NavigationProperty Name="SubCategoria" Relationship="Self.FK_SubCategoria_Categorias" FromRole="Categorias" ToRole="SubCategoria" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoDoc" Type="Int32" Nullable="false" />
+          <Property Name="CUIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sexo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="IdCategoria" Type="Int32" />
+          <Property Name="IdSubcategoria" Type="Int32" />
+          <Property Name="Fecha_Ingreso" Type="DateTime" Precision="0" />
+          <Property Name="Remuneracion" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Suma_No_Remuneracion" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Afiliado" Type="Boolean" />
+          <Property Name="IdEstado" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="Fecha_Baja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK_Empleados_Categorias" FromRole="Empleados" ToRole="Categorias" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Empleados_Empresas" FromRole="Empleados" ToRole="Empresas" />
+          <NavigationProperty Name="Estados" Relationship="Self.FK_Empleados_Estados" FromRole="Empleados" ToRole="Estados" />
+          <NavigationProperty Name="TipoDocumentos" Relationship="Self.FK_Empleados_TipoDocumentos" FromRole="Empleados" ToRole="TipoDocumentos" />
+        </EntityType>
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CUIT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sucursal" Type="Int32" Nullable="false" />
+          <Property Name="Cuenta" Type="Int32" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NombreFantasia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Localidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CP" Type="Int32" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HorarioAtencion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Actas" Relationship="Self.FK_Actas_Empresas" FromRole="Empresas" ToRole="Actas" />
+          <NavigationProperty Name="Boletas_Actas" Relationship="Self.FK_Boletas_Actas_Empresas" FromRole="Empresas" ToRole="Boletas_Actas" />
+          <NavigationProperty Name="Boletas_DDJJ" Relationship="Self.FK_Boletas_DDJJ_Empresas" FromRole="Empresas" ToRole="Boletas_DDJJ" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Empresas" FromRole="Empresas" ToRole="Empleados" />
+          <NavigationProperty Name="Liquidacion" Relationship="Self.FK_Liquidacion_Empresas" FromRole="Empresas" ToRole="Liquidacion" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="IdEstado" />
+          </Key>
+          <Property Name="IdEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreEstado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Estados" FromRole="Estados" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Liquidacion">
+          <Key>
+            <PropertyRef Name="IdLiquidacion" />
+          </Key>
+          <Property Name="IdLiquidacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remunerativo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="No_Remunerativo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CantEmpleados" Type="Int32" />
+          <Property Name="Convenio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Afiliado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remunerativo_Afiliado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="No_Remunerativo_Afiliado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Afiliados" Type="Int32" />
+          <Property Name="Cuota_Sindical" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remuneracion" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Periodo" Type="DateTime" Precision="0" />
+          <Property Name="Vencimiento" Type="DateTime" Precision="0" />
+          <Property Name="Vencimiento_Pago" Type="DateTime" Precision="0" />
+          <Property Name="Interes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Diferencia_Pago" Type="Int32" />
+          <Property Name="Debito_Credito" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Motivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="InteresMora" Type="Int32" />
+          <Property Name="RecargoMora" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Depositar" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha_Pagado" Type="DateTime" Precision="0" />
+          <Property Name="Lugar_Pago" Type="Int32" />
+          <Property Name="Pagado" Type="Boolean" />
+          <Property Name="Tipo_Pago" Type="Int32" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Liquidacion_Empresas" FromRole="Liquidacion" ToRole="Empresas" />
+        </EntityType>
+        <EntityType Name="LiquidacionPorcentaje">
+          <Key>
+            <PropertyRef Name="IdLiquidacion" />
+          </Key>
+          <Property Name="IdLiquidacion" Type="Int32" Nullable="false" />
+          <Property Name="Convenio_Colectivo" Type="Int32" />
+          <Property Name="Cuota_Sindical" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SubCategoria">
+          <Key>
+            <PropertyRef Name="IdSubcategoria" />
+          </Key>
+          <Property Name="IdSubcategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategoria" Type="Int32" />
+          <Property Name="NombreSubcategoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK_SubCategoria_Categorias" FromRole="SubCategoria" ToRole="Categorias" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoDocumentos">
+          <Key>
+            <PropertyRef Name="IdDocumento" />
+          </Key>
+          <Property Name="IdDocumento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_TipoDocumentos" FromRole="TipoDocumentos" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Vencimiento_Liquidacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ter_CUIT" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dia_Vencimiento" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Actas_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Actas" Type="Self.Actas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Actas">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boletas_Actas_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Boletas_Actas" Type="Self.Boletas_Actas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Boletas_Actas">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boletas_DDJJ_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Boletas_DDJJ" Type="Self.Boletas_DDJJ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Boletas_DDJJ">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategoria_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="SubCategoria" Type="Self.SubCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="SubCategoria">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Estados">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="IdEstado" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_TipoDocumentos">
+          <End Role="TipoDocumentos" Type="Self.TipoDocumentos" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumentos">
+              <PropertyRef Name="IdDocumento" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="TipoDoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Liquidacion_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Liquidacion" Type="Self.Liquidacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Liquidacion">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SindicatoEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actas" EntityType="Self.Actas" />
+          <EntitySet Name="Boletas_Actas" EntityType="Self.Boletas_Actas" />
+          <EntitySet Name="Boletas_DDJJ" EntityType="Self.Boletas_DDJJ" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" />
+          <EntitySet Name="Estados" EntityType="Self.Estados" />
+          <EntitySet Name="Liquidacion" EntityType="Self.Liquidacion" />
+          <EntitySet Name="LiquidacionPorcentaje" EntityType="Self.LiquidacionPorcentaje" />
+          <EntitySet Name="SubCategoria" EntityType="Self.SubCategoria" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoDocumentos" EntityType="Self.TipoDocumentos" />
+          <EntitySet Name="Vencimiento_Liquidacion" EntityType="Self.Vencimiento_Liquidacion" />
+          <AssociationSet Name="FK_Actas_Empresas" Association="Self.FK_Actas_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Actas" EntitySet="Actas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boletas_Actas_Empresas" Association="Self.FK_Boletas_Actas_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Boletas_Actas" EntitySet="Boletas_Actas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boletas_DDJJ_Empresas" Association="Self.FK_Boletas_DDJJ_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Boletas_DDJJ" EntitySet="Boletas_DDJJ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Categorias" Association="Self.FK_Empleados_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategoria_Categorias" Association="Self.FK_SubCategoria_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="SubCategoria" EntitySet="SubCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Empresas" Association="Self.FK_Empleados_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Estados" Association="Self.FK_Empleados_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_TipoDocumentos" Association="Self.FK_Empleados_TipoDocumentos">
+            <End Role="TipoDocumentos" EntitySet="TipoDocumentos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Liquidacion_Empresas" Association="Self.FK_Liquidacion_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Liquidacion" EntitySet="Liquidacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SindicatoModelStoreContainer" CdmEntityContainer="SindicatoEntities2">
+          <EntitySetMapping Name="Actas">
+            <EntityTypeMapping TypeName="SindicatoModel.Actas">
+              <MappingFragment StoreEntitySet="Actas">
+                <ScalarProperty Name="IdActas" ColumnName="IdActas" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Desde" ColumnName="Desde" />
+                <ScalarProperty Name="Hasta" ColumnName="Hasta" />
+                <ScalarProperty Name="Importe_Adeudado" ColumnName="Importe_Adeudado" />
+                <ScalarProperty Name="Importe_Actualizado" ColumnName="Importe_Actualizado" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="Valor_Cuota" ColumnName="Valor_Cuota" />
+                <ScalarProperty Name="Prox_Vencimiento" ColumnName="Prox_Vencimiento" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boletas_Actas">
+            <EntityTypeMapping TypeName="SindicatoModel.Boletas_Actas">
+              <MappingFragment StoreEntitySet="Boletas_Actas">
+                <ScalarProperty Name="Id_BoletasActas" ColumnName="Id_BoletasActas" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Acta_Cuota" ColumnName="Acta_Cuota" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="A_Cuenta" ColumnName="A_Cuenta" />
+                <ScalarProperty Name="Interes_Mora" ColumnName="Interes_Mora" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boletas_DDJJ">
+            <EntityTypeMapping TypeName="SindicatoModel.Boletas_DDJJ">
+              <MappingFragment StoreEntitySet="Boletas_DDJJ">
+                <ScalarProperty Name="IdBoletaDDJJ" ColumnName="IdBoletaDDJJ" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Periodo_DDJJ" ColumnName="Periodo_DDJJ" />
+                <ScalarProperty Name="Remunerativo" ColumnName="Remunerativo" />
+                <ScalarProperty Name="No_Remunerativo" ColumnName="No_Remunerativo" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="A_Cuenta" ColumnName="A_Cuenta" />
+                <ScalarProperty Name="Interes_Mora" ColumnName="Interes_Mora" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="SindicatoModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="SindicatoModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="TipoDoc" ColumnName="TipoDoc" />
+                <ScalarProperty Name="CUIL" ColumnName="CUIL" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="IdSubcategoria" ColumnName="IdSubcategoria" />
+                <ScalarProperty Name="Fecha_Ingreso" ColumnName="Fecha_Ingreso" />
+                <ScalarProperty Name="Remuneracion" ColumnName="Remuneracion" />
+                <ScalarProperty Name="Suma_No_Remuneracion" ColumnName="Suma_No_Remuneracion" />
+                <ScalarProperty Name="Afiliado" ColumnName="Afiliado" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Fecha_Baja" ColumnName="Fecha_Baja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="SindicatoModel.Empresas">
+              <MappingFragment StoreEntitySet="Empresas">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="CUIT" ColumnName="CUIT" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="NombreFantasia" ColumnName="NombreFantasia" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HorarioAtencion" ColumnName="HorarioAtencion" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estados">
+            <EntityTypeMapping TypeName="SindicatoModel.Estados">
+              <MappingFragment StoreEntitySet="Estados">
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="NombreEstado" ColumnName="NombreEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Liquidacion">
+            <EntityTypeMapping TypeName="SindicatoModel.Liquidacion">
+              <MappingFragment StoreEntitySet="Liquidacion">
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Remunerativo" ColumnName="Remunerativo" />
+                <ScalarProperty Name="No_Remunerativo" ColumnName="No_Remunerativo" />
+                <ScalarProperty Name="CantEmpleados" ColumnName="CantEmpleados" />
+                <ScalarProperty Name="Convenio" ColumnName="Convenio" />
+                <ScalarProperty Name="Total_Afiliado" ColumnName="Total_Afiliado" />
+                <ScalarProperty Name="Remunerativo_Afiliado" ColumnName="Remunerativo_Afiliado" />
+                <ScalarProperty Name="No_Remunerativo_Afiliado" ColumnName="No_Remunerativo_Afiliado" />
+                <ScalarProperty Name="Afiliados" ColumnName="Afiliados" />
+                <ScalarProperty Name="Cuota_Sindical" ColumnName="Cuota_Sindical" />
+                <ScalarProperty Name="Remuneracion" ColumnName="Remuneracion" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Vencimiento" ColumnName="Vencimiento" />
+                <ScalarProperty Name="Vencimiento_Pago" ColumnName="Vencimiento_Pago" />
+                <ScalarProperty Name="Interes" ColumnName="Interes" />
+                <ScalarProperty Name="Diferencia_Pago" ColumnName="Diferencia_Pago" />
+                <ScalarProperty Name="Debito_Credito" ColumnName="Debito_Credito" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="InteresMora" ColumnName="InteresMora" />
+                <ScalarProperty Name="RecargoMora" ColumnName="RecargoMora" />
+                <ScalarProperty Name="Total_Depositar" ColumnName="Total_Depositar" />
+                <ScalarProperty Name="Fecha_Pagado" ColumnName="Fecha_Pagado" />
+                <ScalarProperty Name="Lugar_Pago" ColumnName="Lugar_Pago" />
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+                <ScalarProperty Name="Tipo_Pago" ColumnName="Tipo_Pago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LiquidacionPorcentaje">
+            <EntityTypeMapping TypeName="SindicatoModel.LiquidacionPorcentaje">
+              <MappingFragment StoreEntitySet="LiquidacionPorcentaje">
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="Convenio_Colectivo" ColumnName="Convenio_Colectivo" />
+                <ScalarProperty Name="Cuota_Sindical" ColumnName="Cuota_Sindical" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategoria">
+            <EntityTypeMapping TypeName="SindicatoModel.SubCategoria">
+              <MappingFragment StoreEntitySet="SubCategoria">
+                <ScalarProperty Name="IdSubcategoria" ColumnName="IdSubcategoria" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="NombreSubcategoria" ColumnName="NombreSubcategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SindicatoModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDocumentos">
+            <EntityTypeMapping TypeName="SindicatoModel.TipoDocumentos">
+              <MappingFragment StoreEntitySet="TipoDocumentos">
+                <ScalarProperty Name="IdDocumento" ColumnName="IdDocumento" />
+                <ScalarProperty Name="NombreDocumento" ColumnName="NombreDocumento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vencimiento_Liquidacion">
+            <EntityTypeMapping TypeName="SindicatoModel.Vencimiento_Liquidacion">
+              <MappingFragment StoreEntitySet="Vencimiento_Liquidacion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ter_CUIT" ColumnName="Ter_CUIT" />
+                <ScalarProperty Name="Dia_Vencimiento" ColumnName="Dia_Vencimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

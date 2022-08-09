@@ -1,0 +1,120 @@
+﻿@model Sindicato_Viedma.Models.ViewModels.CrearActa
+
+
+@{
+    ViewData["Title"] = "Boletas / Actas";
+}
+
+<!-- Banner -->
+@Html.Partial("~/Views/Shared/MisViews/Banner.cshtml")
+
+@{
+    if (ViewBag.Session != false) // Si esta logueado que se muestre la barra menu
+    {
+        @Html.Partial("~/Views/Shared/BarraNavegacion.cshtml")
+    }
+
+}
+
+<!-- ----------------- F  O  R  M  U  L  A  R  I  O   S ----------------- -->
+<div class="w3-content" style="max-width:1564px">
+
+    @using (Html.BeginForm("Actas", "Boletas", FormMethod.Post, new { @class = "w3-content", autocomplete = "off", style = "max-width:1564px" }))
+    {
+
+        <!-- -------------------- Numero Acta / Cuenta / Cuota -------------------- -->
+    <div class="w3-row">
+        <div class="w3-third w3-container w3-text-white">
+            <div class="w3-padding bg-zul">Numero Acta</div>
+            @Html.TextBoxFor(model => model.Numero_Acta, new { @class = "w3-input w3-ligth-grey w3-right-align", onchange = "changeCampos()" })
+        </div>
+        <div class="w3-third w3-container w3-text-white">
+            <div class="w3-padding bg-zul">Cuenta</div>
+            <div class="">
+                <select class="w3-select" name="Cuenta" id="Cuenta">
+                    <option value="" disabled selected>Seleccione una opcion</option>
+                    <option value="Seguro">Seguro Sepelio</option>
+                    <option value="FAMS">FAMS</option>
+                </select>
+            </div>
+        </div>
+        <div class="w3-third w3-container w3-text-white">
+            <div class="w3-padding bg-zul">N° Cuotas</div>
+            <select asp-for="Cuota" class="w3-select" name="Cuotas" id="Cuotas">
+                @{
+                    if (ViewData["CantCuotas"] != null)
+                    {
+                        IEnumerable<dynamic> CantCuotas = (IEnumerable<dynamic>)ViewData["CantCuotas"];
+                        <option value="0">< Seleccione una Cuota ></option>
+                        foreach (dynamic cant in CantCuotas)
+                        {
+                            int CantidadCuotas = cant.CantidadCuotas;
+                            for (var i = 1; i <= CantidadCuotas; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        }
+                    }
+                }
+            </select>
+        </div>
+     </div>
+     <br>
+
+        <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
+
+        <div class="w3-row">
+            <div class="w3-third w3-container w3-text-white">
+                <div class="w3-padding bg-zul">Fecha</div>
+                @Html.TextBoxFor(model => model.Fecha, new { @class = "w3-input w3-ligth-grey", placeholder = "Fecha", id = "Fecha", type = "date"})
+            </div>
+            <div class="w3-third w3-container w3-text-white">
+                <div class="w3-padding bg-zul">Importe</div>
+                @Html.TextBoxFor(model => model.Importe, new { @class = "w3-input w3-ligth-grey w3-right-align", onchange = "changeCampos()"})
+            </div>
+            <div class="w3-third w3-container w3-text-white">
+                <div class="w3-padding bg-zul">Interes_Mora</div>
+                @Html.TextBoxFor(model => model.Interes_Mora, new { @class = "w3-input w3-ligth-grey w3-right-align", onchange = "changeCampos()" })
+            </div>
+        </div>
+        <br>
+
+        <!-- -------------------- Total -------------------- -->
+        <div class="w3-row">
+            <div class="w3-third w3-container w3-text-white">
+            </div>
+            <div class="w3-third w3-container w3-text-white">
+            </div>
+            <div class="w3-third w3-container w3-text-white">
+                <div class="w3-padding bg-zul">Total </div>
+                @Html.TextBoxFor(model => model.Total, new { @class = "w3-input w3-ligth-grey w3-right-align", @readonly = "readonly", id="Total", name = "Total", Style = "background:#CACFD2;" })
+            </div>
+        </div>
+
+        <div class="w3-row">
+            <div class="w3-third w3-container w3-text-white">
+            </div>
+            <div class="w3-third w3-container w3-text-white">
+            </div>
+            <div class="w3-third w3-container w3-text-white">
+                <button class="w3-right w3-margin-top w3-button w3-card bg-zul w3-text-white w3-hover-blue w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="return validarCamposActas();">
+                    Crear Acta
+                </button>
+            </div>
+        </div>
+
+           }
+
+</div>
+<br />
+
+@if (!string.IsNullOrEmpty(ViewBag.message))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.message");
+    </script>
+}
+
+@section scripts{
+    <script src="~/js/Actas.js"></script>
+}

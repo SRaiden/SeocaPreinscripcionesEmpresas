@@ -1,0 +1,187 @@
+﻿@model IEnumerable<Sindicato_Viedma.Models.ViewModels.VerEmpleados>
+@*@model List<Sindicato_Viedma.Models.ViewModels.VerEmpleados>*@
+
+@{
+    ViewData["Title"] = "Empleados y Afiliados";
+}
+
+<!-- Banner -->
+@Html.Partial("~/Views/Shared/MisViews/Banner.cshtml")
+
+@{
+    if (ViewBag.Session != false) // Si esta logueado que se muestre la barra menu
+    {
+        @Html.Partial("~/Views/Shared/BarraNavegacion.cshtml")
+    }
+}
+
+
+<!-- ----------------- F  O  R  M  U  L  A  R  I  O   S ----------------- -->
+
+<div class="w3-content" style="max-width:1564px">
+
+    <!-- ---------------------------- Modal Empleados Start ---------------------------- -->
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+            <div id="modal-content">
+                Cargando...
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-padding-32 w3-center w3-xlarge bg-zul w3-text-white">EMPLEADOS Y AFILIADOS</div>
+
+    <div class="w3-row">
+        <div class="w3-half w3-container">
+            <div class="w3-row">
+                <div class="w3-col l4 s12 w3-border w3-padding"><label>Total Empleados: @ViewBag.cant</label></div>
+                <div class="w3-col l4 s12 w3-border w3-padding"><label>Afiliados: @ViewBag.afiliado</label></div>
+                <div class="w3-col l4 s12 w3-border w3-padding"><label>Con Licencia: @ViewBag.licencia</label></div>
+            </div>
+        </div>
+
+        <div class="w3-half w3-container w3-row w3-border w3-padding l4 s12">
+            <label id="total_Remuneracion">Total Remuneracion: @ViewBag.remun</label>
+            @* <label id="total_NoRemuneracion" class="w3-right">Total No Remuneracion: @ViewBag.Noremun</label>*@
+        </div>
+    </div>
+
+    <br />
+
+    <div class="w3-row">
+        <div class="w3-col w3-container" style="width:50%">
+            <button onclick="document.getElementById('id01').style.display='block'" class="btnAgregar w3-button w3-card bg-zul w3-margin-left w3-text-white w3-hover-blue" data-toggle="modal" type="button">
+                Agregar Nuevo Empleado
+            </button>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="w3-row">
+        <div class="w3-half">
+            @using (Html.BeginForm("Buscar", "Personal", FormMethod.Post, new { @class = "w3-container", autocomplete = "off" }))
+            {
+                <div class="w3-col w3-container" style="width:100%">
+
+                    <div class="w3-row-padding">
+
+                        <div class="w3-col w3-container" style="width:40%">
+                            <input class="w3-input " type="text" placeholder="Apellido y Nombres" name="buscarAPELLIDO" value="@ViewBag.filtroApellido">
+                        </div>
+
+                        <div class="w3-col w3-container" style="width:20%">
+                            <input class="w3-input " type="text" placeholder="CUIL" name="buscarCUIL" value="@ViewBag.filtroCUIL">
+                        </div>
+
+                        <div class="w3-col w3-container" style="width:20%">
+                            <button class="w3-btn w3-text-light-grey bg-zul w3-hover-blue" type="submit" id="BuscarEmpleados">Buscar</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+        </div>
+        <div class="w3-half">
+            @using (Html.BeginForm("ActualHistorial", "Liquidacion", FormMethod.Post, new { @class = "w3-container", autocomplete = "off" }))
+            {
+                @*<input type="hidden" value="45" id="UltimoId" name="UltimoId" />*@
+                <button class="w3-btn w3-small w3-text-light-grey bg-zul" type="submit">Nomina Personal</button>
+            }
+
+        </div>
+    </div>
+
+        <div class="w3-container">
+
+            <div class="w3-responsive">
+                <div class="w3-left">
+                    <h2>Empleados</h2>
+                </div>
+
+                <div class="w3-right w3-margin-top">
+                    <button type="submit" class="ActualizarMontos w3-btn bg-zul w3-small w3-round-large w3-right w3-text-white" id="ActualizarMontos">Actualizar Montos</button>
+                </div>
+
+                <br />
+                <br />
+
+                <table class="w3-table-all EmpleadosCargados" id="EmpleadosCargados">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>CUIL</th>
+                            <th>Afil.</th>
+                            <th>Apellido y Nombre</th>
+                            <th>Categoría</th>
+                            <th>Estado</th>
+                            <th style="padding-left: 7%;">Remunerativo</th>
+                            @*<th style="padding-left: 5%;">No Remunerativo</th>*@
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var items in Model)
+                        {
+                            <tr>
+                                <td><label class="IdEmpleado" hidden> @items.IdEmpleado</label></td>
+                                <td><input class="w3-input" value="@items.CUIL" size=25 disabled style="width: 150px;" /></td>
+                                <td><input class="w3-check" type="checkbox" checked="@items.Afiliado" disabled></td>
+                                <td><input class="inputApe" type="text" value="@items.Apellido @items.Nombre" size=25 style="width: 215px;" readonly></td>
+                                <td><label class="Categoria"> @items.Categoria</label></td>
+                                <td>
+                                    <label class="Estado"> @items.Estado</label>
+                                </td>
+
+                                <td><input class="w3-right-align Remunerativo" type="text" value="@items.Remuneracion" onchange="validarMontos()" onclick="clickMontos(@items.IdEmpleado)"></td>
+                                @*<td><input class="w3-right-align NoRemunerativo" type="text" value="@items.NoRemuneracion" onchange="validarMontos()" onclick="clickMontos(@items.IdEmpleado)"></td>*@
+                                <td><button onclick="document.getElementById('id01').style.display='block'" class="btnEditar w3-btn w3-small w3-text-light-grey bg-zul" data-id="@items.IdEmpleado" data-toggle="modal" type="button">Editar</button></td>
+                                <td><button onclick="document.getElementById('id01').style.display='block'" class="btnEliminar w3-btn w3-small w3-text-light-grey bg-zul" data-id="@items.IdEmpleado" data-toggle="modal" type="button">Baja</button></td>
+                                <td><button onclick="document.getElementById('id01').style.display='block'" class="btnHistorial w3-btn w3-small w3-text-light-grey bg-zul" data-id="@items.IdEmpleado" data-toggle="modal" type="button">Historial</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+            <br>
+            <br>
+
+        </div>
+    </div>
+
+@if (!string.IsNullOrEmpty(ViewBag.agregarEmpleado))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.agregarEmpleado");
+    </script>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.eliminarEmpleado))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.eliminarEmpleado");
+    </script>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.modificarEmpleado))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.modificarEmpleado");
+    </script>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.error))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.error");
+    </script>
+}
+
+@section scripts{
+    <script src="~/js/Empleados.js"></script>
+    <script src="~/js/MontosActualizar.js"></script>
+}

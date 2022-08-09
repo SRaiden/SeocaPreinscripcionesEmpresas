@@ -1,0 +1,135 @@
+﻿@model Sindicato_Viedma.Models.ViewModels.EditarEmpleado
+
+<div class="w3-container" style="line-height : 5px;"></div>
+
+    <div class="w3-panel w3-wide bg-zul w3-text-white w3-content w3-margin-left w3-margin-right w3-center w3-padding-24">
+        DAR DE BAJA EMPLEADO
+    </div>
+
+<div class="w3-padding w3-margin-left small2 w3-center">
+
+    <!-- ---------------- FORMULARIO ---------------- -->
+    @using (Html.BeginForm("BorrarEmpleado", "Personal", FormMethod.Post, new { @class = "w3-container", autocomplete = "off" }))
+    {
+        <input hidden asp-for="IdEmpleado" />
+
+        <div class="w3-row w3-container">
+
+            <div class="w3-col l12" style="width: 33%; display: none;">
+                @Html.TextBoxFor(model => model.IdEmpleado, new { @class = "w3-input w3-border", placeholder = "Nº de Ficha", @readonly = "readonly", style = "display: none;" })<br><br>
+            </div>
+
+            <div class="w3-row">
+                <div class="w3-half">
+                    <label>Apellido</label>
+                    @Html.TextBoxFor(model => model.Apellido, new { @class = "w3-input w3-border", placeholder = "Apellido", @readonly = "readonly" })<br><br>
+                </div>
+                <div class="w3-half">
+                    <label>Nombre</label>
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "w3-input w3-border", placeholder = "Nombre", @readonly = "readonly" })<br><br>
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Tipo</label>
+                    @Html.TextBoxFor(model => model.TipoDoc, new { @class = "w3-input w3-border", placeholder = "Tipo Documento", @readonly = "readonly" })
+                </div>
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>CUIL</label>
+                    @Html.TextBoxFor(model => model.CUIL, new { @class = "w3-input w3-border", placeholder = "N° sin puntos o guiones", @readonly = "readonly" })
+                </div>
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Sexo</label>
+                    @Html.TextBoxFor(model => model.Sexo, new { @class = "w3-input w3-border", placeholder = "Sexo", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <br>
+
+            <div class="w3-row">
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Fecha Nacimiento</label>
+                    @Html.TextBoxFor(model => model.Fecha_Nacimiento, "{0:yyyy-MM-dd}", new { @class = "w3-input w3-border", placeholder = "Nac:DD/MM/AA", id = "FechaNac", type = "date", min = "1940-01-01", max = "2040-01-01" })
+                </div>
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Categoria</label>
+                    @Html.TextBoxFor(model => model.Categoria, new { @class = "w3-input w3-border", placeholder = "Categoria", @readonly = "readonly" })
+                </div>
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    @*<label>Subcategoria</label>
+            @Html.TextBoxFor(model => model.SubCategoria, new { @class = "w3-input w3-border", placeholder = "SubCategoria", @readonly = "readonly" })*@
+                </div>
+            </div>
+
+            <br>
+
+            <div class="w3-row">
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Fecha Ingreso</label>
+                    @Html.TextBoxFor(model => model.Fecha_Ingreso, "{0:yyyy-MM-dd}", new { @class = "w3-input w3-border", placeholder = "F.Ingr.: DD/MM/AA", id = "FechaIng", type = "date", min = "1940-01-01", max = "2040-01-01" })
+                </div>
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Remun.</label>
+                    @Html.TextBoxFor(model => model.Remuneracion, new { @class = "w3-input w3-border", placeholder = "Remuneración", @readonly = "readonly" })
+                </div>
+
+                @*<div class="w3-col w3-container" style="width: 33%;">
+                    <label>No Remun.</label>
+                    @Html.TextBoxFor(model => model.NoRemuneracion, new { @class = "w3-input w3-border", placeholder = "No Remuneracion", @readonly = "readonly" })
+                </div>*@
+
+
+            </div>
+
+            <br />
+
+            <div class="w3-row">
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    @Html.CheckBoxFor(model => model.Afiliado, new { @class = "w3-check", type = "checkbox", @readonly = "readonly" })
+                    <label>Afiliado</label>
+                </div>
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Cant. Horas Mensuales</label>
+                    @Html.TextBoxFor(model => model.CantHoras, new { @class = "w3-input w3-border", placeholder = "Cantidad Horas", @type = "number", @value = "200", @min = "100", @max = "200", @readonly = "readonly" })
+                </div>
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Estado</label>
+                    @Html.DropDownListFor(model => model.Estado, new List<SelectListItem> { new SelectListItem { Value = "1", Text = "ACTIVO" }, new SelectListItem { Value = "2", Text = "LICENCIA SUJETA A RETENCIONES" }, new SelectListItem { Value = "3", Text = "LICENCIA SIN RETENCIONES" } }, new { @class = "w3-select", name = "Sexo", @readonly = "readonly" })
+                </div>
+
+
+            </div>
+
+            <div class="w3-row">
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <p><button class="w3-btn w3-text-white bg-zul w3-hover-zul" type="submit" onclick="return verificarBajaEmpleado()">Dar de Baja..</button></p>
+                    <p><button class="w3-btn w3-text-white bg-zul w3-hover-zul" type="button" onclick="cerrarId01()">Cancelar</button></p>
+                </div>
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Fecha Baja</label>
+                    @Html.TextBoxFor(model => model.Fecha_Baja, "{0:yyyy-MM-dd}", new { @class = "w3-input w3-border", placeholder = "F.Ingr.: DD/MM/AA", id = "Fechabaja", type = "date", min = "1940-01-01", max = "2040-01-01" })
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.eliminarEmpleado))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.eliminarEmpleado");
+    </script>
+}
+
+@section scripts{
+    <script src="~/js/optionSelect.js"></script>
+    <script src="~/js/modalRegistrarse.js"></script>
+}
