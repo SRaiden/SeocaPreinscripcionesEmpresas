@@ -12,7 +12,7 @@
     <Property Name="LocalidadReal" Type="int" />
     <Property Name="TelefonoReal" Type="varchar" MaxLength="20" />
     <Property Name="DomicilioLegal" Type="varchar" MaxLength="150" />
-    <Property Name="LocalidadLegal" Type="int" />
+    <Property Name="LocalidadLegal" Type="varchar" MaxLength="150" />
     <Property Name="TelefonoLegal" Type="varchar" MaxLength="20" />
     <Property Name="Actividad" Type="int" />
     <Property Name="Email" Type="varchar" MaxLength="150" />
@@ -62,9 +62,9 @@
     <Property Name="FechaIngreso" Type="datetime" />
     <Property Name="Categoria" Type="varchar" MaxLength="100" />
     <Property Name="TotalRemuneracion" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Art_100" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Sind" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Sepelio" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Art_100" Type="bit" />
+    <Property Name="Sind" Type="bit" />
+    <Property Name="Sepelio" Type="bit" />
     <Property Name="Jornada" Type="varchar" MaxLength="20" />
     <Property Name="IdEmpresa" Type="int" Nullable="false" />
   </EntityType>

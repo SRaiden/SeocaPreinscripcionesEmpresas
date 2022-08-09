@@ -20,9 +20,9 @@ namespace Sindicato_Viedma.Models
         public Nullable<System.DateTime> FechaIngreso { get; set; }
         public string Categoria { get; set; }
         public Nullable<decimal> TotalRemuneracion { get; set; }
-        public Nullable<decimal> Art_100 { get; set; }
-        public Nullable<decimal> Sind { get; set; }
-        public Nullable<decimal> Sepelio { get; set; }
+        public Nullable<bool> Art_100 { get; set; }
+        public Nullable<bool> Sind { get; set; }
+        public Nullable<bool> Sepelio { get; set; }
         public string Jornada { get; set; }
         public int IdEmpresa { get; set; }
     }

@@ -22,7 +22,7 @@ namespace Sindicato_Viedma.Models
         public Nullable<int> LocalidadReal { get; set; }
         public string TelefonoReal { get; set; }
         public string DomicilioLegal { get; set; }
-        public Nullable<int> LocalidadLegal { get; set; }
+        public string LocalidadLegal { get; set; }
         public string TelefonoLegal { get; set; }
         public Nullable<int> Actividad { get; set; }
         public string Email { get; set; }

@@ -113,7 +113,7 @@
 
                 <div class="w3-row">
                     <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Domicilio Real</div>
+                        <div class="w3-padding bg-zul">Domicilio Legal</div>
                         <input type="text" id="DomicilioLegal" name="DomicilioLegal" class="w3-input w3-ligth-grey" onchange="changeCampos()">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
@@ -160,7 +160,7 @@
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding bg-zul">Documento</div>
-                        <input type="text" id="DocumentoTitular" name="DocumentoTitular" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
+                        <input type="number" id="DocumentoTitular" name="DocumentoTitular" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
                     </div>
                 </div>
                 <br>
@@ -171,8 +171,6 @@
                         <input type="text" id="CargoEmpresaTitular" name="CargoEmpresaTitular" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Repita el Cuit Empresa</div>
-                        <input type="number" id="RepetirCuitEmpresaTitular" name="RepetirCuitEmpresaTitular" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                         <button class="w3-right w3-margin-top w3-button w3-card bg-zul w3-text-white w3-hover-blue w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="insertarTitular()">
@@ -222,7 +220,7 @@
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding bg-zul">Total de Remuneracion</div>
-                        <input type="text" id="TotRemuneracionEmpleado" name="TotRemuneracionEmpleado" class="w3-input w3-ligth-grey w3-right-align" onchange="changeCampos()">
+                        <input type="number" id="TotRemuneracionEmpleado" name="TotRemuneracionEmpleado" class="w3-input w3-ligth-grey w3-right-align" onchange="changeCampos()">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding bg-zul">Aporte 2% Art100CGT</div>
@@ -259,8 +257,6 @@
                 <br>
                 <div class="w3-row">
                     <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Repetir Cuit de la Empresa</div>
-                        <input type="number" id="RepetirCuitEmpresaEmpleado" name="RepetirCuitEmpresaEmpleado" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                     </div>
@@ -340,8 +336,6 @@
                 <br>
                 <div class="w3-row">
                     <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Repetir Cuit Empresa</div>
-                        <input type="number" id="RepetirCuitEmpresaAntecedente" name="RepetirCuitEmpresaAntecedente" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                     </div>
@@ -351,6 +345,7 @@
                         </button>
                     </div>
                 </div>
+                <br />
 
                 <div class="container">
                     <table>
@@ -392,31 +387,9 @@
                         <input type="email" id="EmailContador" name="EmailContador" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding bg-zul">Repita el Cuit Empresa</div>
-                        <input type="number" id="RepetirCuitEmpresaContador" name="RepetirCuitEmpresaContador" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
-                    </div>
+                     </div>
                     <div class="w3-third w3-container w3-text-white">
-                        <button class="w3-right w3-margin-top w3-button w3-card bg-zul w3-text-white w3-hover-blue w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="submit" onclick="insertarContador()">
-                            Agregar Fila
-                        </button>
                     </div>
-                </div>
-                <br>
-
-                <div class="container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nombre Estudio</th>
-                                <th>Direccion</th>
-                                <th>Telefono</th>
-                                <th>Email</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="bodyContador">
-                        </tbody>
-                    </table>
                 </div>
             </div>
 
@@ -433,9 +406,5 @@
 
 @section scripts{
     <script src="~/js/tabPag.js"></script>
-    <script src="~/js/Empleados.js"></script>
-    <script src="~/js/Antecedente.js"></script>
-    <script src="~/js/Contadores.js"></script>
-    <script src="~/js/Titulares.js"></script>
     <script src="~/js/EnviarMatriz.js"></script>
 }

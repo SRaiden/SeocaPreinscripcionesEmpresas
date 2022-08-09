@@ -289,11 +289,8 @@
     <Content Include="images\seoca-nav.png" />
     <Content Include="images\tmp\SEOCA-Logo.png" />
     <Content Include="images\tmp\seoca-nav.png" />
-    <Content Include="js\Antecedente.js" />
-    <Content Include="js\Contadores.js" />
     <Content Include="js\EnviarMatriz.js" />
     <Content Include="js\tabPag.js" />
-    <Content Include="js\Titulares.js" />
     <Content Include="libman.json" />
     <EntityDeploy Include="Models\SindicatoCarga.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -317,7 +314,6 @@
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
-    <Content Include="js\Empleados.js" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -356,7 +352,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\BarraNavegacion.cshtml" />
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\Shared\MisViews\Banner.cshtml" />
     <Content Include="Views\Shared\MisViews\Footer.cshtml" />
