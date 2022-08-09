@@ -1,0 +1,64 @@
+﻿@model Sindicato_Viedma.Models.ViewModels.CrearRegistro
+
+<div class="w3-container w3-padding-48">
+
+    <div class="w3-container bg-zul w3-padding-32">
+        <h2 class="w3-text-white" style="margin-left:50px">Registrarse</h2>
+    </div>
+    <br>
+
+    @using (Html.BeginForm("BuscarCuitExistente", "IniciarSesion", FormMethod.Post, new { @class = "w3-container w3-card w3-padding-16", autocomplete = "off", id = "FormRegistro" }))
+    {
+        <div class="w3-row">
+            <div class="w3-col w3-container w3-text-white">
+                <div class=" w3-container">
+                    <input type="text" class="w3-input w3-border" id="CUITBuscar" name="CUITBuscar" placeholder="Cuit" onchange="validarExistenciaCuit()">
+                </div>
+                <div class="w3-right w3-container w3-text-white">
+                    <br />
+                    <button class="w3-button bg-zul w3-text-white w3-hover-blue" onclick="return validarExistencia()" type="submit">Buscar</button>
+                    <button class="w3-btn w3-text-white bg-zul w3-hover-zul" type="button" onclick="cerrarId01()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <br />
+
+    @using (Html.BeginForm("Registrarse", "IniciarSesion", FormMethod.Post, new { @class = "w3-container w3-card w3-padding-16", autocomplete = "off", id = "Registro", style = ViewBag.style }))
+    {
+        <div class="w3-row w3-display-">
+            <div class="w3-col w3-container">
+                <input type="text" class="w3-input w3-border" id="CUIT" name="CUIT" placeholder="Cuit" onchange="validarMomentoRegistrarse()">
+                <br />
+                <input type="text" class="w3-input w3-border" id="NombreFantasia" name="NombreFantasia" placeholder="Nombre Fantasia" onchange="validarMomentoRegistrarse()" value="@ViewBag.NombreFantasiaEncontrado">
+                <br />
+                <input type="text" class="w3-input w3-border" id="RazonSocial" name="RazonSocial" placeholder="Razon Social" onchange="validarMomentoRegistrarse()" value="@ViewBag.RazonSocialEncontrado">
+                <br />
+                <input type="Email" class="w3-input w3-border" id="EMail" name="EMail" placeholder="EMail" value="@ViewBag.EmailEncontrado">
+            </div>
+        </div>
+
+        <br />
+        <input id="style" value="@ViewBag.style" hidden />
+
+        <div class="w3-row">
+            <div class="w3-col w3-container">
+                <button class="w3-button bg-zul w3-text-white w3-hover-blue" onclick="return validarRegistrarse()" type="submit">Registrarse</button>
+                <button class="w3-btn w3-text-white bg-zul w3-hover-zul" type="button" onclick="cerrarCancelar()">Cancelar</button>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+@section scripts{
+    <script src="~/js/modalRegistrarse.js">  </script>
+
+    <script>
+        $(document).ready(function () {
+            camposEncontrados();
+        });
+    </script>
+}

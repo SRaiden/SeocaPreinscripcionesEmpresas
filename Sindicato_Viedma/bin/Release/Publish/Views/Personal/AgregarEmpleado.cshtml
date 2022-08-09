@@ -1,0 +1,191 @@
+﻿@model Sindicato_Viedma.Models.ViewModels.CrearEmpleado
+
+<div class="w3-container" style="line-height : 5px;"></div>
+
+<div class="w3-panel w3-wide bg-zul w3-text-white w3-content w3-margin-left w3-margin-right w3-center w3-padding-24">
+    INGRESO DE EMPLEADOS
+</div>
+
+<div class="w3-padding w3-margin-left small2 w3-center">
+
+    <!-- ---------------- FORMULARIO ---------------- -->
+    @using (Html.BeginForm("AgregarEmpleado", "Personal", FormMethod.Post, new { @class = "w3-container", autocomplete = "off" }))
+    {
+        <div class="w3-row w3-container">
+
+            <div class="w3-row">
+                <div class="w3-half">
+                    @Html.TextBoxFor(model => model.Apellido, new { @class = "w3-input w3-border", placeholder = "Apellido", id = "Apellido" })
+                </div>
+                <div class="w3-col l12" style="width: 33%;">
+                    @*<input class="w3-input w3-border" type="text" placeholder="Nº de Ficha" style="width: 33%;"><br><br>*@
+                </div>
+                <div class="w3-half">
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "w3-input w3-border", placeholder = "Nombre", id = "Nombre" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="w3-row">
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <select asp-for="TipoDoc" class="w3-select" name="TipoDoc">
+                        @{
+                            if (ViewData["TipoDoc"] != null)
+                            {
+                                IEnumerable<dynamic> documentos = (IEnumerable<dynamic>)ViewData["TipoDoc"];
+
+                                foreach (dynamic documento in documentos)
+                                {
+                                    string NombreDocumento = documento.NombreDocumento;
+                                    int IdDocumento = documento.IdDocumento;
+                                    <option value="@documento.IdDocumento">@NombreDocumento.ToUpper()</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="w3-col w3-container" style="width: 33%;">
+                    @Html.TextBoxFor(model => model.CUIL, new { @class = "w3-input w3-border", placeholder = "N° sin puntos o guiones", id = "CUIL" })
+                </div>
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <select asp-for="Sexo" class="w3-select" name="Sexo" id="Sexo">
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </select>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="w3-row">
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Fecha Nacimiento</label>
+                    @Html.TextBoxFor(model => model.Fecha_Nacimiento, "{0:yyyy-MM-dd}", new { @class = "w3-input w3-border", placeholder = "N° sin puntos o guiones", type = "date", value = "2000-01-01", min = "1940-01-01", max = "2040-01-01", id = "FechaNac" })
+                </div>
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Categoria</label>
+                    <select class="w3-select" name="Categoria" id="Categorias">
+
+                        @{
+                            if (ViewData["categoria"] != null)
+                            {
+                                IEnumerable<dynamic> categorias = (IEnumerable<dynamic>)ViewData["categoria"];
+                                <option value="0">< Seleccione un Item ></option>
+                                foreach (dynamic categoria in categorias)
+                                {
+                                    string NombreCategoria = categoria.NombreCategoria;
+                                    int IdCategoria = categoria.IdCategoria;
+                                    <option value="@categoria.IdCategoria">@NombreCategoria.ToUpper()</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    @*<label>Subcategoria</label>
+                    <select class="w3-select" name="SubCategoria" id="Subcategorias" onchange="guardarSubcategoria()">
+                        @{
+                            if (ViewData["subcategoria"] != null)
+                            {
+                                IEnumerable<dynamic> subcategorias = (IEnumerable<dynamic>)ViewData["subcategoria"];
+                                <option value="0">< Seleccione un Item ></option>
+                                foreach (dynamic subcategoria in subcategorias)
+                                {
+                                    string NombreSubcategoria = subcategoria.NombreSubcategoria;
+                                    int IdSubcategoria = subcategoria.IdSubcategoria;
+                                    int IdCategoria = subcategoria.IdCategoria;
+                                    <option value="@IdCategoria" hidden>@NombreSubcategoria.ToUpper()</option>
+                                }
+                            }
+                        }
+                    </select>
+                    <input type="hidden" id="NombreSubcategoria" value="" name="NombreSubcategoria" />*@
+                </div>
+            </div>
+
+            <br>
+
+            <div class="w3-row">
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Fecha Ingreso</label>
+                    @Html.TextBoxFor(model => model.Fecha_Ingreso, "{0:yyyy-MM-dd}", new { @class = "w3-input w3-border", type = "date", value = "2000-01-01", min = "1940-01-01", max = "2040-01-01", id = "FechaIng" })
+                </div>
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Remun.</label>
+                    <input type="text" class="w3-input w3-border" id="Remun" name="Remun" value="0" onchange="cambiarSigno()" />
+                </div>
+
+                @*<div class="w3-col w3-container" style="width: 33%;">
+                    <label>No Remun.</label>
+                    <input type="text" class="w3-input w3-border" id="noRemun" name="noRemun" value="0" onchange="cambiarSigno()" />
+                </div>*@
+
+
+            </div>
+
+            <br />
+
+            <div class="w3-row">
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    @Html.CheckBoxFor(model => model.Afiliado, new { @class = "w3-check", type = "checkbox", id = "Remun" })
+                    <label>Afiliado</label>
+                </div>
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Cant. Horas Mensuales</label>
+                    @Html.TextBoxFor(model => model.CantHoras, new { @class = "w3-input w3-border", placeholder = "Cantidad Horas", @type = "number", @value = "400", @min = "1", @max = "200" })
+                    <script>
+                        document.getElementById("CantHoras").value = 200;
+                    </script>
+                </div>
+
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <label>Estado</label>
+                    <select asp-for="Estado" class="w3-select" name="estado">
+                        @{
+                            if (ViewData["estado"] != null)
+                            {
+                                IEnumerable<dynamic> estados = (IEnumerable<dynamic>)ViewData["estado"];
+
+                                foreach (dynamic estado in estados)
+                                {
+                                    string nombreEstado = estado.NombreEstado;
+                                    int IdEstado = estado.IdEstado;
+                                    <option value="@estado.IdEstado">@nombreEstado.ToUpper()</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="w3-row">
+                <div class="w3-col w3-container" style="width: 33%;">
+                    <p><button class="w3-btn w3-text-white bg-zul w3-hover-zul" type="submit" onclick="return verificarCargaEmpleado()">Guardar..</button></p>
+                    <p><button class="w3-btn w3-text-white bg-zul w3-hover-zul" type="button" onclick="cerrarId01()">Cancelar</button></p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@*@if (!string.IsNullOrEmpty(ViewBag.agregarEmpleado))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.agregarEmpleado");
+    </script>
+}*@
+
+@section scripts{
+    <script src="~/js/optionSelect.js"></script>
+    <script src="~/js/modalRegistrarse.js"></script>
+    <script src="~/js/Empleados.js"></script>
+}
+
+
+
