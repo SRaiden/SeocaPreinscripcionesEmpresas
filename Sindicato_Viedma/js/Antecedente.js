@@ -107,8 +107,7 @@ function insertarAntecedente() {
     table.rows[0].insertCell(2);
     table.rows[0].cells[2].innerHTML = FechaTransferenciaAntecedente;
     table.rows[0].insertCell(3);
-    table.rows[0].cells[3].innerHTML = '<button class="w3-right w3-margin-top w3-button w3-card 
-    w3 - text - white w3 - hover - blue w3 - hover - border - cyan" style="margin: 0 0 0 200px; " type="button"  onclick="eliminarAntecedente(' + SucesoraAntecedente + ')">Eliminar</button >';
+    table.rows[0].cells[3].innerHTML = '<button class="w3-right w3-margin-top w3-button w3-card bg-zul w3-text-white w3-hover-blue w3-hover-border-cyan" style="margin: 0 0 0 200px;" type="button"  onclick="eliminarAntecedente(' + SucesoraAntecedente + ')">Eliminar</button >';
 
 
     document.getElementById("SucesoraAntecedente").value = "";
