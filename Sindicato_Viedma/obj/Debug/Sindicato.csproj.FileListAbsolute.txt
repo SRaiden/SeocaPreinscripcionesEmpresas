@@ -910,16 +910,6 @@ C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\pt\Micr
 C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\ru\Microsoft.ReportViewer.WebForms.resources.dll
 C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\zh-CHS\Microsoft.ReportViewer.WebForms.resources.dll
 C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\zh-CHT\Microsoft.ReportViewer.WebForms.resources.dll
-C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\de\Microsoft.SqlServer.Types.resources.dll
-C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\es\Microsoft.SqlServer.Types.resources.dll
-C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\fr\Microsoft.SqlServer.Types.resources.dll
-C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\it\Microsoft.SqlServer.Types.resources.dll
-C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\ja\Microsoft.SqlServer.Types.resources.dll
-C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\ko\Microsoft.SqlServer.Types.resources.dll
-C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\pt\Microsoft.SqlServer.Types.resources.dll
-C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\ru\Microsoft.SqlServer.Types.resources.dll
-C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\zh-Hans\Microsoft.SqlServer.Types.resources.dll
-C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\zh-Hant\Microsoft.SqlServer.Types.resources.dll
 C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\es\System.Web.Helpers.resources.dll
 C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\es\System.Web.Mvc.resources.dll
 C:\Users\MANU\Desktop\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\es\System.Web.Optimization.resources.dll
