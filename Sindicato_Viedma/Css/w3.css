@@ -471,7 +471,7 @@ a {
     outline-style: none;
     user-select: none;
     border-color: black;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     padding: 5px 6px;
     font-size: 17px;
     font-family: poppins;
@@ -1507,7 +1507,7 @@ a {
 .w3-padding {
     font-size: 17px;
     color: black;
-    padding: 8px 16px 8px 0px;
+    padding: 8px 16px 8px 8px;
 }
 
 .w3-padding-large {
@@ -1699,6 +1699,12 @@ a {
 .w3-hover-black:hover {
     color: #fff !important;
     background-color: #000 !important;
+}
+
+.w3-bluesky,
+.w3-hover-bluesky:hover {
+    color: #fff !important;
+    background-color: #1178AB !important;
 }
 
 .w3-grey,

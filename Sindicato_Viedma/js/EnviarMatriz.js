@@ -131,9 +131,14 @@ function enviar() {
             alert("Debe de ingresar el Email Contador");
             return false;
         }
-    }
 
-    
+        matrizContador.push({
+            NombreEstudioContador: NombreEstudioContador,
+            DireccionContador: DireccionContador,
+            TelefonoContador: TelefonoContador,
+            EmailContador: EmailContador
+        });
+    }
 
     if (matrizAntecedente == "") matrizAntecedente = null;
     if (matrizContador == "") matrizContador = null;

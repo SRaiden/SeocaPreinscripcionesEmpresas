@@ -1,5 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SeocaPreinscripcionesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'SeocaPreinscripciones.dbo.Afiliados_DatosPersonales' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Afiliados_DatosPersonales">
+          <Property Name="Codigo" Type="int" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tipo_Doc" Type="nvarchar" MaxLength="50" />
+          <Property Name="Numero_Doc" Type="nvarchar" MaxLength="50" />
+          <Property Name="Delegacion" Type="nvarchar" MaxLength="150" />
+          <Property Name="Calificacion_Profesional" Type="nvarchar" MaxLength="150" />
+          <Property Name="Fecha_Afiliacion" Type="date" />
+          <Property Name="Estado_Civil" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fecha_Nac" Type="date" />
+          <Property Name="Calle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Numero_Calle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Piso" Type="nvarchar" MaxLength="50" />
+          <Property Name="Dto" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="CP" Type="int" />
+          <Property Name="Localidad" Type="nvarchar" MaxLength="150" />
+          <Property Name="Provincia" Type="nvarchar" MaxLength="150" />
+        </EntityType>-->
   <EntityType Name="Empresas">
     <Key>
       <PropertyRef Name="Id" />
