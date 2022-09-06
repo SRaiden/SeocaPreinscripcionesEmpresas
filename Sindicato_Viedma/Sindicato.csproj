@@ -240,7 +240,25 @@
     <Compile Include="Models\Empresas_Titulares.cs">
       <DependentUpon>SindicatoCarga.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\General_Calificacion.cs">
+      <DependentUpon>SindicatoCarga.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Delegacion.cs">
+      <DependentUpon>SindicatoCarga.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Documentos.cs">
+      <DependentUpon>SindicatoCarga.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Estado_Civil.cs">
+      <DependentUpon>SindicatoCarga.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\General_Localidades.cs">
+      <DependentUpon>SindicatoCarga.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Parentesco.cs">
+      <DependentUpon>SindicatoCarga.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Provincias.cs">
       <DependentUpon>SindicatoCarga.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SindicatoCarga.Context.cs">

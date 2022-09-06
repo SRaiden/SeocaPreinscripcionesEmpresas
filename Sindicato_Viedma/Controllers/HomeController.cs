@@ -23,6 +23,9 @@ namespace Sindicato_Viedma.Controllers
 
                 List<General_Localidades> Localidades = db.General_Localidades.ToList<General_Localidades>();
                 ViewData["Localidades"] = Localidades;
+
+                List<General_Calificacion> CalifProf = db.General_Calificacion.ToList<General_Calificacion>();
+                ViewData["CalifProf"] = CalifProf;
             }
                 
 
@@ -264,7 +267,7 @@ namespace Sindicato_Viedma.Controllers
 
                     }
 
-                    string ApellidoNombreEmpleado = "", CuilEmpleado = "", FechaIngresoEmpleado = "", CategoriaEmpleado = "", TotRemuneracionEmpleado = "", Aporte2ArtEmpleado = "", Aporte1SindEmpleado = "", Aporte1SepEmpleado = "", JornadaEmpleado = "";
+                    string ApellidoNombreEmpleado = "", CuilEmpleado = "", FechaIngresoEmpleado = "", CategoriaEmpleado = "", TotRemuneracionEmpleado = "", Afiliado = "", JornadaEmpleado = "";
                     if (jsonPreservar != null)
                     {
                         foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
@@ -277,23 +280,15 @@ namespace Sindicato_Viedma.Controllers
                                 if (propiedad.Equals("FechaIngresoEmpleado")) FechaIngresoEmpleado = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("CategoriaEmpleado")) CategoriaEmpleado = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("TotRemuneracionEmpleado")) TotRemuneracionEmpleado = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("Aporte2ArtEmpleado")) Aporte2ArtEmpleado = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("Aporte1SindEmpleado")) Aporte1SindEmpleado = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("Aporte1SepEmpleado")) Aporte1SepEmpleado = jsonOPropiedades.Value.ToString();
+                                if (propiedad.Equals("Afiliado")) Afiliado = jsonOPropiedades.Value.ToString();
                                 if (propiedad.Equals("JornadaEmpleado")) JornadaEmpleado = jsonOPropiedades.Value.ToString();
                             }
 
                             if (JornadaEmpleado == "MEDIA") JornadaEmpleado = "1/2 JORNADA";
                             else JornadaEmpleado = "JORNADA COMPLETA";
 
-                            bool apor2 = false;
-                            if (Aporte2ArtEmpleado == "SI") apor2 = true;
-
-                            bool apor1Sind = false;
-                            if (Aporte1SindEmpleado == "SI") apor1Sind = true;
-
-                            bool AportSep = false;
-                            if (Aporte1SepEmpleado == "SI") AportSep = true;
+                            bool afi = false;
+                            if (Afiliado == "SI") afi = true;
 
 
                             // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
@@ -304,9 +299,7 @@ namespace Sindicato_Viedma.Controllers
                                 FechaIngreso = DateTime.Parse(FechaIngresoEmpleado),
                                 Categoria = CategoriaEmpleado,
                                 TotalRemuneracion = decimal.Parse(TotRemuneracionEmpleado),
-                                Art_100 = apor2,
-                                Sind = apor1Sind,
-                                Sepelio = AportSep,
+                                Afiliado = afi,
                                 Jornada = JornadaEmpleado,
                                 IdEmpresa = ultimoId
                             };

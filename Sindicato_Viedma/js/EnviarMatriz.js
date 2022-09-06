@@ -184,18 +184,8 @@ function insertarTitular() {
         return false;
     }
 
-    if (DomicilioParticularTitular == "") {
-        alert("Debe de ingresar Domicilio Particular Titular");
-        return false;
-    }
-
     if (DocumentoTitular == "") {
         alert("Debe de ingresar Documento Titular");
-        return false;
-    }
-
-    if (DocumentoTitular.length != 8) {
-        alert("El Documento Titular debe de constar de 8 caracteres");
         return false;
     }
 
@@ -263,17 +253,8 @@ function insertarEmpleado() {
     var CategoriaEmpleado = document.getElementById("CategoriaEmpleado").value;
     var TotRemuneracionEmpleado = document.getElementById("TotRemuneracionEmpleado").value;
 
-    var selectionArt = document.getElementById("Aporte2ArtEmpleado").value;
-    //var Aporte2ArtEmpleado = selectionArt.options[selection.selectedIndex].value;
-
-    var selectionSind = document.getElementById("Aporte1SindEmpleado").value;
-    //var Aporte1SindEmpleado = selectionSind.options[selection.selectedIndex].value;
-
-    var selectionSep = document.getElementById("Aporte1SepEmpleado").value;
-    //var Aporte1SepEmpleado = selectionSep.options[selection.selectedIndex].value;
-
+    var Afiliado = document.getElementById("Afiliado").value;
     var selectionjornada = document.getElementById("JornadaEmpleado").value;
-    //var JornadaEmpleado = selectionjornada.options[selection.selectedIndex].value;
 
     //validaciones
     if (ApellidoNombreEmpleado == "") {
@@ -361,9 +342,7 @@ function insertarEmpleado() {
         FechaIngresoEmpleado: FechaIngresoEmpleado,
         CategoriaEmpleado: CategoriaEmpleado,
         TotRemuneracionEmpleado: TotRemuneracionEmpleado,
-        Aporte2ArtEmpleado: selectionArt,
-        Aporte1SindEmpleado: selectionSind,
-        Aporte1SepEmpleado: selectionSep,
+        Afiliado: Afiliado,
         JornadaEmpleado: selectionjornada
     });
 

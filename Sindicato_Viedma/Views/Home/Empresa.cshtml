@@ -215,43 +215,48 @@
                 <br>
                 <div class="w3-row">
                     <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky ">Categoria</div>
-                        <input type="text" id="CategoriaEmpleado" name="CategoriaEmpleado" class="w3-input w3-ligth-grey w3-left-align" onchange="changeCampos()">
+                        <div class="w3-padding w3-bluesky">Categoria</div>
+                        <select class="w3-select" name="CategoriaEmpleado" id="CategoriaEmpleado">
+                            <option value="0">< Seleccione una Calificacion Profesional ></option>
+                            @{
+                                if (ViewData["CalifProf"] != null)
+                                {
+                                    IEnumerable<dynamic> CalifProf = (IEnumerable<dynamic>)ViewData["CalifProf"];
+
+                                    foreach (dynamic Loc in CalifProf)
+                                    {
+                                        <option value="@Loc.Id">@Loc.Nombre</option>
+                                    }
+                                }
+                            }
+                        </select>
                     </div>
                     <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding w3-bluesky ">Total de Remuneracion</div>
                         <input type="number" id="TotRemuneracionEmpleado" name="TotRemuneracionEmpleado" class="w3-input w3-ligth-grey w3-right-align" onchange="changeCampos()">
                     </div>
                     <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky ">Aporte 2% Art100CGT</div>
-                        <select class="w3-select" name="Aporte2ArtEmpleado" id="Aporte2ArtEmpleado">
-                            <option value="SI">SI</option>
+                        <div class="w3-padding w3-bluesky ">Afiliado</div>
+                        <select class="w3-select" name="Afiliado" id="Afiliado">
                             <option value="NO">NO</option>
+                            <option value="SI">SI</option>
                         </select>
                     </div>
                 </div>
                 <br>
                 <div class="w3-row">
                     <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky ">Aporte 1% C. Sind T. y R.</div>
-                        <select class="w3-select" name="Aporte1SindEmpleado" id="Aporte1SindEmpleado">
-                            <option value="SI">SI</option>
-                            <option value="NO">NO</option>
-                        </select>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
-                        <div class="w3-padding w3-bluesky ">Aporte 1% Sep. y Acc. Soc</div>
-                        <select class="w3-select" name="Aporte1SepEmpleado" id="Aporte1SepEmpleado">
-                            <option value="SI">SI</option>
-                            <option value="NO">NO</option>
-                        </select>
-                    </div>
-                    <div class="w3-third w3-container w3-text-white">
                         <div class="w3-padding w3-bluesky ">Jornada</div>
                         <select class="w3-select" name="JornadaEmpleado" id="JornadaEmpleado">
-                            <option value="MEDIA">1/2 JORNADA</option>
                             <option value="COMPLETA">JORNADA COMPLETA</option>
+                            <option value="MEDIA">1/2 JORNADA</option>
                         </select>
+                    </div>
+                    <div class="w3-third w3-container w3-text-white">
+                        
+                    </div>
+                    <div class="w3-third w3-container w3-text-white">
+                       
                     </div>
                 </div>
                 <br>

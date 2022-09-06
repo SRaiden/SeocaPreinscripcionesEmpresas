@@ -15,15 +15,13 @@ namespace Sindicato_Viedma.Models
     public partial class Empresas_Empleados
     {
         public int Id { get; set; }
+        public int IdEmpresa { get; set; }
         public string ApellidoNombre { get; set; }
         public string Cuil { get; set; }
         public Nullable<System.DateTime> FechaIngreso { get; set; }
         public string Categoria { get; set; }
         public Nullable<decimal> TotalRemuneracion { get; set; }
-        public Nullable<bool> Art_100 { get; set; }
-        public Nullable<bool> Sind { get; set; }
-        public Nullable<bool> Sepelio { get; set; }
+        public Nullable<bool> Afiliado { get; set; }
         public string Jornada { get; set; }
-        public int IdEmpresa { get; set; }
     }
 }

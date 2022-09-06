@@ -25,13 +25,19 @@ namespace Sindicato_Viedma.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Empresas> Empresas { get; set; }
         public virtual DbSet<Empresas_Actividades> Empresas_Actividades { get; set; }
         public virtual DbSet<Empresas_Antecedentes> Empresas_Antecedentes { get; set; }
         public virtual DbSet<Empresas_Contadores> Empresas_Contadores { get; set; }
+        public virtual DbSet<Empresas_Empleados> Empresas_Empleados { get; set; }
         public virtual DbSet<Empresas_Sucursales> Empresas_Sucursales { get; set; }
         public virtual DbSet<Empresas_Titulares> Empresas_Titulares { get; set; }
+        public virtual DbSet<General_Calificacion> General_Calificacion { get; set; }
+        public virtual DbSet<General_Delegacion> General_Delegacion { get; set; }
+        public virtual DbSet<General_Documentos> General_Documentos { get; set; }
+        public virtual DbSet<General_Estado_Civil> General_Estado_Civil { get; set; }
         public virtual DbSet<General_Localidades> General_Localidades { get; set; }
-        public virtual DbSet<Empresas> Empresas { get; set; }
-        public virtual DbSet<Empresas_Empleados> Empresas_Empleados { get; set; }
+        public virtual DbSet<General_Parentesco> General_Parentesco { get; set; }
+        public virtual DbSet<General_Provincias> General_Provincias { get; set; }
     }
 }

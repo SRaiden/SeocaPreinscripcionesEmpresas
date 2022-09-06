@@ -12,18 +12,9 @@ namespace Sindicato_Viedma.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Empresas_Antecedentes
+    public partial class General_Parentesco
     {
         public int Id { get; set; }
-        public Nullable<int> IdEmpresa { get; set; }
-        public string Sucesora { get; set; }
-        public Nullable<int> NumeroEmpresa { get; set; }
-        public Nullable<System.DateTime> FechaTransferencia { get; set; }
-        public string Calle { get; set; }
-        public string Piso { get; set; }
-        public string Localidad { get; set; }
-        public string CodigoPostal { get; set; }
-        public string Provincia { get; set; }
-        public string Telefono { get; set; }
+        public string Nombre { get; set; }
     }
 }
