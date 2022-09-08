@@ -4,21 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c5d87c81169f446892f28af9acc04482" Name="Diagram1" ZoomLevel="29">
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Actividades" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Antecedentes" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Contadores" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Empleados" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Sucursales" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.Empresas_Titulares" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Calificacion" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Delegacion" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Documentos" Width="1.5" PointX="2.75" PointY="7.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Estado_Civil" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Localidades" Width="1.5" PointX="8.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Parentesco" Width="1.5" PointX="8.75" PointY="6.75" />
-        <EntityTypeShape EntityType="SeocaPreinscripcionesModel.General_Provincias" Width="1.5" PointX="4.75" PointY="9.75" />
+      <Diagram DiagramId="e965c11333b74c6b9227d4b3d71323ab" Name="Diagram1">
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Actividades" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Antecedentes" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Contadores" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Empleados" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Sucursales" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.Empresas_Titulares" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Calificacion" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Delegacion" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Documentos" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Estado_Civil" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Localidades" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Parentesco" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geosoftw_seocapreinscripcionesModel.General_Provincias" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

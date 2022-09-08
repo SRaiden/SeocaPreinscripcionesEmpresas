@@ -219,63 +219,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Empresas.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Empresas_Actividades.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Empresas_Antecedentes.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Empresas_Contadores.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Empresas_Empleados.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Empresas_Sucursales.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Empresas_Titulares.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\General_Calificacion.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\General_Delegacion.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\General_Documentos.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\General_Estado_Civil.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\General_Localidades.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\General_Parentesco.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\General_Provincias.cs">
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SindicatoCarga.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SindicatoCarga.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SindicatoCarga.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SindicatoCarga.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SindicatoCarga.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SindicatoCarga.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\ViewModels\Empresa.cs" />
     <Compile Include="NuGet.Modules\JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -310,24 +253,7 @@
     <Content Include="js\EnviarMatriz.js" />
     <Content Include="js\tabPag.js" />
     <Content Include="libman.json" />
-    <EntityDeploy Include="Models\SindicatoCarga.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SindicatoCarga.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\SindicatoCarga.edmx.diagram">
-      <DependentUpon>SindicatoCarga.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
-    <Content Include="Models\SindicatoCarga.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SindicatoCarga.edmx</DependentUpon>
-      <LastGenOutput>SindicatoCarga.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\SindicatoCarga.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SindicatoCarga.edmx</DependentUpon>
-      <LastGenOutput>SindicatoCarga.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />

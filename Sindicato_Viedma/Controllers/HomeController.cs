@@ -140,7 +140,7 @@ namespace Sindicato_Viedma.Controllers
                         db.SaveChanges();
                     }
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Empresa." }, JsonRequestBehavior.AllowGet);
                 }
@@ -200,7 +200,7 @@ namespace Sindicato_Viedma.Controllers
                     }
                     
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Antecedente." }, JsonRequestBehavior.AllowGet);
                 }
@@ -248,7 +248,7 @@ namespace Sindicato_Viedma.Controllers
 
                     
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Contador." }, JsonRequestBehavior.AllowGet);
                 }
@@ -310,7 +310,7 @@ namespace Sindicato_Viedma.Controllers
                     }
                     
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Empleados." }, JsonRequestBehavior.AllowGet);
                 }
@@ -359,7 +359,7 @@ namespace Sindicato_Viedma.Controllers
                     }
                     
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Json(new { success = true, responseText = "Error al Preinscribir Titulares." }, JsonRequestBehavior.AllowGet);
                 }
