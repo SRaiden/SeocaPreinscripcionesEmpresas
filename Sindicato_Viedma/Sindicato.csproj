@@ -219,6 +219,63 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Empresas.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empresas_Actividades.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empresas_Antecedentes.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empresas_Contadores.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empresas_Empleados.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empresas_Sucursales.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empresas_Titulares.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Calificacion.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Delegacion.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Documentos.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Estado_Civil.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Localidades.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Parentesco.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Provincias.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SindicatoEmpresas.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SindicatoEmpresas.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SindicatoEmpresas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SindicatoEmpresas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SindicatoEmpresas.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\Empresa.cs" />
     <Compile Include="NuGet.Modules\JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -253,7 +310,24 @@
     <Content Include="js\EnviarMatriz.js" />
     <Content Include="js\tabPag.js" />
     <Content Include="libman.json" />
+    <EntityDeploy Include="Models\SindicatoEmpresas.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SindicatoEmpresas.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SindicatoEmpresas.edmx.diagram">
+      <DependentUpon>SindicatoEmpresas.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Models\SindicatoEmpresas.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SindicatoEmpresas.edmx</DependentUpon>
+      <LastGenOutput>SindicatoEmpresas.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\SindicatoEmpresas.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SindicatoEmpresas.edmx</DependentUpon>
+      <LastGenOutput>SindicatoEmpresas.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />

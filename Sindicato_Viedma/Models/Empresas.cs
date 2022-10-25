@@ -27,5 +27,6 @@ namespace Sindicato_Viedma.Models
         public Nullable<int> Actividad { get; set; }
         public string Email { get; set; }
         public string PaginaWeb { get; set; }
+        public Nullable<bool> Ingresada { get; set; }
     }
 }

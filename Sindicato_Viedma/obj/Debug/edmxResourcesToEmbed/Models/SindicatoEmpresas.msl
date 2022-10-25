@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="geosoftw_seocapreinscripcionesModelStoreContainer" CdmEntityContainer="SeocaPreinscripcionesEntities">
+    <EntitySetMapping Name="Empresas">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas">
+        <MappingFragment StoreEntitySet="Empresas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+          <ScalarProperty Name="NombreFantasia" ColumnName="NombreFantasia" />
+          <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+          <ScalarProperty Name="DomicilioReal" ColumnName="DomicilioReal" />
+          <ScalarProperty Name="LocalidadReal" ColumnName="LocalidadReal" />
+          <ScalarProperty Name="TelefonoReal" ColumnName="TelefonoReal" />
+          <ScalarProperty Name="DomicilioLegal" ColumnName="DomicilioLegal" />
+          <ScalarProperty Name="LocalidadLegal" ColumnName="LocalidadLegal" />
+          <ScalarProperty Name="TelefonoLegal" ColumnName="TelefonoLegal" />
+          <ScalarProperty Name="Actividad" ColumnName="Actividad" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PaginaWeb" ColumnName="PaginaWeb" />
+          <ScalarProperty Name="Ingresada" ColumnName="Ingresada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresas_Actividades">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Actividades">
+        <MappingFragment StoreEntitySet="Empresas_Actividades">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresas_Antecedentes">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Antecedentes">
+        <MappingFragment StoreEntitySet="Empresas_Antecedentes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="Sucesora" ColumnName="Sucesora" />
+          <ScalarProperty Name="NumeroEmpresa" ColumnName="NumeroEmpresa" />
+          <ScalarProperty Name="FechaTransferencia" ColumnName="FechaTransferencia" />
+          <ScalarProperty Name="Calle" ColumnName="Calle" />
+          <ScalarProperty Name="Piso" ColumnName="Piso" />
+          <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresas_Contadores">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Contadores">
+        <MappingFragment StoreEntitySet="Empresas_Contadores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="NomreEstudio" ColumnName="NomreEstudio" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresas_Empleados">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Empleados">
+        <MappingFragment StoreEntitySet="Empresas_Empleados">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="ApellidoNombre" ColumnName="ApellidoNombre" />
+          <ScalarProperty Name="Cuil" ColumnName="Cuil" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+          <ScalarProperty Name="TotalRemuneracion" ColumnName="TotalRemuneracion" />
+          <ScalarProperty Name="Afiliado" ColumnName="Afiliado" />
+          <ScalarProperty Name="Jornada" ColumnName="Jornada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresas_Sucursales">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Sucursales">
+        <MappingFragment StoreEntitySet="Empresas_Sucursales">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresas_Titulares">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.Empresas_Titulares">
+        <MappingFragment StoreEntitySet="Empresas_Titulares">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+          <ScalarProperty Name="ApellidoNombre" ColumnName="ApellidoNombre" />
+          <ScalarProperty Name="DomicilioParticular" ColumnName="DomicilioParticular" />
+          <ScalarProperty Name="Documento" ColumnName="Documento" />
+          <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="General_Calificacion">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Calificacion">
+        <MappingFragment StoreEntitySet="General_Calificacion">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="General_Delegacion">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Delegacion">
+        <MappingFragment StoreEntitySet="General_Delegacion">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="General_Documentos">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Documentos">
+        <MappingFragment StoreEntitySet="General_Documentos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="General_Estado_Civil">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Estado_Civil">
+        <MappingFragment StoreEntitySet="General_Estado_Civil">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="General_Localidades">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Localidades">
+        <MappingFragment StoreEntitySet="General_Localidades">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre_Localidad" ColumnName="Nombre_Localidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="General_Parentesco">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Parentesco">
+        <MappingFragment StoreEntitySet="General_Parentesco">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="General_Provincias">
+      <EntityTypeMapping TypeName="geosoftw_seocapreinscripcionesModel.General_Provincias">
+        <MappingFragment StoreEntitySet="General_Provincias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
