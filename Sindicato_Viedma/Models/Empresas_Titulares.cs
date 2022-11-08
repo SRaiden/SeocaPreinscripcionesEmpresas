@@ -20,5 +20,7 @@ namespace Sindicato_Viedma.Models
         public string DomicilioParticular { get; set; }
         public string Documento { get; set; }
         public string Cargo { get; set; }
+        public Nullable<int> TipoDni { get; set; }
+        public string Localidad { get; set; }
     }
 }

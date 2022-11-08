@@ -255,10 +255,16 @@
     <Compile Include="Models\General_Localidades.cs">
       <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\General_Nacionalidades.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\General_Parentesco.cs">
       <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\General_Provincias.cs">
+      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\General_Sexo.cs">
       <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SindicatoEmpresas.Context.cs">
@@ -301,6 +307,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="images\bnnr-form-b.jpg" />
     <Content Include="images\bnnr.jpg" />
+    <Content Include="images\inscripcion-online.jpg" />
     <Content Include="images\questions.svg" />
     <Content Include="images\seoca-iso.png" />
     <Content Include="images\seoca-min.svg" />

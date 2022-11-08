@@ -19,7 +19,7 @@ namespace Sindicato_Viedma.Models
         public string ApellidoNombre { get; set; }
         public string Cuil { get; set; }
         public Nullable<System.DateTime> FechaIngreso { get; set; }
-        public string Categoria { get; set; }
+        public Nullable<int> Categoria { get; set; }
         public Nullable<decimal> TotalRemuneracion { get; set; }
         public Nullable<bool> Afiliado { get; set; }
         public string Jornada { get; set; }

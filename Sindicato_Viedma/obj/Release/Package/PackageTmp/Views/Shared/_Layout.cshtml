@@ -2,34 +2,38 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>@ViewBag.Title</title>
 
     <!-- CSS -->
-    <link type="text/css" href="~/Css/form.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+
+
     <link type="text/css" href="~/Css/main.css" rel="stylesheet" />
     <link type="text/css" href="~/Css/w3.css" rel="stylesheet" />
+    <link type="text/css" href="~/Css/Table.css" rel="stylesheet" />
+    <link type="text/css" href="~/Css/TabPag.css" rel="stylesheet" />
 
-    @*<script src="~/js/modalRegistrarse.js"></script>*@
-    
+
+
     <script src="https://kit.fontawesome.com/815e601374.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
 
-
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
-    <script type="text/javascript">
-
-        <script src="~/js/Liquidaciones.js"></script>
 
 </head>
 <body>
 
-    @RenderBody()
+        @RenderBody()
 
-    @Html.Partial("~/Views/Shared/MisViews/Footer.cshtml")
+        @Html.Partial("~/Views/Shared/MisViews/Footer.cshtml")
+
 
     @RenderSection("Scripts", required: false)
 

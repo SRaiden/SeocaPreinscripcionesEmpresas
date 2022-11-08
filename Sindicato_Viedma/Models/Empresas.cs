@@ -28,5 +28,8 @@ namespace Sindicato_Viedma.Models
         public string Email { get; set; }
         public string PaginaWeb { get; set; }
         public Nullable<bool> Ingresada { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
+        public string NroReal { get; set; }
+        public string NroLegal { get; set; }
     }
 }
