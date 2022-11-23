@@ -255,16 +255,10 @@
     <Compile Include="Models\General_Localidades.cs">
       <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\General_Nacionalidades.cs">
-      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\General_Parentesco.cs">
       <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\General_Provincias.cs">
-      <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\General_Sexo.cs">
       <DependentUpon>SindicatoEmpresas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SindicatoEmpresas.Context.cs">

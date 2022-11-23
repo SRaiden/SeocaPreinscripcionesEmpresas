@@ -95,7 +95,8 @@ namespace Sindicato_Viedma.Controllers
                         LocalidadLegal = LocalidadLegal,
                         TelefonoLegal = TelefonoLegal,
                         Fecha = DateTime.Parse(hoy),
-                        Ingresada = false
+                        Ingresada = false,
+                        NroEmpresa = 0
                     };
 
                     db.Empresas.Add(emp);

@@ -18,9 +18,9 @@ namespace Sindicato_Viedma.Models
         public Nullable<int> IdEmpresa { get; set; }
         public string ApellidoNombre { get; set; }
         public string DomicilioParticular { get; set; }
+        public Nullable<int> TipoDni { get; set; }
         public string Documento { get; set; }
         public string Cargo { get; set; }
-        public Nullable<int> TipoDni { get; set; }
         public string Localidad { get; set; }
     }
 }

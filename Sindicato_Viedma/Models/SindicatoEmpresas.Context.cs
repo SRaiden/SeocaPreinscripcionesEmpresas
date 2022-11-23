@@ -29,6 +29,8 @@ namespace Sindicato_Viedma.Models
         public virtual DbSet<Empresas_Actividades> Empresas_Actividades { get; set; }
         public virtual DbSet<Empresas_Antecedentes> Empresas_Antecedentes { get; set; }
         public virtual DbSet<Empresas_Contadores> Empresas_Contadores { get; set; }
+        public virtual DbSet<Empresas_Empleados> Empresas_Empleados { get; set; }
+        public virtual DbSet<Empresas_Sucursales> Empresas_Sucursales { get; set; }
         public virtual DbSet<Empresas_Titulares> Empresas_Titulares { get; set; }
         public virtual DbSet<General_Calificacion> General_Calificacion { get; set; }
         public virtual DbSet<General_Delegacion> General_Delegacion { get; set; }
@@ -37,9 +39,5 @@ namespace Sindicato_Viedma.Models
         public virtual DbSet<General_Localidades> General_Localidades { get; set; }
         public virtual DbSet<General_Parentesco> General_Parentesco { get; set; }
         public virtual DbSet<General_Provincias> General_Provincias { get; set; }
-        public virtual DbSet<General_Nacionalidades> General_Nacionalidades { get; set; }
-        public virtual DbSet<General_Sexo> General_Sexo { get; set; }
-        public virtual DbSet<Empresas_Sucursales> Empresas_Sucursales { get; set; }
-        public virtual DbSet<Empresas_Empleados> Empresas_Empleados { get; set; }
     }
 }

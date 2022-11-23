@@ -23,5 +23,6 @@ namespace Sindicato_Viedma.Models
         public Nullable<decimal> TotalRemuneracion { get; set; }
         public Nullable<bool> Afiliado { get; set; }
         public string Jornada { get; set; }
+        public Nullable<int> Horas { get; set; }
     }
 }

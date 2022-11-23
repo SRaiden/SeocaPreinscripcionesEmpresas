@@ -15,21 +15,22 @@ namespace Sindicato_Viedma.Models
     public partial class Empresas
     {
         public int Id { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
         public string RazonSocial { get; set; }
         public string NombreFantasia { get; set; }
         public string Cuit { get; set; }
         public string DomicilioReal { get; set; }
+        public string NroReal { get; set; }
         public Nullable<int> LocalidadReal { get; set; }
         public string TelefonoReal { get; set; }
         public string DomicilioLegal { get; set; }
+        public string NroLegal { get; set; }
         public string LocalidadLegal { get; set; }
         public string TelefonoLegal { get; set; }
         public Nullable<int> Actividad { get; set; }
         public string Email { get; set; }
         public string PaginaWeb { get; set; }
         public Nullable<bool> Ingresada { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public string NroReal { get; set; }
-        public string NroLegal { get; set; }
+        public Nullable<int> NroEmpresa { get; set; }
     }
 }
