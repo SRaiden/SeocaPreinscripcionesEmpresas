@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Inicio";
+}
+
+
+
+<div class="w3-container" style="margin-top: 5%;">
+    <div class="login-wrap">
+        <div class="login-html">
+            <h1 class="sign-in">INGRESAR</h1>
+            @using (Html.BeginForm("IniciarSesion", "Home", FormMethod.Post, new { autocomplete = "off", style = "display: flex; flex-direction: column;" }))
+            {
+                <div class="login-form">
+                    <div class="sign-in-htm">
+                        <div class="group">
+                            <label for="user" class="label">Usuario</label>
+                            <input id="user" type="text" class="input" name="user">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Password</label>
+                            <input id="pass" type="password" class="input" data-type="password" name="pass">
+                        </div>
+                        <div class="group">
+                            <input id="check" type="checkbox" class="check" checked>
+                            <label for="check"><span class="icon"></span> Recordar Contraseña</label>
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="Iniciar Sesion">
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.Error");
+    </script>
+}
+
+

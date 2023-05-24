@@ -12,11 +12,13 @@ namespace Sindicato_Viedma.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
-    public partial class SeocaPreinscripcionesEntities : DbContext
+    public partial class geosoftw_seocapreinscripcionesEntities : DbContext
     {
-        public SeocaPreinscripcionesEntities()
-            : base("name=SeocaPreinscripcionesEntities")
+        public geosoftw_seocapreinscripcionesEntities()
+            : base("name=geosoftw_seocapreinscripcionesEntities")
         {
         }
     
@@ -25,6 +27,9 @@ namespace Sindicato_Viedma.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Afiliados_DatosPersonales> Afiliados_DatosPersonales { get; set; }
+        public virtual DbSet<Afiliados_Empresa> Afiliados_Empresa { get; set; }
+        public virtual DbSet<Afiliados_Familiares> Afiliados_Familiares { get; set; }
         public virtual DbSet<Empresas> Empresas { get; set; }
         public virtual DbSet<Empresas_Actividades> Empresas_Actividades { get; set; }
         public virtual DbSet<Empresas_Antecedentes> Empresas_Antecedentes { get; set; }
@@ -37,7 +42,19 @@ namespace Sindicato_Viedma.Models
         public virtual DbSet<General_Documentos> General_Documentos { get; set; }
         public virtual DbSet<General_Estado_Civil> General_Estado_Civil { get; set; }
         public virtual DbSet<General_Localidades> General_Localidades { get; set; }
+        public virtual DbSet<General_Nacionalidades> General_Nacionalidades { get; set; }
         public virtual DbSet<General_Parentesco> General_Parentesco { get; set; }
         public virtual DbSet<General_Provincias> General_Provincias { get; set; }
+        public virtual DbSet<General_Sexo> General_Sexo { get; set; }
+        public virtual DbSet<General_Delegacion_Usuarios> General_Delegacion_Usuarios { get; set; }
+    
+        public virtual int SP_crearReporteAfiliados(Nullable<int> codigo)
+        {
+            var codigoParameter = codigo.HasValue ?
+                new ObjectParameter("Codigo", codigo) :
+                new ObjectParameter("Codigo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_crearReporteAfiliados", codigoParameter);
+        }
     }
 }

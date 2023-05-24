@@ -14,6 +14,10 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+::placeholder {
+    color: red;
+    opacity: 0.7;
+}
 
 body {
     margin: 0;
@@ -88,13 +92,17 @@ dfn {
     font-style: italic;
 }
 
-.ocultar{
+.ocultar {
     display: none;
 }
 
 mark {
     background: #ff0;
     color: #000;
+}
+
+.bg-zul {
+    background-color: #004b8c !important;
 }
 
 small {
@@ -368,7 +376,6 @@ a {
     text-align: center;
     cursor: pointer;
     white-space: nowrap;
-
 }
 
 .enviar {
@@ -403,9 +410,9 @@ a {
     width: 100%;
 }
 
-    .w3-btn:hover {
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
+.w3-btn:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
 .w3-btn,
 .w3-button {

@@ -14,10 +14,14 @@ namespace Sindicato_Viedma.Controllers
 {
     public class HomeController : Controller
     {
+        public static string codigo = "";
+
+        //---------------------------------------//
+
         [HttpGet]
         public ActionResult Empresa()
         {
-            using (Models.SeocaPreinscripcionesEntities db = new Models.SeocaPreinscripcionesEntities()) {
+            using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities()) {
                 List<Empresas_Actividades> Empresas_Actividades = db.Empresas_Actividades.ToList<Empresas_Actividades>();
                 ViewData["Empresas_Actividades"] = Empresas_Actividades;
 
@@ -36,7 +40,7 @@ namespace Sindicato_Viedma.Controllers
         [HttpPost]
         public ActionResult Empresa(string matrizEmpresa, string matrizAntecedente = null, string matrizContador = null, string matrizEmpleado = null, string matrizTitular = null, string matrizSucursal = null)
         {
-            using (Models.SeocaPreinscripcionesEntities db = new Models.SeocaPreinscripcionesEntities())
+            using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
             {
                 // EMPRESAS
                 try
@@ -96,6 +100,7 @@ namespace Sindicato_Viedma.Controllers
                         TelefonoLegal = TelefonoLegal,
                         Fecha = DateTime.Parse(hoy),
                         Ingresada = false,
+                        Estado = "Pendiente",
                         NroEmpresa = 0
                     };
 

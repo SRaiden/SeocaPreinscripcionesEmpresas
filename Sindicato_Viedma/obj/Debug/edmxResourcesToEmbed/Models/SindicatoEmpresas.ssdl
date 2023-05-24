@@ -21,6 +21,7 @@
     <Property Name="Email" Type="varchar" MaxLength="150" />
     <Property Name="PaginaWeb" Type="varchar" MaxLength="200" />
     <Property Name="Ingresada" Type="bit" />
+    <Property Name="NroEmpresa" Type="int" />
   </EntityType>
   <EntityType Name="Empresas_Actividades">
     <Key>
@@ -69,6 +70,7 @@
     <Property Name="TotalRemuneracion" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Afiliado" Type="bit" />
     <Property Name="Jornada" Type="varchar" MaxLength="20" />
+    <Property Name="Horas" Type="int" />
   </EntityType>
   <EntityType Name="Empresas_Sucursales">
     <Key>
@@ -100,64 +102,50 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="General_Delegacion">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="General_Documentos">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="General_Estado_Civil">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="General_Localidades">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Nombre_Localidad" Type="varchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="General_Parentesco">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="General_Provincias">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="150" />
-  </EntityType>
-  <EntityType Name="General_Nacionalidades">
-    <Key>
-      <PropertyRef Name="Codigo" />
-    </Key>
-    <Property Name="Codigo" Type="int" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="General_Sexo">
-    <Key>
-      <PropertyRef Name="Codigo" />
-    </Key>
-    <Property Name="Codigo" Type="int" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityContainer Name="geosoftw_seocapreinscripcionesModelStoreContainer">
     <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
@@ -174,7 +162,5 @@
     <EntitySet Name="General_Localidades" EntityType="Self.General_Localidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="General_Parentesco" EntityType="Self.General_Parentesco" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="General_Provincias" EntityType="Self.General_Provincias" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="General_Nacionalidades" EntityType="Self.General_Nacionalidades" Schema="seoca_pre" store:Type="Tables" />
-    <EntitySet Name="General_Sexo" EntityType="Self.General_Sexo" Schema="seoca_pre" store:Type="Tables" />
   </EntityContainer>
 </Schema>

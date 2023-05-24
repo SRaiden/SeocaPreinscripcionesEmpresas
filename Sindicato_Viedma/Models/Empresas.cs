@@ -32,5 +32,9 @@ namespace Sindicato_Viedma.Models
         public string PaginaWeb { get; set; }
         public Nullable<bool> Ingresada { get; set; }
         public Nullable<int> NroEmpresa { get; set; }
+        public Nullable<int> Usuario { get; set; }
+        public string Estado { get; set; }
+        public string ComentarioEstado { get; set; }
+        public Nullable<bool> Confirmada { get; set; }
     }
 }
