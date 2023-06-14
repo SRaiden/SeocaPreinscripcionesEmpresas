@@ -11,27 +11,29 @@ function enviar() {
     var RazonSocial = document.getElementById("RazonSocial").value;
     var NombreFantasia = document.getElementById("NombreFantasia").value;
     var Cuit = document.getElementById("Cuit").value;
-
     var DomicilioReal = document.getElementById("DomicilioReal").value;
     var LocalidadReal = document.getElementById("LocalidadReal").value;
-    //var LocalidadReal = selectionLocReal.options[selection.selectedIndex].value;
     var TelefonoReal = document.getElementById("TelefonoReal").value;
-
+    var TelefonoLegal = document.getElementById("TelefonoLegal").value;
+    var DomicilioLegal = document.getElementById("DomicilioLegal").value;
+    var NroLegal = document.getElementById("NroLegal").value;
+    var NroReal = document.getElementById("NroReal").value;
+    var LocalidadLegal = document.getElementById("LocalidadLegal").value;
     var Actividad = document.getElementById("Actividad").value;
-    //var Actividad = selectionActividad.options[selection.selectedIndex].value;
     var Email = document.getElementById("Email").value;
     var PaginaWeb = document.getElementById("PaginaWeb").value;
 
-    var DomicilioLegal = document.getElementById("DomicilioLegal").value;
-    var LocalidadLegal = document.getElementById("LocalidadLegal").value;
-    var TelefonoLegal = document.getElementById("TelefonoLegal").value;
+    if (matrizTitular == "") {
+        alert("Debe de ingresar al menos 1 Titular");
+        return false;
+    }
 
-    //var Sucursal1 = document.getElementById("Sucursal1").value;
-    //var Sucursal2 = document.getElementById("Sucursal2").value;
-    //var Sucursal3 = document.getElementById("Sucursal3").value;
+    if (matrizEmpleado == "") {
+        alert("Debe de ingresar al menos 1 Empleado");
+        return false;
+    }
 
     // Validaciones
-
     if (RazonSocial == "") {
         alert("Debe de ingresar la Razon Social");
         return false;
@@ -42,13 +44,30 @@ function enviar() {
         return false;
     }
 
+    if (Cuit.length != 13) {
+        alert("El CUIL debe de constar de 13 caracteres");
+        return false;
+    }
+
+    var cadena1 = Cuit.slice(0, 2);
+    var cadena2 = Cuit.slice(3, 11);
+    var cadena3 = Cuit.slice(12, 13);
+    Cuit = cadena1 + cadena2 + cadena3;
+
     if (isNaN(Cuit)) {
         alert("Ingrese solo numeros en el campo Cuit");
         return false;
     }
 
-    if (Cuit.length != 11) {
-        alert("El CUIL debe de constar de 11 caracteres");
+
+
+    if (LocalidadReal == 0) {
+        alert("Seleccione una Localidad Real");
+        return false;
+    }
+
+    if (LocalidadLegal == 0) {
+        alert("Seleccione una Localidad Legal");
         return false;
     }
 
@@ -57,8 +76,13 @@ function enviar() {
         return false;
     }
 
-    if (LocalidadReal == 0) {
-        alert("Debe de seleccionar una Localidad Real");
+    if (NroLegal == 0 || NroLegal == "") {
+        alert("Debe de ingresar el Nro Legal");
+        return false;
+    }
+
+    if (NroReal == 0 || NroReal == "") {
+        alert("Debe de ingresar el Nro Legal");
         return false;
     }
 
@@ -66,6 +90,13 @@ function enviar() {
         alert("Ingrese solo numeros en el campo Telefono Real");
         return false;
     }
+
+    if (isNaN(TelefonoLegal)) {
+        alert("Ingrese solo numeros en el campo Telefono Real");
+        return false;
+    }
+
+    
 
     if (Actividad == 0) {
         alert("Debe de seleccionar una Actividad");
@@ -93,15 +124,14 @@ function enviar() {
         DomicilioReal: DomicilioReal,
         LocalidadReal: LocalidadReal,
         TelefonoReal: TelefonoReal,
+        TelefonoLegal: TelefonoLegal,
         Actividad: Actividad,
         Email: Email,
         PaginaWeb: PaginaWeb,
         DomicilioLegal: DomicilioLegal,
         LocalidadLegal: LocalidadLegal,
-        TelefonoLegal: TelefonoLegal
-        //Sucursal1: Sucursal1,
-        //Sucursal2: Sucursal2,
-        //Sucursal3: Sucursal3
+        NroLegal: NroLegal,
+        NroReal: NroReal
     });
 
     // ---------------------------------------------------------------------- //
@@ -154,28 +184,34 @@ function enviar() {
     if (matrizSucursal == "") matrizSucursal = null;
     if (matrizTitular == "") matrizTitular = null;
 
-    $.ajax({
-        url: '/Home/Empresa',
-        type: 'POST',
-        dataType: 'json',
-        success: function (response) {
-            alert(response.responseText);
-            window.open(response.enlace);
-            location.reload();
+    document.getElementById("matrizEmpresa").value = JSON.stringify(matrizEmpresa);
+    document.getElementById("matrizAntecedente").value = JSON.stringify(matrizAntecedente);
+    document.getElementById("matrizContador").value = JSON.stringify(matrizContador);
+    document.getElementById("matrizEmpleado").value = JSON.stringify(matrizEmpleado);
+    document.getElementById("matrizTitular").value = JSON.stringify(matrizTitular);
+    document.getElementById("matrizSucursal").value = JSON.stringify(matrizSucursal);
 
-        },
-        error: function (response) {
-            alert(response.responseText);
-        },
-        data: {
-            matrizEmpresa: JSON.stringify(matrizEmpresa),
-            matrizAntecedente: JSON.stringify(matrizAntecedente),
-            matrizContador: JSON.stringify(matrizContador),
-            matrizEmpleado: JSON.stringify(matrizEmpleado),
-            matrizTitular: JSON.stringify(matrizTitular),
-            matrizSucursal: JSON.stringify(matrizSucursal),
-        }
-    });
+    //$.ajax({
+    //    url: '/Home/Empresa',
+    //    type: 'POST',
+    //    dataType: 'json',
+    //    success: function (response) {
+    //        alert(response.responseText);
+    //        window.open(response.enlace);
+    //        location.reload();
+    //    },
+    //    error: function (response) {
+    //        alert(response.responseText);
+    //    },
+    //    data: {
+    //        matrizEmpresa: JSON.stringify(matrizEmpresa),
+    //        matrizAntecedente: JSON.stringify(matrizAntecedente),
+    //        matrizContador: JSON.stringify(matrizContador),
+    //        matrizEmpleado: JSON.stringify(matrizEmpleado),
+    //        matrizTitular: JSON.stringify(matrizTitular),
+    //        matrizSucursal: JSON.stringify(matrizSucursal),
+    //    }
+    //});
 
 
 }
@@ -187,6 +223,7 @@ function insertarTitular() {
     var DomicilioParticularTitular = document.getElementById("DomicilioParticularTitular").value;
     var DocumentoTitular = document.getElementById("DocumentoTitular").value;
     var CargoEmpresaTitular = document.getElementById("CargoEmpresaTitular").value;
+    var LocalidadEmpresaTitular = document.getElementById("LocalidadEmpresaTitular").value;
 
     //validaciones
     if (ApellidoNombreTitular == "") {
@@ -231,19 +268,21 @@ function insertarTitular() {
     table.rows[0].insertCell(2);
     table.rows[0].cells[2].innerHTML = DocumentoTitular;
     table.rows[0].insertCell(3);
-    table.rows[0].cells[3].innerHTML = '<button class="w3-right w3-margin-top eliminar w3-card bg-zul w3-text-white w3-hover-red w3-hover-border-cyan borrarTitular" type="button"  onclick="eliminarTitular(' + DocumentoTitular + ')">Eliminar</button >';
+    table.rows[0].cells[3].innerHTML = '<button class="btn btn-danger borrarTitular" type="button"  onclick="eliminarTitular(' + DocumentoTitular + ')">Eliminar</button >';
 
 
     document.getElementById("ApellidoNombreTitular").value = "";
     document.getElementById("DomicilioParticularTitular").value = "";
     document.getElementById("DocumentoTitular").value = "";
     document.getElementById("CargoEmpresaTitular").value = "";
+    document.getElementById("LocalidadEmpresaTitular").value = 1471;
 
     matrizTitular.push({
         ApellidoNombreTitular: ApellidoNombreTitular,
         DomicilioParticularTitular: DomicilioParticularTitular,
         DocumentoTitular: DocumentoTitular,
-        CargoEmpresaTitular: CargoEmpresaTitular
+        CargoEmpresaTitular: CargoEmpresaTitular,
+        LocalidadEmpresaTitular: LocalidadEmpresaTitular
     });
 }
 
@@ -269,8 +308,7 @@ function insertarEmpleado() {
     var FechaIngresoEmpleado = document.getElementById("FechaIngresoEmpleado").value;
     var CategoriaEmpleado = document.getElementById("CategoriaEmpleado").value;
     var TotRemuneracionEmpleado = document.getElementById("TotRemuneracionEmpleado").value;
-
-    var Afiliado = document.getElementById("Afiliado").value;
+    var Afiliado = document.getElementById("chkCuota").checked;
     var selectionjornada = document.getElementById("JornadaEmpleado").value;
 
     //validaciones
@@ -290,23 +328,27 @@ function insertarEmpleado() {
         return false;
     }
 
+    if (CuilEmpleado.length != 13) {
+        alert("El CUIL debe de constar de 13 caracteres");
+        return false;
+    }
+
+    var cadena1 = CuilEmpleado.slice(0, 2);
+    var cadena2 = CuilEmpleado.slice(3, 11);
+    var cadena3 = CuilEmpleado.slice(12, 13);
+    CuilEmpleado = cadena1 + cadena2 + cadena3;
+
     if (isNaN(CuilEmpleado)) {
         alert("Ingrese solo numeros en el campo Cuit");
         return false;
     }
-
-    if (CuilEmpleado.length != 11) {
-        alert("El CUIL debe de constar de 11 caracteres");
-        return false;
-    }
-
 
     if (FechaIngresoEmpleado == "") {
         alert("Debe de ingresar la Fecha de Ingreso del Empleado");
         return false;
     }
 
-    if (CategoriaEmpleado == "") {
+    if (CategoriaEmpleado == -1) {
         alert("Debe de ingresar la Categoria del Empleado");
         return false;
     }
@@ -346,17 +388,17 @@ function insertarEmpleado() {
     table.rows[0].insertCell(2);
     table.rows[0].cells[2].innerHTML = FechaIngresoEmpleado;
     table.rows[0].insertCell(3);
-    table.rows[0].cells[3].innerHTML = CategoriaEmpleado;
+    table.rows[0].cells[3].innerHTML = TotRemuneracionEmpleado;
     table.rows[0].insertCell(4);
-    table.rows[0].cells[4].innerHTML = TotRemuneracionEmpleado;
-    table.rows[0].insertCell(5);
-    table.rows[0].cells[5].innerHTML = '<button class="w3-right w3-margin-top eliminar w3-card bg-zul w3-text-white w3-hover-red w3-hover-border-cyan borrarEmpleado" style="margin: 0 0 0 200px;" type="button"  onclick="eliminarEmpleado(' + CuilEmpleado + ')">Eliminar</button >';
+    table.rows[0].cells[4].innerHTML = '<button class="btn btn-danger borrarEmpleado" type="button"  onclick="eliminarEmpleado(' + CuilEmpleado + ')">Eliminar</button >';
 
     document.getElementById("ApellidoNombreEmpleado").value = "";
     document.getElementById("CuilEmpleado").value = "";
     document.getElementById("FechaIngresoEmpleado").value = "";
-    document.getElementById("CategoriaEmpleado").value = "";
+    document.getElementById("CategoriaEmpleado").value = -1;
     document.getElementById("TotRemuneracionEmpleado").value = "";
+    document.getElementById("chkCuota").checked = false;
+    document.getElementById("JornadaEmpleado").value = 0;
 
     matrizEmpleado.push({
         ApellidoNombreEmpleado: ApellidoNombreEmpleado,
@@ -390,11 +432,9 @@ function insertarAntecedente() {
     var SucesoraAntecedente = document.getElementById("SucesoraAntecedente").value;
     var NumeroEmpresaAntecedente = document.getElementById("NumeroEmpresaAntecedente").value;
     var FechaTransferenciaAntecedente = document.getElementById("FechaTransferenciaAntecedente").value;
-
     var CalleAntecedente = document.getElementById("CalleAntecedente").value;
     var PisoAntecedente = document.getElementById("PisoAntecedente").value;
     var LocalidadAntecedente = document.getElementById("LocalidadAntecedente").value;
-    var CPAntecedente = document.getElementById("CPAntecedente").value;
     var ProvinciaAntecedente = document.getElementById("ProvinciaAntecedente").value;
     var TelefonoAntecedente = document.getElementById("TelefonoAntecedente").value;
 
@@ -421,36 +461,6 @@ function insertarAntecedente() {
 
     if (FechaTransferenciaAntecedente == "") {
         alert("Debe de ingresar la Fecha Transferencia Antecedente");
-        return false;
-    }
-
-    if (LocalidadAntecedente == "") {
-        alert("Debe de ingresar el Localidad Antecedente");
-        return false;
-    }
-
-    if (!isNaN(LocalidadAntecedente)) {
-        alert("Ingrese solo letras en el campo Localidad Antecedente");
-        return false;
-    }
-
-    if (CPAntecedente == "") {
-        alert("Debe de ingresar el CP Antecedente");
-        return false;
-    }
-
-    if (isNaN(CPAntecedente)) {
-        alert("Ingrese solo numeros en el campo CP Antecedente");
-        return false;
-    }
-
-    if (ProvinciaAntecedente == "") {
-        alert("Debe de ingresar el Provincia Antecedente");
-        return false;
-    }
-
-    if (!isNaN(ProvinciaAntecedente)) {
-        alert("Ingrese solo letras en el campo Provincia Antecedente");
         return false;
     }
 
@@ -484,7 +494,7 @@ function insertarAntecedente() {
     table.rows[0].insertCell(2);
     table.rows[0].cells[2].innerHTML = FechaTransferenciaAntecedente;
     table.rows[0].insertCell(3);
-    table.rows[0].cells[3].innerHTML = '<button class="w3-right w3-margin-top eliminar w3-card bg-zul w3-text-white w3-hover-red w3-hover-border-cyan borrarAntecedente" style="margin: 0 0 0 200px;" type="button"  onclick="eliminarAntecedente(' + "'" + SucesoraAntecedente + "'" + ')">Eliminar</button >';
+    table.rows[0].cells[3].innerHTML = '<button class="btn btn-danger borrarAntecedente" type="button"  onclick="eliminarAntecedente(' + "'" + SucesoraAntecedente + "'" + ')">Eliminar</button >';
 
 
     document.getElementById("SucesoraAntecedente").value = "";
@@ -493,9 +503,8 @@ function insertarAntecedente() {
 
     document.getElementById("CalleAntecedente").value = "";
     document.getElementById("PisoAntecedente").value = "";
-    document.getElementById("LocalidadAntecedente").value = "";
-    document.getElementById("CPAntecedente").value = "";
-    document.getElementById("ProvinciaAntecedente").value = "";
+    document.getElementById("LocalidadAntecedente").value = 1471;
+    document.getElementById("ProvinciaAntecedente").value = 1;
     document.getElementById("TelefonoAntecedente").value = "";
 
     matrizAntecedente.push({
@@ -505,7 +514,6 @@ function insertarAntecedente() {
         CalleAntecedente: CalleAntecedente,
         PisoAntecedente: PisoAntecedente,
         LocalidadAntecedente: LocalidadAntecedente,
-        CPAntecedente: CPAntecedente,
         ProvinciaAntecedente: ProvinciaAntecedente,
         TelefonoAntecedente: TelefonoAntecedente
     });
@@ -531,9 +539,7 @@ $(document).on('click', '.borrarAntecedente', function (event) {
 
 function insertarSucursal() {
     var NombreSucursal = document.getElementById("NombreSucursal").value;
-    var CPSucursal = document.getElementById("CPSucursal").value;
     var LocalidadSucursal = document.getElementById("LocalidadSucursal").value;
-
     var CalleSucursal = document.getElementById("CalleSucursal").value;
     var AlturaSucursal = document.getElementById("AlturaSucursal").value;
     var TelefonoSucursal = document.getElementById("TelefonoSucursal").value;
@@ -544,16 +550,6 @@ function insertarSucursal() {
         return false;
     }
 
-    if (isNaN(CPSucursal)) {
-        alert("Ingrese solo numeros en el campo CP Sucursal");
-        return false;
-    }
-
-    if (LocalidadSucursal == "") {
-        alert("Debe de ingresar la Localidad de la Sucursal");
-        return false;
-    }
-
     if (CalleSucursal == "") {
         alert("Debe de ingresar la Calle de la Sucursal");
         return false;
@@ -561,6 +557,11 @@ function insertarSucursal() {
 
     if (TelefonoSucursal == "") {
         alert("Debe de ingresar el numero de Telefono de la Sucursal");
+        return false;
+    }
+
+    if (isNaN(TelefonoSucursal)) {
+        alert("Debe de ingresar solo numeros en el Telefono");
         return false;
     }
 
@@ -580,19 +581,16 @@ function insertarSucursal() {
     table.rows[0].insertCell(0);
     table.rows[0].cells[0].innerHTML = NombreSucursal;
     table.rows[0].insertCell(1);
-    table.rows[0].cells[1].innerHTML = CPSucursal;
+    table.rows[0].cells[1].innerHTML = LocalidadSucursal;
     table.rows[0].insertCell(2);
-    table.rows[0].cells[2].innerHTML = LocalidadSucursal;
+    table.rows[0].cells[2].innerHTML = CalleSucursal;
     table.rows[0].insertCell(3);
-    table.rows[0].cells[3].innerHTML = CalleSucursal;
+    table.rows[0].cells[3].innerHTML = TelefonoSucursal;
     table.rows[0].insertCell(4);
-    table.rows[0].cells[4].innerHTML = TelefonoSucursal;
-    table.rows[0].insertCell(5);
-    table.rows[0].cells[5].innerHTML = '<button class="w3-right w3-margin-top eliminar w3-card bg-zul w3-text-white w3-hover-red w3-hover-border-cyan eliminarSucursal" style="margin: 0 0 0 200px;" type="button"  onclick="eliminarSucursal(' + "'" + NombreSucursal + "'" + ')">Eliminar</button >';
+    table.rows[0].cells[4].innerHTML = '<button class="btn btn-danger eliminarSucursal" type="button"  onclick="eliminarSucursal(' + "'" + NombreSucursal + "'" + ')">Eliminar</button >';
 
 
     document.getElementById("NombreSucursal").value = "";
-    document.getElementById("CPSucursal").value = "";
     document.getElementById("LocalidadSucursal").value = "";
 
     document.getElementById("CalleSucursal").value = "";
@@ -602,7 +600,6 @@ function insertarSucursal() {
 
     matrizSucursal.push({
         NombreSucursal: NombreSucursal,
-        CPSucursal: CPSucursal,
         LocalidadSucursal: LocalidadSucursal,
         CalleSucursal: CalleSucursal,
         AlturaSucursal: AlturaSucursal,
@@ -625,6 +622,28 @@ $(document).on('click', '.eliminarSucursal', function (event) {
     $(this).closest('tr').remove();
 });
 
+//---------------------------------------------------//
 
+function valiCuit() {
+    var cuit = document.getElementById("Cuit").value;
+    if (cuit.length == 11) {
+        var cadena1 = cuit.slice(0, 2);
+        var cadena2 = cuit.slice(2, 10);
+        var cadena3 = cuit.slice(10, 11);
 
+        var cuit = cadena1 + "-" + cadena2 + "-" + cadena3;
+        document.getElementById("Cuit").value = cuit;
+    }
+}
 
+function valiCuil() {
+    var cuit = document.getElementById("CuilEmpleado").value;
+    if (cuit.length == 11) {
+        var cadena1 = cuit.slice(0, 2);
+        var cadena2 = cuit.slice(2, 10);
+        var cadena3 = cuit.slice(10, 11);
+
+        var cuit = cadena1 + "-" + cadena2 + "-" + cadena3;
+        document.getElementById("CuilEmpleado").value = cuit;
+    }
+}

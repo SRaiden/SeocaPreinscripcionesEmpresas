@@ -6,499 +6,647 @@
     <div class="wrap-100">
         <div class="form-100 validate-form">
             <span class="title-100-form"> Formulario de solicitud de preinscripcion de Empresas </span>
+            @if (ViewBag.Email != null)
+            {
+                <span class="title-15-form">
+                    <b>Garantice la seguridad de su cuenta y manténgase actualizado</b>
+                </span>
+                <p class="title-10-form">
+                    Se ha enviado un correo electrónico de verificación a <b>@ViewBag.Email</b>. Por favor
+                    revise su bandeja de entrada y siga las instrucciones para verificar su dirección de
+                    correo electrónico.
+                </p>
+            }
         </div>
 
-
-        <h3 class="h3-input100"> Datos Empresariales</h3>
-        <hr class="hrs" />
-        <br />
-
-        <div class="Datos">
-            <div class="wrap-input100 validate-input bg1 alert-validate" data-validate="Please Type Your Name">
-                <span class="label-cuit"> Cuit </span>
-                <input type="number" id="Cuit" name="Cuit" class="input100" onchange="changeCampos()" placeholder="Ingrese su Cuit">
-            </div>
-
-            <div class="w3-row">
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Razon Social</span>
-                    <input type="text" id="RazonSocial" name="RazonSocial" class="input100" onchange="changeCampos()" placeholder="Ingrese su Razon Social">
+        @using (Html.BeginForm("Empresa", "Home", FormMethod.Post, new { autocomplete = "off", enctype = "multipart/form-data", @class = "box" }))
+        {
+            <div class="form-body">
+                <fieldset>
+                    <legend>Datos Empresariales</legend>
+                </fieldset>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group ">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control input-mask-format" data-error="CUIL es un campo requerido." data-masked-input="99-99999999-9" data-validate="false" id="Cuit" maxlength="13" name="Cuit" placeholder="XX-XXXXXXXX-X (Cuit)" required="required" type="text" value="@ViewBag.vacio" autocomplete="off" onchange="valiCuit();">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control" data-error="RazonSocial es un campo requerido." id="RazonSocial" name="RazonSocial" placeholder="Razon Social" onchange="changeCampos()" required="required" type="text" value="@ViewBag.vacio">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control" data-error="NombreFantasia es un campo requerido." id="NombreFantasia" name="NombredeFantasia" placeholder="NombreFantasia" onchange="changeCampos()" type="text" value="@ViewBag.vacio">
+                        </div>
+                    </div>
                 </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Nombre Fantasia</span>
-                    <input type="text" id="NombreFantasia" name="NombreFantasia" class="input100" onchange="changeCampos()" placeholder="Ingrese su Nombre de Fantasia">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Domicilio Real</span>
-                    <input type="text" id="DomicilioReal" name="DomicilioReal" class="input100" onchange="changeCampos()" placeholder="Ingrese su Direccion Real">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Localidad Real</span>
-                    <select class="w3-select bg1" name="LocalidadReal" id="LocalidadReal">
-                        <option value="0">< Seleccione una localidad ></option>
-                        @{
-                            if (ViewData["Localidades"] != null)
-                            {
-                                IEnumerable<dynamic> Localidades = (IEnumerable<dynamic>)ViewData["Localidades"];
-
-                                foreach (dynamic Loc in Localidades)
-                                {
-                                    //string Descripcion = EmpAct.Descripcion;
-                                    //int Id = EmpAct.Id;
-                                    if (@Loc.Id != 0)
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" id="DomicilioReal" maxlength="200" name="DomicilioReal" placeholder="Direccion Real" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control" id="NroReal" maxlength="10" name="NroReal" placeholder="N° Real" type="number" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                            <select class="form-control" data-error="LocalidadReal es un campo requerido." data-val="true" data-val-number="The field Localidad Real must be a number." data-val-required="The Localidad Real field is required." id="LocalidadReal" name="LocalidadReal" placeholder="Localidad Real" required="required">
+                                <option value="0">< Localidad Real ></option>
+                                @{
+                                    if (ViewData["Localidades"] != null)
                                     {
-                                        <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
+                                        IEnumerable<dynamic> Localidades = (IEnumerable<dynamic>)ViewData["Localidades"];
+
+                                        foreach (dynamic Loc in Localidades)
+                                        {
+                                            //string Descripcion = EmpAct.Descripcion;
+                                            //int Id = EmpAct.Id;
+                                            if (@Loc.Id != 0)
+                                            {
+                                                <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
+                            <input class="form-control bfh-phone" id="TelefonoReal" maxlength="200" name="TelefonoReal" placeholder="Telefono Real / Wsp" type="tel" value="">
+                        </div>
+                    </div>
 
-                    </select>
                 </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Telefono Real</span>
-                    <input type="number" id="TelefonoReal" name="TelefonoReal" class="input100" onchange="changeCampos()" placeholder="Ingrese su Telefono Real">
-                </div>
-                <div class="w3-third">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Domicilio Legal</span>
-                    <input type="text" id="DomicilioLegal" name="DomicilioLegal" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Localidad Legal</span>
-                    <select class="w3-select bg1" name="LocalidadLegal" id="LocalidadLegal">
-                        <option value="0">< Seleccione una localidad ></option>
-                        @{
-                            if (ViewData["Localidades"] != null)
-                            {
-                                IEnumerable<dynamic> Localidades = (IEnumerable<dynamic>)ViewData["Localidades"];
-
-                                foreach (dynamic Loc in Localidades)
-                                {
-                                    //string Descripcion = EmpAct.Descripcion;
-                                    //int Id = EmpAct.Id;
-                                    if (@Loc.Id != 0)
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="Domicilio Legal es un campo uiuerido." id="DomicilioLegal" maxlength="200" name="DomicilioLegal" placeholder="Domicilio Legal" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control" data-error="Numero Legal es un campo uiuerido." id="NroLegal" maxlength="200" name="NroLegal" placeholder="N° Legal" type="number" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                            <select class="form-control" data-error="LocalidadLegal es un campo requerido." data-val="true" data-val-number="The field Localidad Legal must be a number." data-val-required="The Localidad Legal field is required." id="LocalidadLegal" name="LocalidadLegal" placeholder="Localidad Legal" required="required">
+                                <option value="0">< Localidad Legal ></option>
+                                @{
+                                    if (ViewData["Localidades"] != null)
                                     {
-                                        <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
+                                        IEnumerable<dynamic> Localidades = (IEnumerable<dynamic>)ViewData["Localidades"];
+
+                                        foreach (dynamic Loc in Localidades)
+                                        {
+                                            //string Descripcion = EmpAct.Descripcion;
+                                            //int Id = EmpAct.Id;
+                                            if (@Loc.Id != 0)
+                                            {
+                                                <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        }
-
-                    </select>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
+                            <input class="form-control bfh-phone" id="TelefonoLegal" maxlength="200" name="TelefonoLegal" placeholder="Telefono Legal / Wsp" type="tel" value="">
+                        </div>
+                    </div>
                 </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Telefono Legal</span>
-                    <input type="number" id="TelefonoLegal" name="TelefonoLegal" class="input100" onchange="changeCampos()">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Fecha / Importe / Interes_Mora -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Actividad</span>
-                    <select class="w3-select bg1" name="Actividad" id="Actividad">
-                        <option value="0">< Seleccione una actividad ></option>
-                        @{
-                            if (ViewData["Empresas_Actividades"] != null)
-                            {
-                                IEnumerable<dynamic> Empresas_Actividades = (IEnumerable<dynamic>)ViewData["Empresas_Actividades"];
-
-                                foreach (dynamic EmpAct in Empresas_Actividades)
-                                {
-                                    //string Descripcion = EmpAct.Descripcion;
-                                    //int Id = EmpAct.Id;
-                                    if (EmpAct.Id != 0)
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                            <select class="form-control" data-error="Actividad es un campo requerido." data-val="true" data-val-number="The field Actividad must be a number." data-val-required="The Actividad field is required." id="Actividad" name="Actividad" placeholder="Actividad" required="required">
+                                <option value="0">< Seleccione una actividad ></option>
+                                @{
+                                    if (ViewData["Empresas_Actividades"] != null)
                                     {
-                                        <option value="@EmpAct.Id">@EmpAct.Descripcion</option>
+                                        IEnumerable<dynamic> Empresas_Actividades = (IEnumerable<dynamic>)ViewData["Empresas_Actividades"];
+
+                                        foreach (dynamic EmpAct in Empresas_Actividades)
+                                        {
+                                            //string Descripcion = EmpAct.Descripcion;
+                                            //int Id = EmpAct.Id;
+                                            if (EmpAct.Id != 0)
+                                            {
+                                                <option value="@EmpAct.Id">@EmpAct.Descripcion</option>
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        }
-                    </select>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                            <input class="form-control" id="Email" maxlength="200" name="Email" placeholder="Email" required="required" type="email" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></div>
+                            <input class="form-control" data-error="PaginaWeb es un campo requerido." id="PaginaWeb" name="PaginaWeb" placeholder="Pagina Web" type="text">
+                        </div>
+                    </div>
                 </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Email</span>
-                    <input type="email" id="Email" name="Email" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Pagina Web</span>
-                    <input type="text" id="PaginaWeb" name="PaginaWeb" class="input100" onchange="changeCampos()">
-                </div>
-            </div>
-        </div>
 
-        <h3 class="h3-input100"> Titulares </h3>
-        <hr class="hrs" />
-        <br />
-
-        <div class="titular">
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Apellido y Nombre</span>
-                    <input type="text" id="ApellidoNombreTitular" name="ApellidoNombreTitular" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Domicilio Particular</span>
-                    <input type="text" id="DomicilioParticularTitular" name="DomicilioParticularTitular" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Documento</span>
-                    <input type="number" id="DocumentoTitular" name="DocumentoTitular" class="input100" onchange="changeCampos()">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Cargo Empresa</span>
-                    <input type="text" id="CargoEmpresaTitular" name="CargoEmpresaTitular" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third">
-                </div>
-                <div class="w3-third ">
-                    <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="button" onclick="insertarTitular()">
-                        Agregar Titular
-                    </button>
-                </div>
                 <br />
-            </div>
+                <br />
 
-            <div class="w3-row">
-                <div class="container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Apellido Nombre</th>
-                                <th>Domicilio</th>
-                                <th>Documento</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="bodyTitular">
-                        </tbody>
-                    </table>
+                <fieldset>
+                    <legend>Titulares</legend>
+                </fieldset>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group ">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                            <input class="form-control" data-error="ApellidoNombreTitular es un campo requerido." data-validate="false" id="ApellidoNombreTitular" name="ApellidoNombreTitular" placeholder="Apellido y Nombre" onchange="changeCampos()" type="text" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="DomicilioParticularTitular es un campo requerido." id="DomicilioParticularTitular" name="DomicilioParticularTitular" placeholder="Domicilio Particular" onchange="changeCampos()" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                            <input class="form-control" data-error="DocumentoTitular es un campo requerido." id="DocumentoTitular" name="DocumentoTitular" placeholder="Documento" onchange="changeCampos()" type="number">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                            <input class="form-control" id="CargoEmpresaTitular" name="CargoEmpresaTitular" placeholder="Cargo Empresa" type="text" value="">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                            <select class="form-control" id="LocalidadEmpresaTitular" name="LocalidadEmpresaTitular" placeholder="Localidad">
+                                @{
+                                    if (ViewData["Localidades"] != null)
+                                    {
+                                        IEnumerable<dynamic> Localidades = (IEnumerable<dynamic>)ViewData["Localidades"];
 
-        <br />
-        <h3 class="h3-input100"> Empleados </h3>
-        <hr class="hrs" />
-        <br />
-
-        <div class="empleado">
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Apellido y Nombre</span>
-                    <input type="text" id="ApellidoNombreEmpleado" name="ApellidoNombreEmpleado" class="input100" onchange="changeCampos()">
-
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Cuil Particular</span>
-                    <input type="number" id="CuilEmpleado" name="CuilEmpleado" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Fecha Ingreso</span>
-                    <input type="date" id="FechaIngresoEmpleado" name="FechaIngresoEmpleado" class="input100" onchange="changeCampos()">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Categoria</span>
-                    <select class="w3-select bg1" name="CategoriaEmpleado" id="CategoriaEmpleado">
-                        <option value="0">< Seleccione una Calificacion Profesional ></option>
-                        @{
-                            if (ViewData["CalifProf"] != null)
-                            {
-                                IEnumerable<dynamic> CalifProf = (IEnumerable<dynamic>)ViewData["CalifProf"];
-
-                                foreach (dynamic Loc in CalifProf)
-                                {
-                                    <option value="@Loc.Id">@Loc.Nombre</option>
+                                        foreach (dynamic Loc in Localidades)
+                                        {
+                                            //string Descripcion = EmpAct.Descripcion;
+                                            //int Id = EmpAct.Id;
+                                            if (@Loc.Id != 0)
+                                            {
+                                                <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
+                                            }
+                                        }
+                                    }
                                 }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <button class="w3-right enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="button" onclick="insertarTitular()">
+                            Agregar Titular
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Apellido Nombre</th>
+                                    <th>Domicilio</th>
+                                    <th>Documento</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyTitular">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+
+                <fieldset>
+                    <legend>Empleados</legend>
+                </fieldset>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group ">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                            <input class="form-control" data-error="ApellidoNombreEmpleado es un campo requerido." data-validate="false" id="ApellidoNombreEmpleado" name="ApellidoNombreEmpleado" placeholder="Apellido y Nombre" onchange="changeCampos()" type="text" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group ">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control input-mask-format" data-error="Cuil es un campo requerido." data-masked-input="99-99999999-9" data-validate="false" id="CuilEmpleado" maxlength="13" name="CuilEmpleado" placeholder="XX-XXXXXXXX-X (CUIL)" type="text" autocomplete="off" onchange="valiCuil();">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+                            <input class="form-control hasDatepicker" data-error="Fecha Ingreso es un campo requerido." data-pattern-error="Verifique la fecha ingresada." id="FechaIngresoEmpleado" maxlength="10" name="FechaIngresoEmpleado" placeholder="F. Ingreso (DD/MM/YYYY)" type="text" value="" autocomplete="off" onfocus="(this.type='date')" onblur="(this.type='text')">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                            <select class="form-control" data-error="Categoria Empleado es un campo requerido." data-val="true" data-val-number="The field Categoria Empleado must be a number." data-val-required="The Categoria Empleado field is required." id="CategoriaEmpleado" name="CategoriaEmpleado" placeholder="Categoria">
+                                <option value="-1">< Seleccione una Calificacion Profesional ></option>
+                                @{
+                                    if (ViewData["CalifProf"] != null)
+                                    {
+                                        IEnumerable<dynamic> CalifProf = (IEnumerable<dynamic>)ViewData["CalifProf"];
+
+                                        foreach (dynamic Loc in CalifProf)
+                                        {
+                                            <option value="@Loc.Id">@Loc.Nombre</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></div>
+                            <input class="form-control bfh-phone" id="TotRemuneracionEmpleado" name="TotRemuneracionEmpleado" placeholder="Total Remuneracion" type="number" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <label><input type="checkbox" value="Convenio" name="chkConvenio" class="w3-check bg1" id="chkConvenio" checked disabled /> Conv. Colectivo </label><br />
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <label><input type="checkbox" name="chkCuota" class="w3-check bg1" id="chkCuota" /> Cuota Afiliado </label> <br />
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                            <select class="form-control" data-error="Jornada es un campo requerido." data-val="true" data-val-number="The field Jornada must be a number." data-val-required="The Jornada field is required." id="JornadaEmpleado" name="JornadaEmpleado" placeholder="Jornada" required="required">
+                                <option value="0"> < Seleccione una jornada > </option>
+                                <option value="COMPLETA">200 Horas</option>
+                                <option value="MEDIA">100 Horas</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <button class="w3-right enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="button" onclick="insertarEmpleado()">
+                            Agregar Empleado
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <table id="tablaEmpleados">
+                            <thead>
+                                <tr>
+                                    <th>Apellido y Nombre</th>
+                                    <th>Cuil</th>
+                                    <th>Fecha Ingreso</th>
+                                    <th>Remuneracion</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyEmpleado">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+
+                <fieldset>
+                    <legend>Antecedentes</legend>
+                </fieldset>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group ">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control" data-error="SucesoraAntecedente es un campo requerido." data-validate="false" id="SucesoraAntecedente" name="SucesoraAntecedente" placeholder="Sucesora" onchange="changeCampos()" type="text" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control bfh-phone" data-error="NumeroEmpresaAntecedente es un campo requerido." id="NumeroEmpresaAntecedente" name="NumeroEmpresaAntecedente" placeholder="N° Empresa" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+                            <input class="form-control hasDatepicker" data-error="FechaTransferenciaAntecedente es un campo requerido." data-pattern-error="Verifique la fecha ingresada." id="FechaTransferenciaAntecedente" maxlength="10" name="FechaTransferenciaAntecedente" placeholder="F. Transferencia (DD/MM/YYYY)" type="text" value="" autocomplete="off" onfocus="(this.type='date')" onblur="(this.type='text')">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
+                            <select class="form-control" data-error="Localidad es un campo requerido." id="LocalidadAntecedente" name="LocalidadAntecedente" placeholder="Localidad">
+                                @{
+                                    if (ViewData["Localidades"] != null)
+                                    {
+                                        IEnumerable<dynamic> Localidad = (IEnumerable<dynamic>)ViewData["Localidades"];
+
+                                        foreach (dynamic Loc in Localidad)
+                                        {
+                                            <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-4">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="Calle es un campo uiuerido." id="CalleAntecedente" maxlength="200" name="CalleAntecedente" placeholder="Domicilio Particular" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control numeric" data-error="Piso es un campo requerido." data-val="true" data-val-number="The field Piso must be a number." data-val-required="The Piso field is required." id="PisoAntecedente" maxlength="10" name="PisoAntecedente" placeholder="N° Piso" type="text" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
+                            <select class="form-control" data-error="Provincia es un campo requerido." data-val="true" id="ProvinciaAntecedente" name="ProvinciaAntecedente" placeholder="ProvinciaAntecedente">
+                                @{
+                                    if (ViewData["Provincia"] != null)
+                                    {
+                                        IEnumerable<dynamic> Provincia = (IEnumerable<dynamic>)ViewData["Provincia"];
+
+                                        foreach (dynamic Loc in Provincia)
+                                        {
+                                            <option value="@Loc.Id">@Loc.Nombre</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
+                            <input class="form-control" data-error="Telefono es un campo uiuerido." id="TelefonoAntecedente" asas name="TelefonoAntecedente" placeholder="Telefono" data-format="ddddddddddddddd" maxlength="15" minlength="10" type="tel" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <button class="w3-right enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="button" onclick="insertarAntecedente()">
+                            Agregar Antecedente
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sucesora</th>
+                                    <th>Numero</th>
+                                    <th>Fecha Transf.</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyAntecedente">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+
+                <fieldset>
+                    <legend>Sucursales</legend>
+                </fieldset>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control" data-error="Nombre es un campo uiuerido." id="NombreSucursal" name="NombreSucursal" placeholder="Nombre" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
+                            <select class="form-control" data-error="Localidad es un campo requerido." id="LocalidadSucursal" name="LocalidadSucursal" placeholder="Localidad">
+                                @{
+                                    if (ViewData["Localidades"] != null)
+                                    {
+                                        IEnumerable<dynamic> Localidad = (IEnumerable<dynamic>)ViewData["Localidades"];
+
+                                        foreach (dynamic Loc in Localidad)
+                                        {
+                                            <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
+                                        }
+                                    }
+
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="Calle es un campo uiuerido." id="CalleSucursal" name="CalleSucursal" placeholder="Calle" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-road"></span></div>
+                            <input class="form-control" data-error="Altura es un campo uiuerido." id="AlturaSucursal" name="AlturaSucursal" placeholder="Altura" type="number" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
+                            <input class="form-control numeric" data-error="Telefono es un campo requerido." data-val="true" data-val-number="The field Telefono must be a number." data-val-required="The Telefono field is required." data-format="ddddddddddddddd" maxlength="15" minlength="10" id="TelefonoSucursal" name="TelefonoSucursal" placeholder="Telefono" type="tel" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <button class="w3-right enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="button" onclick="insertarSucursal()">
+                            Agregar Sucursal
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Localidad</th>
+                                    <th>Calle</th>
+                                    <th>Telefono</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodySucursal">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+
+                <fieldset>
+                    <legend>Contador</legend>
+                </fieldset>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group ">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
+                            <input class="form-control" data-error="NombreEstudioContador es un campo requerido." data-validate="false" id="NombreEstudioContador" name="NombreEstudioContador" placeholder="Nombre Estudio" onchange="changeCampos()" type="text" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="DireccionContador es un campo requerido." id="DireccionContador" name="DireccionContador" placeholder="Direccion Contador" onchange="changeCampos()" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
+                            <input class="form-control" data-error="TelefonoContador es un campo requerido." id="TelefonoContador" name="TelefonoContador" data-format="ddddddddddddddd" maxlength="15" minlength="10" placeholder="Telefono Contador" onchange="changeCampos()" type="tel">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                            <input class="form-control" id="EmailContador" maxlength="200" name="EmailContador" placeholder="Email" type="email" value="">
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="form-footer">
+                    <div class="form-group has-feedback col-lg-10">
+                        <div class="input-group" style="margin-top: 1%; float: right;">
+                            @if (ViewBag.Email != null)
+                            {
+                                <span>
+                                    <b>Garantice la seguridad de su cuenta y manténgase actualizado</b>
+                                </span>
+                                <p>
+                                    Se ha enviado un correo electrónico de verificación a <b>@ViewBag.Email</b>. Por favor
+                                    revise su bandeja de entrada y siga las instrucciones para verificar su dirección de
+                                    correo electrónico.
+                                </p>
                             }
-                        }
-                    </select>
+                        </div>
+                    </div>
+
+
+                    <input type="text" id="matrizEmpresa" name="matrizEmpresa" hidden />
+                    <input type="text" id="matrizAntecedente" name="matrizAntecedente" hidden />
+                    <input type="text" id="matrizContador" name="matrizContador" hidden />
+                    <input type="text" id="matrizEmpleado" name="matrizEmpleado" hidden />
+                    <input type="text" id="matrizTitular" name="matrizTitular" hidden />
+                    <input type="text" id="matrizSucursal" name="matrizSucursal" hidden />
+
+
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <button class="btn btn-success" style="float:right;" type="submit" onclick="return enviar();">
+                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                                Generar Solicitud
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Total Remuneracion</span>
-                    <input type="number" id="TotRemuneracionEmpleado" name="TotRemuneracionEmpleado" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Afiliado</span>
-                    <select class="w3-select bg1" name="Afiliado" id="Afiliado">
-                        <option value="NO">NO</option>
-                        <option value="SI">SI</option>
-                    </select>
-                </div>
+
             </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Jornada</span>
-                    <select class="w3-select bg1" name="JornadaEmpleado" id="JornadaEmpleado">
-                        <option value="0"> < Seleccione una jornada > </option>
-                        <option value="200">200 Horas</option>
-                        <option value="100">100 Horas</option>
-                    </select>
-                </div>
-                <div class="w3-third ">
-                    <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="button" onclick="insertarEmpleado()">
-                        Agregar Empleado
-                    </button>
-                </div>
-
-                <div class="w3-third">
-
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <div class="container">
-                    <table id="tablaEmpleados">
-                        <thead>
-                            <tr>
-                                <th>Apellido y Nombre</th>
-                                <th>Cuil</th>
-                                <th>Fecha Ingreso</th>
-                                <th>Categoria</th>
-                                <th>Remuneracion</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="bodyEmpleado">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        @*<br />jor
-        <h3 class="h3-input100"> Antecedentes </h3>
-        <hr class="hrs" />
-        <br />*@
-
-        <div class="antecedente" hidden>
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Sucesora</span>
-                    <input type="text" id="SucesoraAntecedente" name="SucesoraAntecedente" class="input100" onchange="changeCampos()">
-
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Numero de Empresa</span>
-                    <input type="number" id="NumeroEmpresaAntecedente" name="NumeroEmpresaAntecedente" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Fecha de Transferencia</span>
-                    <input type="date" id="FechaTransferenciaAntecedente" name="FechaTransferenciaAntecedente" class="input100" onchange="changeCampos()">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Calle</span>
-                    <input type="text" id="CalleAntecedente" name="CalleAntecedente" class="input100" onchange="changeCampos()">
-
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Piso</span>
-                    <input type="text" id="PisoAntecedente" name="PisoAntecedente" class="input100" onchange="changeCampos()">
-
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Localidad</span>
-                    <input type="text" id="LocalidadAntecedente" name="LocalidadAntecedente" class="input100" onchange="changeCampos()">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">CP</span>
-                    <input type="number" id="CPAntecedente" name="CPAntecedente" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Provincia</span>
-                    <input type="text" id="ProvinciaAntecedente" name="ProvinciaAntecedente" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Telefono</span>
-                    <input type="number" id="TelefonoAntecedente" name="TelefonoAntecedente" class="input100" onchange="changeCampos()">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third">
-                </div>
-                <div class="w3-third">
-                </div>
-                <div class="w3-third">
-                    <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="submit" onclick="insertarAntecedente()">
-                        Agregar Antecedente
-                    </button>
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <div class="container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Sucesora</th>
-                                <th>Numero</th>
-                                <th>Fecha Transf.</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="bodyAntecedente">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-
-        <br />
-        <h3 class="h3-input100"> Sucursales </h3>
-        <hr class="hrs" />
-        <br />
-
-        <div class="sucursales">
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Nombre</span>
-                    <input type="text" id="NombreSucursal" name="NombreSucursal" class="input100" onchange="changeCampos()">
-
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">CP</span>
-                    <input type="number" id="CPSucursal" name="CPSucursal" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Localidad</span>
-                    <input type="text" id="LocalidadSucursal" name="LocalidadSucursal" class="input100" onchange="changeCampos()">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Calle</span>
-                    <input type="text" id="CalleSucursal" name="CalleSucursal" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Altura</span>
-                    <input type="text" id="AlturaSucursal" name="AlturaSucursal" class="input100" onchange="changeCampos()">
-
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Telefono</span>
-                    <input type="tel" id="TelefonoSucursal" name="TelefonoSucursal" class="input100" onchange="changeCampos()">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third">
-                    <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="submit" onclick="insertarSucursal()">
-                        Agregar Sucursal
-                    </button>
-                </div>
-                <div class="w3-third">
-                </div>
-                <div class="w3-third">
-                </div>
-            </div>
-            <br />
-
-            <div class="w3-row">
-                <div class="container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>CP</th>
-                                <th>Localidad</th>
-                                <th>Calle</th>
-                                <th>Telefono</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="bodySucursal">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <br />
-        <h3 class="h3-input100"> Contador </h3>
-        <hr class="hrs" />
-        <br />
-
-        <div class="contador">
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Nombre Estudio</span>
-                    <input type="text" id="NombreEstudioContador" name="NombreEstudioContador" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Direccion</span>
-                    <input type="text" id="DireccionContador" name="DireccionContador" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third w3-container wrap-input100 bg1 rs1-wrap-input100">
-                    <span class="label-input100">Telefono Contador</span>
-                    <input type="number" id="TelefonoContador" name="TelefonoContador" class="input100" onchange="changeCampos()">
-                </div>
-            </div>
-
-            <div class="w3-row">
-                <!-- -------------------- Apellido / Docimilio / Documento -------------------- -->
-                <div class="w3-third w3-container wrap-input100 validate-input bg1 rs1-wrap-input100 alert-validate" data-validate="Enter Your Email (e@a.x)">
-                    <span class="label-input100">Email</span>
-                    <input type="email" id="EmailContador" name="EmailContador" class="input100" onchange="changeCampos()">
-                </div>
-                <div class="w3-third">
-                </div>
-                <div class="w3-third">
-                </div>
-            </div>
-        </div>
-
-        <div class="w3-row">
-            <div class="">
-                <button class="w3-right w3-margin-top enviar w3-card bg-zul w3-text-white w3-hover-green w3-hover-border-cyan" type="submit" onclick="return enviar();">
-                    ENVIAR
-                </button>
-            </div>
-        </div>
+        }
 
     </div>
 </div>
 
 
-    <br />
+<br />
 
-    @section scripts{
-        <script src="~/js/tabPag.js"></script>
-        <script src="~/js/EnviarMatriz.js"></script>
-    }
+@if (!string.IsNullOrEmpty(ViewBag.error))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.error");
+    </script>
+}
+
+
+@section scripts{
+    <script src="~/js/tabPag.js"></script>
+    <script src="~/js/EnviarMatriz.js"></script>
+}

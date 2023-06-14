@@ -1263,3 +1263,17 @@ C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sin
 C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\Microsoft.VisualStudio.Shell.Interop.10.0.dll
 C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\Microsoft.VisualStudio.Debugger.Interop.11.0.dll
 C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\Microsoft.VisualStudio.TextManager.Interop.10.0.dll
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\BouncyCastle.Cryptography.dll
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\MailKit.dll
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\MimeKit.dll
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\System.Security.Cryptography.Pkcs.dll
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\System.Text.Encoding.CodePages.dll
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\BouncyCastle.Cryptography.xml
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\MailKit.pdb
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\MailKit.xml
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\MailKit.dll.config
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\MimeKit.pdb
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\MimeKit.xml
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\MimeKit.dll.config
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\System.Security.Cryptography.Pkcs.xml
+C:\Users\Nata\OneDrive\Documentos\GitHub\Seoca\SeocaPreinscripcionesEmpresas\Sindicato_Viedma\bin\System.Text.Encoding.CodePages.xml
