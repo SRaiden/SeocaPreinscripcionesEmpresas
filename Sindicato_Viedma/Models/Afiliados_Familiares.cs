@@ -18,10 +18,16 @@ namespace Sindicato_Viedma.Models
         public int Id_Afiliado { get; set; }
         public string Parentesco { get; set; }
         public string Apellido_Nombre { get; set; }
-        public Nullable<System.DateTime> Cert_Estudios { get; set; }
-        public string Tipo_Doc { get; set; }
+        public Nullable<int> Tipo_Doc { get; set; }
         public string Num_Doc { get; set; }
         public Nullable<int> Sexo { get; set; }
         public Nullable<System.DateTime> Fecha_Nac { get; set; }
+        public byte[] DatosArchivo { get; set; }
+        public string ExtensionArchivo { get; set; }
+        public string UsuarioSecretaria { get; set; }
+        public Nullable<int> NroAfiliadoSecretaria { get; set; }
+        public Nullable<int> IdFamiliarSecretaria { get; set; }
+        public Nullable<bool> InhabilitarSecretaria { get; set; }
+        public Nullable<bool> ActualizacionSecretaria { get; set; }
     }
 }

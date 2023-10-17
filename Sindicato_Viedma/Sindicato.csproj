@@ -279,6 +279,9 @@
     <Compile Include="Models\Empresas_Titulares.cs">
       <DependentUpon>Empresas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\General_ActividadRubro.cs">
+      <DependentUpon>Empresas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\General_Calificacion.cs">
       <DependentUpon>Empresas.tt</DependentUpon>
     </Compile>

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
@@ -17,36 +18,35 @@ namespace Sindicato_Viedma.Controllers
     {
         public static string codigo = "";
 
-        //---------------------------------------//
-
         [HttpGet]
         public ActionResult Empresa()
         {
-            using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities()) {
-                List<Empresas_Actividades> Empresas_Actividades = db.Empresas_Actividades.ToList<Empresas_Actividades>();
-                ViewData["Empresas_Actividades"] = Empresas_Actividades;
+            using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
+            {
+                var empresasActividades = db.Empresas_Actividades.OrderBy(d => d.Descripcion).ToList();
+                ViewData["Empresas_Actividades"] = empresasActividades;
 
-                List<General_Localidades> Localidades = db.General_Localidades.ToList<General_Localidades>();
-                ViewData["Localidades"] = Localidades;
+                var localidades = db.General_Localidades.OrderBy(d => d.Nombre_Localidad).ToList();
+                ViewData["Localidades"] = localidades;
 
-                List<General_Calificacion> CalifProf = db.General_Calificacion.ToList<General_Calificacion>();
-                ViewData["CalifProf"] = CalifProf;
+                var califProf = db.General_Calificacion.OrderBy(d => d.Nombre).ToList();
+                ViewData["CalifProf"] = califProf;
 
-                List<General_Provincias> Provincia = db.General_Provincias.Where(d => d.Id != 0).ToList<General_Provincias>();
-                ViewData["Provincia"] = Provincia;
-
+                var provincias = db.General_Provincias.Where(d => d.Id != 0).OrderBy(d => d.Nombre).ToList();
+                ViewData["Provincia"] = provincias;
             }
-                
-
             return View();
         }
 
-
-
         [HttpPost]
-        public ActionResult Empresa(string matrizEmpresa, string matrizAntecedente = null, string matrizContador = null, string matrizEmpleado = null, string matrizTitular = null, string matrizSucursal = null)
+        public ActionResult Empresa(string matrizEmpresa, string matrizAntecedente = null, 
+            string matrizContador = null, string matrizEmpleado = null, 
+            string matrizTitular = null, string matrizSucursal = null, 
+            HttpPostedFileBase fileHabilitacionMunicipal = null, HttpPostedFileBase fileComprobanteAfip = null, 
+            HttpPostedFileBase fileContratoSocial = null, HttpPostedFileBase fileNotaEscrita = null, HttpPostedFileBase fileUltimoReciboSueldo = null)
         {
             string Email = "";
+            string EmailContador = "";
             using (Models.geosoftw_seocapreinscripcionesEntities db = new Models.geosoftw_seocapreinscripcionesEntities())
             {
                 string Cuit = "";
@@ -54,50 +54,123 @@ namespace Sindicato_Viedma.Controllers
                 try
                 {
                     JArray jsonPreservar = JArray.Parse(matrizEmpresa);
-                    string RazonSocial = "", NombreFantasia = "", DomicilioReal = "", LocalidadReal = "", TelefonoReal = "", 
-                        Actividad = "", PaginaWeb = "", DomicilioLegal = "", LocalidadLegal = "", TelefonoLegal = "",
-                        NroReal = "", NroLegal = "";
+                    string RazonSocial = "", NombreFantasia = "", DomicilioReal = "", LocalidadReal = "", TelefonoReal = "",
+                        Actividad = "", PaginaWeb = "", DomicilioLegal = "", LocalidadLegal = "", CPLegal = "", TelefonoLegal = "",
+                        NroReal = "", NroLegal = "", PisoReal = "", DtoReal = "", PisoLegal = "", DtoLegal = "";
+
                     foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                     {
                         foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
                         {
                             string propiedad = jsonOPropiedades.Name;
-                            if (propiedad.Equals("RazonSocial")) RazonSocial = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("NombreFantasia")) NombreFantasia = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Cuit")) Cuit = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("DomicilioReal")) DomicilioReal = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("LocalidadReal")) LocalidadReal = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("TelefonoReal")) TelefonoReal = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Actividad")) Actividad = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("Email")) Email = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("PaginaWeb")) PaginaWeb = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("DomicilioLegal")) DomicilioLegal = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("LocalidadLegal")) LocalidadLegal = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("TelefonoLegal")) TelefonoLegal = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("NroReal")) NroReal = jsonOPropiedades.Value.ToString();
-                            if (propiedad.Equals("NroLegal")) NroLegal = jsonOPropiedades.Value.ToString();
+                            switch (propiedad)
+                            {
+                                case "RazonSocial":
+                                    RazonSocial = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "NombreFantasia":
+                                    NombreFantasia = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "Cuit":
+                                    Cuit = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "DomicilioReal":
+                                    DomicilioReal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "LocalidadReal":
+                                    LocalidadReal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "PisoReal":
+                                    PisoReal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "DtoReal":
+                                    DtoReal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "TelefonoReal":
+                                    TelefonoReal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "Actividad":
+                                    Actividad = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "Email":
+                                    Email = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "PaginaWeb":
+                                    PaginaWeb = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "DomicilioLegal":
+                                    DomicilioLegal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "LocalidadLegal":
+                                    LocalidadLegal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "CPLegal":
+                                    CPLegal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "PisoLegal":
+                                    PisoLegal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "DtoLegal":
+                                    DtoLegal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "TelefonoLegal":
+                                    TelefonoLegal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "NroReal":
+                                    NroReal = jsonOPropiedades.Value.ToString();
+                                    break;
+                                case "NroLegal":
+                                    NroLegal = jsonOPropiedades.Value.ToString();
+                                    break;
+                            }
                         }
                     }
 
                     Cuit = Cuit.Replace("-", "");
 
-                    // Validar si se preinscribio anteriormente
-                    try
+                    // Validar si se preinscribió anteriormente
+                    if (db.Empresas.Any(d => d.Cuit == Cuit))
                     {
-                        var Inscripcion = db.Empresas.Where(d => d.Cuit == Cuit).First();
-                        if (Inscripcion != null)
-                        {
-                            ViewBag.error = "Ya hay una empresa cargada con este mismo numero de CUIT.";
-                            return View();
-                            //return Json(new { success = true, responseText = "Ya hay una empresa con este mismo numero de CUIT." }, JsonRequestBehavior.AllowGet);
-                        }
-                    }
-                    catch (Exception)
-                    {
-
+                        ViewBag.error = "Ya hay una empresa cargada con este mismo número de CUIT.";
+                        return View();
+                        //return Json(new { success = true, responseText = "Ya hay una empresa con este mismo número de CUIT." }, JsonRequestBehavior.AllowGet);
                     }
 
                     string hoy = DateTime.Now.ToString("yyyy/MM/dd");
+
+                    byte[] bytesHabMunicipal = null;
+                    byte[] bytesComAFIP = null;
+                    byte[] bytesContSocial = null;
+                    byte[] bytesNotaEscrita = null;
+                    byte[] bytesReciboSueldo = null;
+
+                    string extHabMunicipal = null;
+                    string extComAFIP = null;
+                    string extContSocial = null;
+                    string extNotaEscrita = null;
+                    string extReciboSueldo = null;
+
+                    void ReadFile(HttpPostedFileBase file, out byte[] bytes, out string extension)
+                    {
+                        bytes = null;
+                        extension = null;
+                        if (file != null)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            string[] fileParts = fileName.Split('.');
+                            extension = fileParts[1];
+                            using (BinaryReader br = new BinaryReader(file.InputStream))
+                            {
+                                bytes = br.ReadBytes(file.ContentLength);
+                            }
+                        }
+                    }
+
+                    ReadFile(fileHabilitacionMunicipal, out bytesHabMunicipal, out extHabMunicipal);
+                    ReadFile(fileComprobanteAfip, out bytesComAFIP, out extComAFIP);
+                    ReadFile(fileContratoSocial, out bytesContSocial, out extContSocial);
+                    ReadFile(fileNotaEscrita, out bytesNotaEscrita, out extNotaEscrita);
+                    ReadFile(fileUltimoReciboSueldo, out bytesReciboSueldo, out extReciboSueldo);
 
                     // GUARDAR EN LA TABLA DE EMPRESAS
                     var emp = new Empresas
@@ -106,6 +179,8 @@ namespace Sindicato_Viedma.Controllers
                         NombreFantasia = NombreFantasia,
                         Cuit = Cuit,
                         DomicilioReal = DomicilioReal,
+                        PisoReal = PisoReal,
+                        DtoReal = DtoReal,
                         LocalidadReal = Int32.Parse(LocalidadReal),
                         TelefonoReal = TelefonoReal,
                         Actividad = Int32.Parse(Actividad),
@@ -113,14 +188,28 @@ namespace Sindicato_Viedma.Controllers
                         PaginaWeb = PaginaWeb,
                         DomicilioLegal = DomicilioLegal,
                         LocalidadLegal = LocalidadLegal,
+                        CPLegal = Int32.Parse(CPLegal),
+                        DtoLegal = DtoLegal,
+                        PisoLegal = PisoLegal,
                         TelefonoLegal = TelefonoLegal,
                         Fecha = DateTime.Parse(hoy),
                         Ingresada = false,
                         Estado = "Pendiente",
                         Confirmada = false,
                         NroEmpresa = 0,
-                        NroReal = NroReal, 
-                        NroLegal = NroLegal
+                        NroReal = NroReal,
+                        NroLegal = NroLegal,
+
+                        FotoComprobanteAFIP = bytesComAFIP,
+                        FotoContratoSocial = bytesContSocial,
+                        FotoHabilitacionMunicipal = bytesHabMunicipal,
+                        FotoNotaEscrita = bytesNotaEscrita,
+                        FotoReciboSueldo = bytesReciboSueldo,
+                        extensionComprobanteAFIP = extComAFIP,
+                        extensionContratoSocial = extContSocial,
+                        extensionHabilitacionMunicipal = extHabMunicipal,
+                        extensionNotaEscrita = extNotaEscrita,
+                        extensionReciboSueldo = extReciboSueldo
                     };
 
                     db.Empresas.Add(emp);
@@ -129,17 +218,17 @@ namespace Sindicato_Viedma.Controllers
                     // Guardar Sucursales
                     var idEmpresa = db.Empresas.OrderByDescending(d => d.Id).First().Id;
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     ViewBag.error = "Error al Preinscribir Empresa.";
                     return View();
-                    //return Json(new { success = true, responseText = "Error al Preinscribir Empresa." }, JsonRequestBehavior.AllowGet);
                 }
 
                 var ultimoId = db.Empresas.OrderByDescending(d => d.Id).First().Id;
 
                 // ANTECEDENTES
-                try {
+                try
+                {
                     JArray jsonPreservar = null;
                     try
                     {
@@ -149,23 +238,42 @@ namespace Sindicato_Viedma.Controllers
                     {
 
                     }
-                    
-                    string SucesoraAntecedente = "", NumeroEmpresaAntecedente = "", FechaTransferenciaAntecedente = "", CalleAntecedente = "", PisoAntecedente = "", LocalidadAntecedente = "", ProvinciaAntecedente = "", TelefonoAntecedente = "";
+
                     if (jsonPreservar != null)
                     {
                         foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                         {
+                            string SucesoraAntecedente = "", NumeroEmpresaAntecedente = "", FechaTransferenciaAntecedente = "", CalleAntecedente = "", PisoAntecedente = "", LocalidadAntecedente = "", ProvinciaAntecedente = "", TelefonoAntecedente = "";
                             foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
                             {
                                 string propiedad = jsonOPropiedades.Name;
-                                if (propiedad.Equals("SucesoraAntecedente")) SucesoraAntecedente = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("NumeroEmpresaAntecedente")) NumeroEmpresaAntecedente = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("FechaTransferenciaAntecedente")) FechaTransferenciaAntecedente = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("CalleAntecedente")) CalleAntecedente = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("PisoAntecedente")) PisoAntecedente = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("LocalidadAntecedente")) LocalidadAntecedente = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("ProvinciaAntecedente")) ProvinciaAntecedente = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("TelefonoAntecedente")) TelefonoAntecedente = jsonOPropiedades.Value.ToString();
+                                switch (propiedad)
+                                {
+                                    case "SucesoraAntecedente":
+                                        SucesoraAntecedente = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "NumeroEmpresaAntecedente":
+                                        NumeroEmpresaAntecedente = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "FechaTransferenciaAntecedente":
+                                        FechaTransferenciaAntecedente = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "CalleAntecedente":
+                                        CalleAntecedente = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "PisoAntecedente":
+                                        PisoAntecedente = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "LocalidadAntecedente":
+                                        LocalidadAntecedente = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "ProvinciaAntecedente":
+                                        ProvinciaAntecedente = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "TelefonoAntecedente":
+                                        TelefonoAntecedente = jsonOPropiedades.Value.ToString();
+                                        break;
+                                }
                             }
 
                             // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
@@ -186,20 +294,18 @@ namespace Sindicato_Viedma.Controllers
                             db.Empresas_Antecedentes.Add(emp);
                             db.SaveChanges();
                         }
-
                     }
-                    
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     ViewBag.error = "Error al Preinscribir Antecedente.";
                     return View();
-                    //return Json(new { success = true, responseText = "Error al Preinscribir Antecedente." }, JsonRequestBehavior.AllowGet);
                 }
 
 
                 // CONTADORES
-                try{
+                try
+                {
                     JArray jsonPreservar = null;
                     try
                     {
@@ -209,21 +315,33 @@ namespace Sindicato_Viedma.Controllers
                     {
 
                     }
-                    string NombreEstudioContador = "", DireccionContador = "", TelefonoContador = "", EmailContador = "";
+
                     if (jsonPreservar != null)
                     {
                         foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                         {
+                            string NombreEstudioContador = "", DireccionContador = "", TelefonoContador = "";
                             foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
                             {
                                 string propiedad = jsonOPropiedades.Name;
-                                if (propiedad.Equals("NombreEstudioContador")) NombreEstudioContador = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("DireccionContador")) DireccionContador = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("TelefonoContador")) TelefonoContador = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("EmailContador")) EmailContador = jsonOPropiedades.Value.ToString();
+                                switch (propiedad)
+                                {
+                                    case "NombreEstudioContador":
+                                        NombreEstudioContador = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "DireccionContador":
+                                        DireccionContador = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "TelefonoContador":
+                                        TelefonoContador = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "EmailContador":
+                                        EmailContador = jsonOPropiedades.Value.ToString();
+                                        break;
+                                }
                             }
 
-                            // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
+                            // GUARDAR EN LA TABLA DE EMPRESAS CONTADORES
                             var emp = new Empresas_Contadores
                             {
                                 NomreEstudio = NombreEstudioContador,
@@ -237,14 +355,11 @@ namespace Sindicato_Viedma.Controllers
                             db.SaveChanges();
                         }
                     }
-
-                    
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     ViewBag.error = "Error al Preinscribir Contador.";
                     return View();
-                    //return Json(new { success = true, responseText = "Error al Preinscribir Contador." }, JsonRequestBehavior.AllowGet);
                 }
 
 
@@ -261,40 +376,45 @@ namespace Sindicato_Viedma.Controllers
 
                     }
 
-                    string ApellidoNombreEmpleado = "", CuilEmpleado = "", FechaIngresoEmpleado = "", CategoriaEmpleado = "", TotRemuneracionEmpleado = "", Afiliado = "", JornadaEmpleado = "";
                     if (jsonPreservar != null)
                     {
                         foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                         {
+                            string ApellidoNombreEmpleado = "", CuilEmpleado = "", FechaIngresoEmpleado = "", CategoriaEmpleado = "", TotRemuneracionEmpleado = "", Afiliado = "", JornadaEmpleado = "";
                             foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
                             {
                                 string propiedad = jsonOPropiedades.Name;
-                                if (propiedad.Equals("ApellidoNombreEmpleado")) ApellidoNombreEmpleado = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("CuilEmpleado")) CuilEmpleado = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("FechaIngresoEmpleado")) FechaIngresoEmpleado = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("CategoriaEmpleado")) CategoriaEmpleado = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("TotRemuneracionEmpleado")) TotRemuneracionEmpleado = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("Afiliado")) Afiliado = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("JornadaEmpleado")) JornadaEmpleado = jsonOPropiedades.Value.ToString();
+                                switch (propiedad)
+                                {
+                                    case "ApellidoNombreEmpleado":
+                                        ApellidoNombreEmpleado = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "CuilEmpleado":
+                                        CuilEmpleado = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "FechaIngresoEmpleado":
+                                        FechaIngresoEmpleado = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "CategoriaEmpleado":
+                                        CategoriaEmpleado = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "TotRemuneracionEmpleado":
+                                        TotRemuneracionEmpleado = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "Afiliado":
+                                        Afiliado = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "JornadaEmpleado":
+                                        JornadaEmpleado = jsonOPropiedades.Value.ToString();
+                                        break;
+                                }
                             }
 
                             CuilEmpleado = CuilEmpleado.Replace("-", "");
-                            int horas = 0;
+                            int horas = JornadaEmpleado == "MEDIA" ? 100 : 200;
+                            bool afi = Afiliado == "True";
 
-                            if (JornadaEmpleado == "MEDIA") {
-                                JornadaEmpleado = "1/2 JORNADA";
-                                horas = 100;
-                            } 
-                            else {
-                                JornadaEmpleado = "JORNADA COMPLETA";
-                                horas = 200;
-                            } 
-
-                            bool afi = false;
-                            if (Afiliado == "True") afi = true;
-
-
-                            // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
+                            // GUARDAR EN LA TABLA DE EMPRESAS EMPLEADOS
                             var emp = new Empresas_Empleados
                             {
                                 ApellidoNombre = ApellidoNombreEmpleado,
@@ -312,13 +432,11 @@ namespace Sindicato_Viedma.Controllers
                             db.SaveChanges();
                         }
                     }
-                    
                 }
                 catch (Exception)
                 {
                     ViewBag.error = "Error al Preinscribir Empleados.";
                     return View();
-                    //return Json(new { success = true, responseText = "Error al Preinscribir Empleados." }, JsonRequestBehavior.AllowGet);
                 }
 
 
@@ -335,23 +453,38 @@ namespace Sindicato_Viedma.Controllers
 
                     }
 
-                    string ApellidoNombreTitular = "", DomicilioParticularTitular = "", DocumentoTitular = "", CargoEmpresaTitular = "", LocalidadEmpresaTitular = "";
                     if (jsonPreservar != null)
                     {
                         foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                         {
+                            string ApellidoNombreTitular = "", DomicilioParticularTitular = "", DocumentoTitular = "", CargoEmpresaTitular = "", LocalidadEmpresaTitular = "", EmpresaCPTitular = "";
                             foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
                             {
                                 string propiedad = jsonOPropiedades.Name;
-                                if (propiedad.Equals("ApellidoNombreTitular")) ApellidoNombreTitular = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("DomicilioParticularTitular")) DomicilioParticularTitular = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("DocumentoTitular")) DocumentoTitular = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("CargoEmpresaTitular")) CargoEmpresaTitular = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("LocalidadEmpresaTitular")) LocalidadEmpresaTitular = jsonOPropiedades.Value.ToString();
-
+                                switch (propiedad)
+                                {
+                                    case "ApellidoNombreTitular":
+                                        ApellidoNombreTitular = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "DomicilioParticularTitular":
+                                        DomicilioParticularTitular = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "DocumentoTitular":
+                                        DocumentoTitular = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "CargoEmpresaTitular":
+                                        CargoEmpresaTitular = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "LocalidadEmpresaTitular":
+                                        LocalidadEmpresaTitular = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "EmpresaCPTitular":
+                                        EmpresaCPTitular = jsonOPropiedades.Value.ToString();
+                                        break;
+                                }
                             }
 
-                            // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
+                            // GUARDAR EN LA TABLA DE EMPRESAS TITULARES
                             var emp = new Empresas_Titulares
                             {
                                 ApellidoNombre = ApellidoNombreTitular,
@@ -359,6 +492,7 @@ namespace Sindicato_Viedma.Controllers
                                 Documento = DocumentoTitular,
                                 Cargo = CargoEmpresaTitular,
                                 Localidad = LocalidadEmpresaTitular,
+                                CP = EmpresaCPTitular,
                                 TipoDni = 1,
                                 IdEmpresa = ultimoId
                             };
@@ -367,13 +501,11 @@ namespace Sindicato_Viedma.Controllers
                             db.SaveChanges();
                         }
                     }
-                    
                 }
                 catch (Exception)
                 {
                     ViewBag.error = "Error al Preinscribir Titulares.";
                     return View();
-                    //return Json(new { success = true, responseText = "Error al Preinscribir Titulares." }, JsonRequestBehavior.AllowGet);
                 }
 
 
@@ -390,22 +522,35 @@ namespace Sindicato_Viedma.Controllers
 
                     }
 
-                    string NombreSucursal = "", LocalidadSucursal = "", CalleSucursal = "", AlturaSucursal = "", TelefonoSucursal = "";
                     if (jsonPreservar != null)
                     {
                         foreach (JObject jsonOperaciones in jsonPreservar.Children<JObject>())
                         {
+                            string NombreSucursal = "", LocalidadSucursal = "", CalleSucursal = "", AlturaSucursal = "", TelefonoSucursal = "";
                             foreach (JProperty jsonOPropiedades in jsonOperaciones.Properties())
                             {
                                 string propiedad = jsonOPropiedades.Name;
-                                if (propiedad.Equals("NombreSucursal")) NombreSucursal = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("LocalidadSucursal")) LocalidadSucursal = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("CalleSucursal")) CalleSucursal = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("AlturaSucursal")) AlturaSucursal = jsonOPropiedades.Value.ToString();
-                                if (propiedad.Equals("TelefonoSucursal")) TelefonoSucursal = jsonOPropiedades.Value.ToString();
+                                switch (propiedad)
+                                {
+                                    case "NombreSucursal":
+                                        NombreSucursal = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "LocalidadSucursal":
+                                        LocalidadSucursal = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "CalleSucursal":
+                                        CalleSucursal = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "AlturaSucursal":
+                                        AlturaSucursal = jsonOPropiedades.Value.ToString();
+                                        break;
+                                    case "TelefonoSucursal":
+                                        TelefonoSucursal = jsonOPropiedades.Value.ToString();
+                                        break;
+                                }
                             }
 
-                            // GUARDAR EN LA TABLA DE EMPRESAS ANTECEDENTES
+                            // GUARDAR EN LA TABLA DE EMPRESAS SUCURSALES
                             var emp = new Empresas_Sucursales
                             {
                                 Nombre = NombreSucursal,
@@ -420,51 +565,41 @@ namespace Sindicato_Viedma.Controllers
                             db.Empresas_Sucursales.Add(emp);
                             db.SaveChanges();
                         }
-
                     }
-
                 }
                 catch (Exception)
                 {
                     ViewBag.error = "Error al Preinscribir Sucursales.";
                     return View();
-                    //return Json(new { success = true, responseText = "Error al Preinscribir Sucursales." }, JsonRequestBehavior.AllowGet);
                 }
 
 
                 // Enviar E-Mail de Codigo de Validacion
                 try
                 {
-                    try
-                    {
-                        MailKit.Net.Smtp.SmtpClient smtp2 = new MailKit.Net.Smtp.SmtpClient();
-                        smtp2.Connect("vps-2676239-x.dattaweb.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect);
-                        smtp2.Authenticate("afiliaciones@seocaweb.com.ar", "XhkW@bK7cJ");
+                    MailKit.Net.Smtp.SmtpClient smtp2 = new MailKit.Net.Smtp.SmtpClient();
+                    smtp2.Connect("vps-2676239-x.dattaweb.com", 465, MailKit.Security.SecureSocketOptions.SslOnConnect);
+                    smtp2.Authenticate("afiliaciones@seocaweb.com.ar", "Hws*7YN7kB");
 
-                        MimeMessage email = new MimeMessage();
-                        email.From.Add(MailboxAddress.Parse("afiliaciones@seocaweb.com.ar"));
-                        email.To.Add(MailboxAddress.Parse(Email));
-                        email.Subject = "Confirmacion de Preinscripcion Afiliado";
-                        email.Body = new TextPart("html") { Text = "Haga click en este enlace para confirmar su preinscripcion. http://seoca-preinscripciones.geosoft-web.com.ar/Home/Codigo?cuit=" + Cuit };
+                    MimeMessage email = new MimeMessage();
+                    email.From.Add(MailboxAddress.Parse("afiliaciones@seocaweb.com.ar"));
+                    email.To.Add(MailboxAddress.Parse(Email));
+                    email.To.Add(MailboxAddress.Parse(EmailContador));
+                    email.Subject = "Confirmacion de Preinscripcion de Empresa";
+                    email.Body = new TextPart("html") { Text = "Haga click en este enlace para confirmar su preinscripcion. http://seoca-preinscripciones.geosoft-web.com.ar/Home/Codigo?cuit=" + Cuit };
 
-                        smtp2.Send(email);
-                        smtp2.Disconnect(true);
-                    }
-                    catch (Exception)
-                    {
-                        ViewBag.message = "Error al registrarse.";
-                        return View("IniciarSesion");
-                    }
+                    smtp2.Send(email);
+                    smtp2.Disconnect(true);
                 }
                 catch (Exception ex)
                 {
+                    ViewBag.message = "Error al enviar Email.";
+                    return View("Empresa");
                 }
-                
             }
 
-            ViewBag.Email = Email;
+            ViewBag.mensaje = "Preinscripcion Ingresada. Confirme el Codigo que le llego a su Email para confirmar su preinscripcion.";
             return View();
-            //return Json(new { success = true, responseText = "Preinscripcion Exitosa. Revise su casilla de Email" + Email }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -474,16 +609,18 @@ namespace Sindicato_Viedma.Controllers
             {
                 try
                 {
-                    var val = db.Empresas.Where(d => d.Cuit == Cuit).First();
+                    var empresa = db.Empresas.FirstOrDefault(e => e.Cuit == Cuit);
+                    if (empresa != null)
+                    {
+                        empresa.Confirmada = true;
+                        db.SaveChanges();
 
-                    Models.Empresas adp = db.Empresas.Find(val.Id);
-                    adp.Confirmada = true;
-
-                    db.Empresas.Attach(adp);
-                    db.Entry(adp).State = EntityState.Modified;//this is for modiying/update existing entry
-                    db.SaveChanges();
-
-                    codigo = "Codigo valido";
+                        codigo = "Codigo valido";
+                    }
+                    else
+                    {
+                        codigo = "Codigo invalido";
+                    }
                 }
                 catch (Exception)
                 {

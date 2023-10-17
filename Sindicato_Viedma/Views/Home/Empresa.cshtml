@@ -35,21 +35,21 @@
                     <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
-                            <input class="form-control" data-error="RazonSocial es un campo requerido." id="RazonSocial" name="RazonSocial" placeholder="Razon Social" onchange="changeCampos()" required="required" type="text" value="@ViewBag.vacio">
+                            <input class="form-control" data-error="RazonSocial es un campo requerido." id="RazonSocial" name="RazonSocial" placeholder="Razon Social" onchange="changeCampos()" required="required" type="text">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
-                            <input class="form-control" data-error="NombreFantasia es un campo requerido." id="NombreFantasia" name="NombredeFantasia" placeholder="NombreFantasia" onchange="changeCampos()" type="text" value="@ViewBag.vacio">
+                            <input class="form-control" data-error="NombreFantasia es un campo requerido." id="NombreFantasia" name="NombredeFantasia" placeholder="NombreFantasia" onchange="changeCampos()" type="text">
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group has-feedback col-lg-3">
+                    <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
-                            <input class="form-control" id="DomicilioReal" maxlength="200" name="DomicilioReal" placeholder="Direccion Real" type="text" value="">
+                            <input class="form-control" id="DomicilioReal" maxlength="200" name="DomicilioReal" onchange="changeCampos()" placeholder="Direccion Real" type="text" value="">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-2">
@@ -58,11 +58,25 @@
                             <input class="form-control" id="NroReal" maxlength="10" name="NroReal" placeholder="N° Real" type="number" value="">
                         </div>
                     </div>
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control" id="PisoReal" maxlength="10" name="PisoReal" placeholder="Piso Real" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control" id="DtoReal" maxlength="10" name="DtoReal" placeholder="Dto Real" type="text" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
                             <select class="form-control" data-error="LocalidadReal es un campo requerido." data-val="true" data-val-number="The field Localidad Real must be a number." data-val-required="The Localidad Real field is required." id="LocalidadReal" name="LocalidadReal" placeholder="Localidad Real" required="required">
-                                <option value="0">< Localidad Real ></option>
+                                <option value="0">- Localidad Real -</option>
                                 @{
                                     if (ViewData["Localidades"] != null)
                                     {
@@ -82,19 +96,18 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group has-feedback col-lg-4">
+                    <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
                             <input class="form-control bfh-phone" id="TelefonoReal" maxlength="200" name="TelefonoReal" placeholder="Telefono Real / Wsp" type="tel" value="">
                         </div>
                     </div>
-
                 </div>
                 <div class="row">
-                    <div class="form-group has-feedback col-lg-3">
+                    <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
-                            <input class="form-control" data-error="Domicilio Legal es un campo uiuerido." id="DomicilioLegal" maxlength="200" name="DomicilioLegal" placeholder="Domicilio Legal" type="text" value="">
+                            <input class="form-control" data-error="Domicilio Legal es un campo uiuerido." id="DomicilioLegal" maxlength="200" name="DomicilioLegal" onchange="changeCampos()" placeholder="Domicilio Legal" type="text" value="">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-2">
@@ -103,31 +116,33 @@
                             <input class="form-control" data-error="Numero Legal es un campo uiuerido." id="NroLegal" maxlength="200" name="NroLegal" placeholder="N° Legal" type="number" value="">
                         </div>
                     </div>
-                    <div class="form-group has-feedback col-lg-3">
+                    <div class="form-group has-feedback col-lg-2">
                         <div class="input-group">
-                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                            <select class="form-control" data-error="LocalidadLegal es un campo requerido." data-val="true" data-val-number="The field Localidad Legal must be a number." data-val-required="The Localidad Legal field is required." id="LocalidadLegal" name="LocalidadLegal" placeholder="Localidad Legal" required="required">
-                                <option value="0">< Localidad Legal ></option>
-                                @{
-                                    if (ViewData["Localidades"] != null)
-                                    {
-                                        IEnumerable<dynamic> Localidades = (IEnumerable<dynamic>)ViewData["Localidades"];
-
-                                        foreach (dynamic Loc in Localidades)
-                                        {
-                                            //string Descripcion = EmpAct.Descripcion;
-                                            //int Id = EmpAct.Id;
-                                            if (@Loc.Id != 0)
-                                            {
-                                                <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
-                                            }
-                                        }
-                                    }
-                                }
-                            </select>
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control" id="PisoLegal" maxlength="10" name="PisoLegal" placeholder="Piso Legal" type="text" value="">
                         </div>
                     </div>
-                    <div class="form-group has-feedback col-lg-4">
+                    <div class="form-group has-feedback col-lg-2">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
+                            <input class="form-control" id="DtoLegal" maxlength="10" name="DtoLegal" placeholder="Dto Legal" type="text" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="Calle es un campo uiuerido." id="LocalidadLegal" maxlength="200" name="LocalidadLegal" placeholder="Localidad Legal" required="required" type="text" value="" onchange="changeCampos()">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="CP es un campo uiuerido." id="CPLegal" maxlength="10" name="CPLegal" placeholder="CP Legal" min="0" required="required" type="number" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
                             <input class="form-control bfh-phone" id="TelefonoLegal" maxlength="200" name="TelefonoLegal" placeholder="Telefono Legal / Wsp" type="tel" value="">
@@ -135,11 +150,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group has-feedback col-lg-4">
+                    <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
                             <select class="form-control" data-error="Actividad es un campo requerido." data-val="true" data-val-number="The field Actividad must be a number." data-val-required="The Actividad field is required." id="Actividad" name="Actividad" placeholder="Actividad" required="required">
-                                <option value="0">< Seleccione una actividad ></option>
+                                <option value="0">- Actividad -</option>
                                 @{
                                     if (ViewData["Empresas_Actividades"] != null)
                                     {
@@ -159,16 +174,22 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group has-feedback col-lg-4">
+                    <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                            <input class="form-control" id="Email" maxlength="200" name="Email" placeholder="Email" required="required" type="email" value="">
+                            <input class="form-control" id="Email" maxlength="200" name="Email" placeholder="Email" onchange="changeCampos()" required="required" type="email" value="">
                         </div>
                     </div>
-                    <div class="form-group has-feedback col-lg-4">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                            <input class="form-control" id="EmailConfirmacion" maxlength="200" name="EmailConfirmacion" placeholder="Repetir Email" onchange="changeCampos()" required="required" type="email" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></div>
-                            <input class="form-control" data-error="PaginaWeb es un campo requerido." id="PaginaWeb" name="PaginaWeb" placeholder="Pagina Web" type="text">
+                            <input class="form-control" data-error="PaginaWeb es un campo requerido." id="PaginaWeb" name="PaginaWeb" placeholder="Pagina Web" onchange="changeCampos()" type="text">
                         </div>
                     </div>
                 </div>
@@ -188,45 +209,35 @@
                     </div>
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                            <input class="form-control" data-error="DocumentoTitular es un campo requerido." id="DocumentoTitular" name="DocumentoTitular" placeholder="DNI" type="number">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
-                            <input class="form-control" data-error="DomicilioParticularTitular es un campo requerido." id="DomicilioParticularTitular" name="DomicilioParticularTitular" placeholder="Domicilio Particular" onchange="changeCampos()" type="text">
+                            <input class="form-control" data-error="DomicilioParticularTitular es un campo requerido." id="DomicilioParticularTitular" name="DomicilioParticularTitular" placeholder="Domicilio" onchange="changeCampos()" type="text">
                         </div>
                     </div>
+
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                            <input class="form-control" data-error="DocumentoTitular es un campo requerido." id="DocumentoTitular" name="DocumentoTitular" placeholder="Documento" onchange="changeCampos()" type="number">
-                        </div>
-                    </div>
-                    <div class="form-group has-feedback col-lg-3">
-                        <div class="input-group">
-                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                            <input class="form-control" id="CargoEmpresaTitular" name="CargoEmpresaTitular" placeholder="Cargo Empresa" type="text" value="">
+                            <input class="form-control" id="CargoEmpresaTitular" name="CargoEmpresaTitular" placeholder="Cargo Empresa" type="text" onchange="changeCampos()" value="">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
-                            <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                            <select class="form-control" id="LocalidadEmpresaTitular" name="LocalidadEmpresaTitular" placeholder="Localidad">
-                                @{
-                                    if (ViewData["Localidades"] != null)
-                                    {
-                                        IEnumerable<dynamic> Localidades = (IEnumerable<dynamic>)ViewData["Localidades"];
-
-                                        foreach (dynamic Loc in Localidades)
-                                        {
-                                            //string Descripcion = EmpAct.Descripcion;
-                                            //int Id = EmpAct.Id;
-                                            if (@Loc.Id != 0)
-                                            {
-                                                <option value="@Loc.Id">@Loc.Nombre_Localidad</option>
-                                            }
-                                        }
-                                    }
-                                }
-                            </select>
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="Calle es un campo uiuerido." id="LocalidadEmpresaTitular" maxlength="200" name="LocalidadEmpresaTitular" placeholder="Localidad" type="text" value="">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
+                            <input class="form-control" data-error="CP es un campo uiuerido." id="EmpresaCPTitular" maxlength="10" name="EmpresaCPTitular" placeholder="CP" min="0" type="number" value="">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-3">
@@ -287,7 +298,7 @@
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
                             <select class="form-control" data-error="Categoria Empleado es un campo requerido." data-val="true" data-val-number="The field Categoria Empleado must be a number." data-val-required="The Categoria Empleado field is required." id="CategoriaEmpleado" name="CategoriaEmpleado" placeholder="Categoria">
-                                <option value="-1">< Seleccione una Calificacion Profesional ></option>
+                                <option value="-1">- Calificacion Profesional -</option>
                                 @{
                                     if (ViewData["CalifProf"] != null)
                                     {
@@ -322,7 +333,7 @@
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-list-alt"></span></div>
                             <select class="form-control" data-error="Jornada es un campo requerido." data-val="true" data-val-number="The field Jornada must be a number." data-val-required="The Jornada field is required." id="JornadaEmpleado" name="JornadaEmpleado" placeholder="Jornada" required="required">
-                                <option value="0"> < Seleccione una jornada > </option>
+                                <option value="0"> - Jornada - </option>
                                 <option value="COMPLETA">200 Horas</option>
                                 <option value="MEDIA">100 Horas</option>
                             </select>
@@ -367,6 +378,93 @@
                 <br />
 
                 <fieldset>
+                    <legend>Documentación requerida</legend>
+                </fieldset>
+                <div class="row" style="margin-bottom: 2em;">
+                    <div class="form-group col-md-8 col-md-offset-2">
+                        <label> Habilitacion Municipal y/o Contrato de Locacion </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="textHabilitacionMunicipal" placeholder="No hay ningún archivo seleccionado..." disabled="">
+                            <span class="input-group-btn">
+                                <label class="btn btn-success" type="button">
+                                    Seleccionar<input id="fileHabilitacionMunicipal" name="fileHabilitacionMunicipal" type="file" data-size-max="10" style="display:none;" accept="image/png,image/jpeg,application/pdf" onchange="fileHabMunicipal();">
+                                </label>
+                            </span>
+                        </div>
+                        <div style="display: block;margin-top: 5px;margin-bottom: 10px;color: #737373;">
+                            Tamaño máximo permitido 10MB
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 2em;">
+                    <div class="form-group col-md-8 col-md-offset-2">
+                        <label>Comprobante Inscripcion Afip o Constancia </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="textComprobanteAfip" placeholder="No hay ningún archivo seleccionado..." disabled="">
+                            <span class="input-group-btn">
+                                <label class="btn btn-success" type="button">
+                                    Seleccionar<input id="fileComprobanteAfip" name="fileComprobanteAfip" type="file" data-size-max="10" style="display:none;" accept="image/png,image/jpeg,application/pdf" onchange="fileCompAfip();">
+                                </label>
+                            </span>
+                        </div>
+                        <div style="display: block;margin-top: 5px;margin-bottom: 10px;color: #737373;">
+                            Tamaño máximo permitido 10MB
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 2em;">
+                    <div class="form-group col-md-8 col-md-offset-2">
+                        <label> Contrato Social o Estatuto </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="textContratoSocial" placeholder="No hay ningún archivo seleccionado..." disabled="">
+                            <span class="input-group-btn">
+                                <label class="btn btn-success" type="button">
+                                    Seleccionar<input id="fileContratoSocial" name="fileContratoSocial" type="file" data-size-max="10" style="display:none;" accept="image/png,image/jpeg,application/pdf" onchange="fileContSocial();">
+                                </label>
+                            </span>
+                        </div>
+                        <div style="display: block;margin-top: 5px;margin-bottom: 10px;color: #737373;">
+                            Tamaño máximo permitido 10MB
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 2em;">
+                    <div class="form-group col-md-8 col-md-offset-2">
+                        <label> Nota Escrita y Firmada por el Titular que avala la documentación </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="textNotaEscrita" placeholder="No hay ningún archivo seleccionado..." disabled="">
+                            <span class="input-group-btn">
+                                <label class="btn btn-success" type="button">
+                                    Seleccionar<input id="fileNotaEscrita" name="fileNotaEscrita" type="file" data-size-max="10" style="display:none;" accept="image/png,image/jpeg,application/pdf" onchange="fileNota();">
+                                </label>
+                            </span>
+                        </div>
+                        <div style="display: block;margin-top: 5px;margin-bottom: 10px;color: #737373;">
+                            Tamaño máximo permitido 10MB
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 2em;">
+                    <div class="form-group col-md-8 col-md-offset-2">
+                        <label> Ultimo Recibo de Sueldo de Empleado </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="textUltimoReciboSueldo" placeholder="No hay ningún archivo seleccionado..." disabled="">
+                            <span class="input-group-btn">
+                                <label class="btn btn-success" type="button">
+                                    Seleccionar<input id="fileUltimoReciboSueldo" name="fileUltimoReciboSueldo" type="file" data-size-max="10" style="display:none;" accept="image/png,image/jpeg,application/pdf" onchange="fileUltimoRS();">
+                                </label>
+                            </span>
+                        </div>
+                        <div style="display: block;margin-top: 5px;margin-bottom: 10px;color: #737373;">
+                            Tamaño máximo permitido 10MB
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <br />
+
+                <fieldset>
                     <legend>Antecedentes</legend>
                 </fieldset>
                 <div class="row">
@@ -392,6 +490,7 @@
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
                             <select class="form-control" data-error="Localidad es un campo requerido." id="LocalidadAntecedente" name="LocalidadAntecedente" placeholder="Localidad">
+                                <option value="0">- Localidad -</option>
                                 @{
                                     if (ViewData["Localidades"] != null)
                                     {
@@ -411,7 +510,7 @@
                     <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
-                            <input class="form-control" data-error="Calle es un campo uiuerido." id="CalleAntecedente" maxlength="200" name="CalleAntecedente" placeholder="Domicilio Particular" type="text" value="">
+                            <input class="form-control" data-error="Calle es un campo uiuerido." id="CalleAntecedente" maxlength="200" name="CalleAntecedente" placeholder="Domicilio Particular" onchange="changeCampos()" type="text" value="">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-2">
@@ -425,6 +524,7 @@
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
                             <select class="form-control" data-error="Provincia es un campo requerido." data-val="true" id="ProvinciaAntecedente" name="ProvinciaAntecedente" placeholder="ProvinciaAntecedente">
+                                <option value="0">- Provincia -</option>
                                 @{
                                     if (ViewData["Provincia"] != null)
                                     {
@@ -486,13 +586,14 @@
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
-                            <input class="form-control" data-error="Nombre es un campo uiuerido." id="NombreSucursal" name="NombreSucursal" placeholder="Nombre" type="text" value="">
+                            <input class="form-control" data-error="Nombre es un campo uiuerido." id="NombreSucursal" name="NombreSucursal" placeholder="Nombre" onchange="changeCampos()" type="text" value="">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
                             <select class="form-control" data-error="Localidad es un campo requerido." id="LocalidadSucursal" name="LocalidadSucursal" placeholder="Localidad">
+                                <option value="0">- Localidad -</option>
                                 @{
                                     if (ViewData["Localidades"] != null)
                                     {
@@ -512,7 +613,7 @@
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
-                            <input class="form-control" data-error="Calle es un campo uiuerido." id="CalleSucursal" name="CalleSucursal" placeholder="Calle" type="text" value="">
+                            <input class="form-control" data-error="Calle es un campo uiuerido." id="CalleSucursal" name="CalleSucursal" placeholder="Calle" type="text" value="" onchange="changeCampos()">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-2">
@@ -564,29 +665,43 @@
                     <legend>Contador</legend>
                 </fieldset>
                 <div class="row">
-                    <div class="form-group has-feedback col-lg-3">
+                    <div class="form-group has-feedback col-lg-4">
                         <div class="input-group ">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-equalizer"></span></div>
                             <input class="form-control" data-error="NombreEstudioContador es un campo requerido." data-validate="false" id="NombreEstudioContador" name="NombreEstudioContador" placeholder="Nombre Estudio" onchange="changeCampos()" type="text" autocomplete="off">
                         </div>
                     </div>
-                    <div class="form-group has-feedback col-lg-3">
+                    <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
                             <input class="form-control" data-error="DireccionContador es un campo requerido." id="DireccionContador" name="DireccionContador" placeholder="Direccion Contador" onchange="changeCampos()" type="text">
                         </div>
                     </div>
-                    <div class="form-group has-feedback col-lg-3">
+                    <div class="form-group has-feedback col-lg-4">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
-                            <input class="form-control" data-error="TelefonoContador es un campo requerido." id="TelefonoContador" name="TelefonoContador" data-format="ddddddddddddddd" maxlength="15" minlength="10" placeholder="Telefono Contador" onchange="changeCampos()" type="tel">
+                            <input class="form-control" data-error="TelefonoContador es un campo requerido." id="TelefonoContador" name="TelefonoContador" data-format="ddddddddddddddd" maxlength="15" minlength="10" placeholder="Telefono Contador" type="tel">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group has-feedback col-lg-3">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                            <input class="form-control" id="EmailContador" maxlength="200" name="EmailContador" placeholder="Email" type="email" value="" onchange="changeCampos()">
                         </div>
                     </div>
                     <div class="form-group has-feedback col-lg-3">
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                            <input class="form-control" id="EmailContador" maxlength="200" name="EmailContador" placeholder="Email" type="email" value="">
+                            <input class="form-control" id="EmailConfirmacionContador" maxlength="200" name="EmailConfirmacionContador" placeholder="Repetir Email" onchange="changeCampos()" required="required" type="email" value="">
                         </div>
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
+                    </div>
+                    <div class="form-group has-feedback col-lg-3">
                     </div>
                 </div>
 
@@ -635,9 +750,6 @@
     </div>
 </div>
 
-
-<br />
-
 @if (!string.IsNullOrEmpty(ViewBag.error))
 {
     <script type="text/javascript">
@@ -645,6 +757,12 @@
     </script>
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.mensaje))
+{
+    <script type="text/javascript">
+        alert("@ViewBag.mensaje");
+    </script>
+}
 
 @section scripts{
     <script src="~/js/tabPag.js"></script>

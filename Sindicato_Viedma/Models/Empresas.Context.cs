@@ -27,16 +27,12 @@ namespace Sindicato_Viedma.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Afiliados_DatosPersonales> Afiliados_DatosPersonales { get; set; }
         public virtual DbSet<Afiliados_Empresa> Afiliados_Empresa { get; set; }
-        public virtual DbSet<Afiliados_Familiares> Afiliados_Familiares { get; set; }
-        public virtual DbSet<Empresas> Empresas { get; set; }
         public virtual DbSet<Empresas_Actividades> Empresas_Actividades { get; set; }
         public virtual DbSet<Empresas_Antecedentes> Empresas_Antecedentes { get; set; }
         public virtual DbSet<Empresas_Contadores> Empresas_Contadores { get; set; }
         public virtual DbSet<Empresas_Empleados> Empresas_Empleados { get; set; }
         public virtual DbSet<Empresas_Sucursales> Empresas_Sucursales { get; set; }
-        public virtual DbSet<Empresas_Titulares> Empresas_Titulares { get; set; }
         public virtual DbSet<General_Calificacion> General_Calificacion { get; set; }
         public virtual DbSet<General_Delegacion> General_Delegacion { get; set; }
         public virtual DbSet<General_Documentos> General_Documentos { get; set; }
@@ -47,6 +43,11 @@ namespace Sindicato_Viedma.Models
         public virtual DbSet<General_Provincias> General_Provincias { get; set; }
         public virtual DbSet<General_Sexo> General_Sexo { get; set; }
         public virtual DbSet<General_Delegacion_Usuarios> General_Delegacion_Usuarios { get; set; }
+        public virtual DbSet<General_ActividadRubro> General_ActividadRubro { get; set; }
+        public virtual DbSet<Afiliados_Familiares> Afiliados_Familiares { get; set; }
+        public virtual DbSet<Afiliados_DatosPersonales> Afiliados_DatosPersonales { get; set; }
+        public virtual DbSet<Empresas> Empresas { get; set; }
+        public virtual DbSet<Empresas_Titulares> Empresas_Titulares { get; set; }
     
         public virtual int SP_crearReporteAfiliados(Nullable<int> codigo)
         {
